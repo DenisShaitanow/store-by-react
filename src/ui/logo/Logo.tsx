@@ -16,6 +16,6 @@ export const Logo: FC = () => (
                 />
             </svg>
         </div>
-        <span className={styles.text}>SkillSwap</span>
+        <span className={styles.text}>StoreThings</span>
     </div>
 );
