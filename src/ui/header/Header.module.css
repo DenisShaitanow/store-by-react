@@ -1,0 +1,68 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    background-color: var(--background-page-color);
+    padding-block: 21px 20px;
+    padding-inline: 21px;
+}
+
+.menu {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: 24px;
+}
+
+.link {
+    color: var(--text-color);
+    text-decoration: none;
+    text-wrap: nowrap;
+}
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.dropdownButton {
+    gap: 4px;
+    background-color: transparent !important;
+}
+
+.authButtons_container {
+    display: flex;
+    gap: 8px;
+}
+
+.loginButton {
+    width: 98px;
+}
+
+.registerButton {
+    width: 208px;
+}
+
+.closeButton {
+    gap: 8px;
+    width: 147px;
+}
+
+.searchBox {
+    flex: 1 1 auto;
+    min-width: 200px;
+}
+
+@media (width <= 760px) {
+    .searchBox {
+        flex: 0 1 100%;
+        width: auto;
+        min-width: 0;
+        max-width: 100%;
+    }
+}

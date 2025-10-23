@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    inline-size: 100px;
+    block-size: 200px;
+    border-radius: 15px;
+    background-color: var(--toggle-color);
+}
+
+.image {
+    display: block;
+    inline-size: 100%;
+    block-size: 100px;
+    object-fit: contain;
+
+}
+
+.title {
+    display: block;
+
+}
+
+.description {
+    display: block;
+}
+
+.category {
+    display: block;
+}
