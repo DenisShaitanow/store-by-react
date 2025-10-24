@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-import { ModalUI } from './ProductCard';
+import { ProductCard } from './ProductCard';
 
 const meta = {
     /* Название компонента и путь, по которому его нужно отобразить на витрине */
-    title: 'UI/modalUI',
+    title: 'UI/ProductCard',
 
     /* Передаём сам компонент */
-    component: ModalUI,
+    component: ProductCard,
 
     /* Тег autodocs просит Storybook сгенерировать отдельную историю с документацией компонента */
     tags: ['autodocs'],
@@ -19,7 +19,7 @@ const meta = {
     }
 
     /* satisfies помогает точнее определить тип */
-} satisfies Meta<typeof ModalUI>;
+} satisfies Meta<typeof ProductCard>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -27,11 +27,13 @@ type Story = StoryObj<typeof meta>;
 export const Open: Story = {
     /* Для React-компонентов args === props */
     args: {
-        // Функция закрытия модального окна
-        onClose: () => console.log('Модальное окно закрыто'),
-
-        // Содержимое модального окна
-        children: <p>Пример текста внутри модального окна.</p>
+        id: '989898989898',
+        price: 1440,
+        title: 'tovar',
+        description: 'opisanie tovara',
+        image: 'https://avatars.mds.yandex.net/i?id=7d70d03fbea1a0fd7673c9baf90ba4366aa12afb-7012253-images-thumbs&n=13',
+        shortDescription: 'short opisaniekkkkkkkkkkk',
+        category: 'Human',
     },
     parameters: {
         viewport: {

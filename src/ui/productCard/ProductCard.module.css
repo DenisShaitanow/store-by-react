@@ -1,29 +1,80 @@
 .container {
+    position: relative;
     display: flex;
     flex-direction: column;
-    inline-size: 100px;
+    inline-size: 140px;
     block-size: 200px;
     border-radius: 15px;
-    background-color: var(--toggle-color);
+    border: 1px solid;
+    border-color: var(--accent-color);
+    font-family: var(--second-family);
+    color: var(--text-color);
 }
 
 .image {
     display: block;
     inline-size: 100%;
-    block-size: 100px;
-    object-fit: contain;
+    block-size: 120px;
+    object-fit: cover;
+    border-radius: inherit;
 
 }
 
 .title {
     display: block;
-
+    padding-inline: 5px;
+    padding-block: 1px;
+    font-size: var(--font-size-h3);
+    font-weight: var(--font-weight-h3);
+    line-height: var(--line-height-h3);
 }
 
 .description {
     display: block;
+    padding-inline: 5px;
+    padding-block: 1px;
+    font-size: var(--font-size-h4);
+    font-weight: var(--font-weight-h4);
+    line-height: var(--line-height-h4);
+    inline-size: 100%;
+    block-size: 26px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .category {
+    position: absolute;
+    top: 97px;
+    right: 7px;
+    inline-size: fit-content;
+    block-size: fit-content;
     display: block;
+    border-radius: 5px;
+    background-color: rgba(80, 136, 38, 0.5);
+    color: brown;
+    padding: 3px;
+    font-size: 10px;
+}
+
+.price {
+    padding-inline: 5px;
+    font-size: var(--font-size-h4);
+    font-weight: var(--font-weight-h4);
+    line-height: var(--line-height-h4);
+    color: brown;
+    font-weight: 700;
+}
+
+.like {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 15px;
+    height: 15px;
+    background-image: url('../assets/like.svg');
+}
+
+.like-done {
+    background-image: url('../assets/like-red.svg');
 }
