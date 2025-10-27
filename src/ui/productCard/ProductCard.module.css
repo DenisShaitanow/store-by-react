@@ -24,23 +24,22 @@
     display: block;
     padding-inline: 5px;
     padding-block: 1px;
-    font-size: var(--font-size-h3);
-    font-weight: var(--font-weight-h3);
-    line-height: var(--line-height-h3);
+    font-size: var(--font-size-caption);
+    font-weight: 800;
+    line-height: var(--line-height-caption);
 }
 
 .description {
-    display: block;
     padding-inline: 5px;
     padding-block: 1px;
-    font-size: var(--font-size-h4);
-    font-weight: var(--font-weight-h4);
-    line-height: var(--line-height-h4);
-    inline-size: 100%;
-    block-size: 26px;
-    white-space: nowrap;
+    font-size: var(--font-size-caption); /* 12px */
+    font-weight: var(--font-weight-caption); /* 400 */
+    line-height: var(--line-height-caption); /* 133% */
+    max-width: 100%;
     overflow: hidden;
-    text-overflow: ellipsis;
+    display: -webkit-box !important; /* Важно установить именно webkit-box */
+    -webkit-line-clamp: 2; /* Обязательно с дефисом и префиксом */
+    -webkit-box-orient: vertical; /* Ориентация вертикальной коробки */
 }
 
 .category {

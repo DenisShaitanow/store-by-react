@@ -1,0 +1,10 @@
+.main {
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    max-inline-size: 100vw;
+    block-size: auto;
+    gap: 20px;
+    background-color: var(--surface-color);
+
+}

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { MemoryRouter } from 'react-router-dom';
 
 import { ProductCard } from './ProductCard';
 
@@ -29,15 +30,22 @@ export const Open: Story = {
     args: {
         id: '989898989898',
         price: 1440,
-        title: 'tovar',
-        description: 'opisanie tovara',
+        title: 'Шикарный рояль',
+        description: 'Этот прекрасный рояль из канадской сиквойи понравится вам.',
         image: 'https://avatars.mds.yandex.net/i?id=7d70d03fbea1a0fd7673c9baf90ba4366aa12afb-7012253-images-thumbs&n=13',
-        shortDescription: 'short opisaniekkkkkkkkkkk',
+        shortDescription: 'Этот прекрасный рояль из канадской сиквойи подойдет для интерьера любого дома',
         category: 'Human',
     },
     parameters: {
         viewport: {
             customViewport: { width: 800, height: 600 } // Настройка собственного разрешения
         }
-    }
+    },
+    decorators: [
+        (Story) => (
+            <MemoryRouter>
+                <Story />
+            </MemoryRouter>
+        )
+    ]
 };
