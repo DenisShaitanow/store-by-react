@@ -1,5 +1,5 @@
 type Category = 
-    'House' | 'Car' | 'Human';
+    't-shirts' | 'shoes' | 'trousers' | 'jackets' | 'hats' | 'underwear' | 'accessories';
 
 
 export interface IProduct {
@@ -10,4 +10,5 @@ export interface IProduct {
     image: string;
     shortDescription: string;
     category: Category;
+    sex: 'man' | 'woman';
 }

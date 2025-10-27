@@ -6,8 +6,9 @@ import { ProductCard } from '../../ui/productCard';
 import type { IProduct } from '../../ui/productCard/type';
 
 const calculateVisibleProductsCount = () => {
-    const cardsPerRow = Math.floor(window.innerWidth / 140); // ширина одной карточки ~140px
-    return cardsPerRow * 3;
+    const cardsPerRow = Math.floor(window.innerWidth / 160); // ширина одной карточки ~140px
+    console.log(cardsPerRow);
+    return cardsPerRow * 4;
 };
 
 export const HomePage: FC = () => {
@@ -73,6 +74,7 @@ export const HomePage: FC = () => {
                     id={product.id}
                     image={product.image}
                     category={product.category}
+                    sex={product.sex}
                 />
             ))}
         </main>
