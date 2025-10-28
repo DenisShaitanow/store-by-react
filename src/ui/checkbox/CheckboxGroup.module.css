@@ -1,0 +1,76 @@
+.label {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+    height: 24px;
+    cursor: pointer;
+}
+
+.label_large_height {
+    height: 32px;
+}
+
+.text {
+    width: fit-content;
+    color: var(--text-color);
+    font-weight: var(--font-weight-body);
+    font-size: var(--font-size-body);
+    font-family: var(--font-family, sans-serif);
+    line-height: var(--line-height-body);
+    white-space: nowrap;
+    text-align: left;
+    background-color: var(--surface-color);
+}
+
+.input {
+    display: none;
+}
+
+.icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    background-image: url('../assets/checkbox-empty.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    cursor: pointer;
+}
+
+.input:checked + .icon {
+    background-image: url('../assets/checkbox-done.svg');
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    height: fit-content;
+}
+
+.title {
+    font-weight: var(--font-weight-h3);
+    font-size: var(--font-size-h3);
+    font-family: var(--second-family);
+    line-height: var(--line-height-h3);
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 12px;
+    height: fit-content;
+}
+
+.list_with_dropdown {
+    gap: 4px;
+    padding-left: 12px;
+}

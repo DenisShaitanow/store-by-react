@@ -33,7 +33,7 @@ export const Footer: FC = () => (
                     </Link>
                 </div>
             </nav>
-            <div className={styles.bottom}>SkillSwap © 2025</div>
+            <div className={styles.bottom}>StoreThings © 2025</div>
         </div>
     </footer>
 );

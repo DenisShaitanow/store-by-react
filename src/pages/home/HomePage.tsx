@@ -1,28 +1,62 @@
 import styles from './HomePage.module.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, type ChangeEvent } from 'react';
 import { products as productsMock } from '../../constants/constants';
 import type { FC } from 'react';
 import { ProductCard } from '../../ui/productCard';
 import type { IProduct } from '../../ui/productCard/type';
+import { CheckboxGroupUI } from '../../ui/checkbox';
+import { CheckboxDropdown } from '../../ui/checkboxDropdown';
 
 const calculateVisibleProductsCount = () => {
-    const cardsPerRow = Math.floor(window.innerWidth / 160); // ширина одной карточки ~140px
-    console.log(cardsPerRow);
-    return cardsPerRow * 4;
+    const cardsPerRow = Math.floor(window.innerWidth / 240); 
+    console.log(cardsPerRow, window.innerWidth);
+    return cardsPerRow * 3;
 };
+
+const categoryMapping: string[] = [
+    't-shirts',
+    'shoes',
+    'jackets',
+    'underwear',
+    'hats',
+    'trousers',
+    'accessories'
+];
+
+const sexMapping: Record<string, string> = {
+    'Для мужчин': 'man',
+    'Для женщин': 'woman'
+}
 
 export const HomePage: FC = () => {
     const [productsToShow, setProductsToShow] = useState<IProduct[]>([]);
     const [isLoadingMore, setIsLoadingMore] = useState(false);
+
+    const [selectedSex, setSelectedSex] = useState<string[]>([]);
+    const [selectedSexData, setSelectedSexData] = useState<string[]>([]);
+    const [selectedCategories, setSelectedCategories ] = useState<(string | number)[]>([]);
+    const [selectedCategoriesData, setSelectedCategoriesData ] = useState<string[]>([]);
     
     const products: IProduct[] = productsMock;
+
+    const filteredProducts = products.filter(product => {
+        // Проверяем выбор категории
+        if (selectedCategoriesData.length > 0 && !selectedCategoriesData.includes(product.category)) {
+            return false;
+        }
+        // Проверяем выбор пола
+        if (selectedSexData.length > 0 && !selectedSexData.includes(product.sex)) {
+            return false;
+        }
+        return true;
+    });
 
     useEffect(() => {
         // Устанавливаем начальное количество отображаемых продуктов
         const initialVisibleCount = calculateVisibleProductsCount();
         console.log(initialVisibleCount);
-        setProductsToShow(products.slice(0, initialVisibleCount));
-    }, []);
+        setProductsToShow(filteredProducts.slice(0, initialVisibleCount));
+    }, [filteredProducts]);
 
     useEffect(() => {
         function handleResize() {
@@ -62,21 +96,63 @@ export const HomePage: FC = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, [products, isLoadingMore, productsToShow]);
 
+
+    //  обработка инпута пола пользователя, получение данных соответствующих по типу карточке товара
+    const handleSex = (e: ChangeEvent<HTMLInputElement>) => {
+        const selectedItem: string = e.target.id;
+        const selectedItemData: string = sexMapping[selectedItem];
+        if (selectedSex.includes(selectedItem)) {
+            setSelectedSex(prevSelectedItems =>
+                [...prevSelectedItems].filter(
+                    item => item !== selectedItem
+                )
+            );
+            setSelectedSexData(prevSelectedSexData => [...prevSelectedSexData].filter(
+                item => item !== selectedItemData
+            ))
+        } else {
+            setSelectedSex(prevSelectedItems => [
+                ...prevSelectedItems,
+                selectedItem
+            ]);
+            setSelectedSexData(prevSelectedSexData => [...prevSelectedSexData, selectedItemData]
+            )
+        }
+    }
+
+    // обработка инпута категории товаров, получение данных соответствующих по типу карточке товара
+    const handlecategories = (selectedValues: (string | number)[]) => {
+        setSelectedCategories(selectedValues);
+        setSelectedCategoriesData(selectedValues.map(item => categoryMapping[item as number]));
+    }
+    
+
     return (
         <main className={styles.main}>
-            {productsToShow.map((product) => (
-                <ProductCard
-                    key={product.id}
-                    title={product.title}
-                    description={product.description}
-                    shortDescription={product.shortDescription}
-                    price={product.price}
-                    id={product.id}
-                    image={product.image}
-                    category={product.category}
-                    sex={product.sex}
-                />
-            ))}
+            <div className={styles.filters}>
+                <div>
+                    <CheckboxGroupUI title='Пол' selectedItems={selectedSex} fieldNames={['Для женщин','Для мужчин']} onChange={handleSex}/>
+                </div>
+                <div>
+                    <CheckboxDropdown selectedValues={selectedCategories} onChange={handlecategories} title='Категория' staticMode options={['Рубашки','Обувь','Верхняя одежда','Нижнее белье','Головные уборы','Брюки', 'Аксессуары']}/>
+                </div>
+            </div>
+            <div className={styles.products}>
+                    {productsToShow.map((product) => (
+                        <ProductCard
+                            className={styles.product}
+                            key={product.id}
+                            title={product.title}
+                            description={product.description}
+                            shortDescription={product.shortDescription}
+                            price={product.price}
+                            id={product.id}
+                            image={product.image}
+                            category={product.category}
+                            sex={product.sex}
+                        />
+                    ))}
+            </div>
         </main>
     );
 };

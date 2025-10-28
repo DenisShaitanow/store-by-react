@@ -12,7 +12,7 @@ export const ProductCard: FC<IProduct> = (props: IProduct) => {
 
     return (
         
-            <Link to={`/${props.id}`} className={styles.container} id={props.id} data-cy={`productCard-${props.id}`}>
+            <Link to={`/${props.id}`} className={`${styles.container} ${props.className}`} id={props.id} data-cy={`productCard-${props.id}`}>
                 <img className={styles.image} src={props.image}></img>
                 <p className={styles.price}>{`${props.price}₽`}</p>
                 <p className={styles.title}>{props.title}</p>

@@ -1,10 +1,30 @@
 .main {
     display: flex;
+    flex-direction: row;
     flex-grow: 1;
-    flex-wrap: wrap;
     max-inline-size: 100vw;
     block-size: auto;
-    gap: 20px;
+    gap: 30px;
     background-color: var(--surface-color);
 
+}
+
+.filters {
+    padding-top: 60px;
+    width: fit-content;
+    display: flex;
+    gap: 50px;
+    flex-direction: column;
+
+}
+
+.products {
+    width: calc(100vw - 115px);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.product {
+    
 }

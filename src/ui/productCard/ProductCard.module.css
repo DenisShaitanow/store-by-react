@@ -26,11 +26,11 @@
     padding-block: 3px;
     font-size: 20px;
     font-weight: 800;
-    line-height: var(--line-height-caption);
+    line-height: 120%;
 }
 
 .description {
-    padding-inline: 8px;
+    padding-inline: 9px;
     padding-block: 1px;
     font-size: var(--font-size-h4); 
     font-weight: var(--font-weight-caption); /* 400 */
@@ -57,13 +57,13 @@
 }
 
 .price {
-    padding-inline: 8px;
+    padding-inline: 9px;
     font-size: var(--font-size-h2);
     font-weight: var(--font-weight-h2);
     line-height: var(--line-height-h2);
     color: brown;
     font-weight: 700;
-    padding-block: 8px;
+    padding-block: 5px;
 }
 
 .like {
