@@ -1,20 +1,37 @@
 .main {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-grow: 1;
     max-inline-size: 100vw;
-    block-size: auto;
     gap: 30px;
     background-color: var(--surface-color);
+    padding-block: 15px;
+}
+
+
+.rowContainer {
+    display: flex;
+    flex-direction: row;
+    max-inline-size: 100%;
+    block-size: auto;
+    gap: 40px;
+    
 
 }
 
-.filters {
+.containerFixed {
     padding-top: 60px;
-    width: fit-content;
+    padding-inline: 10px;
+    width: 170px;
+    
+  
+}
+
+.filters {
+    position: fixed;
     display: flex;
-    gap: 50px;
     flex-direction: column;
+    gap: 50px;
 
 }
 
@@ -25,6 +42,21 @@
     gap: 20px;
 }
 
-.product {
+.spinnerContainer {
+    width: fit-content;
+    height: fit-content;
+    display: block;
+    align-self: center;
+    margin-left: 100px;
+}
+
+.spinner {
+    position: relative !important;
     
+}
+
+.greyLine {
+    width: 1px;
+    background-color: var(--toggle-color);
+    opacity: 0.6;
 }

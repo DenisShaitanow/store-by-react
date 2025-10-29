@@ -1,15 +1,15 @@
 import styles from './HomePage.module.css';
-import { useState, useEffect, type ChangeEvent } from 'react';
+import { useState, useEffect, type ChangeEvent, useMemo, useRef, useLayoutEffect } from 'react';
 import { products as productsMock } from '../../constants/constants';
 import type { FC } from 'react';
 import { ProductCard } from '../../ui/productCard';
 import type { IProduct } from '../../ui/productCard/type';
 import { CheckboxGroupUI } from '../../ui/checkbox';
 import { CheckboxDropdown } from '../../ui/checkboxDropdown';
+import { SpinnerPulse } from '../../ui/spinnerPulse';
 
-const calculateVisibleProductsCount = () => {
-    const cardsPerRow = Math.floor(window.innerWidth / 240); 
-    console.log(cardsPerRow, window.innerWidth);
+const calculateVisibleProductsCount = (width: number) => {
+    const cardsPerRow = Math.floor(width / 240); 
     return cardsPerRow * 3;
 };
 
@@ -28,10 +28,12 @@ const sexMapping: Record<string, string> = {
     'Для женщин': 'woman'
 }
 
-export const HomePage: FC = () => {
+const HomePage: FC = () => {
+
+    const productsContainer = useRef<HTMLDivElement>(null);
+    const productsContainerWidth = productsContainer.current?.clientWidth;
     const [productsToShow, setProductsToShow] = useState<IProduct[]>([]);
     const [isLoadingMore, setIsLoadingMore] = useState(false);
-
     const [selectedSex, setSelectedSex] = useState<string[]>([]);
     const [selectedSexData, setSelectedSexData] = useState<string[]>([]);
     const [selectedCategories, setSelectedCategories ] = useState<(string | number)[]>([]);
@@ -39,59 +41,61 @@ export const HomePage: FC = () => {
     
     const products: IProduct[] = productsMock;
 
-    const filteredProducts = products.filter(product => {
-        // Проверяем выбор категории
-        if (selectedCategoriesData.length > 0 && !selectedCategoriesData.includes(product.category)) {
+    const filteredProducts = useMemo(() => {
+        return products.filter(product => {
+          // Проверяем выбор категории
+          if (selectedCategoriesData.length > 0 && !selectedCategoriesData.includes(product.category)) {
             return false;
-        }
-        // Проверяем выбор пола
-        if (selectedSexData.length > 0 && !selectedSexData.includes(product.sex)) {
+          }
+          // Проверяем выбор пола
+          if (selectedSexData.length > 0 && !selectedSexData.includes(product.sex)) {
             return false;
+          }
+          return true;
+        });
+      }, [selectedCategoriesData, selectedSexData]);
+
+    useLayoutEffect(() => {
+        if (productsContainer.current) {
+            const containerWidth = productsContainer.current.clientWidth;
+            const visibleCardsCount = calculateVisibleProductsCount(containerWidth);
+            setProductsToShow(filteredProducts.slice(0, visibleCardsCount));
         }
-        return true;
-    });
-
-    useEffect(() => {
-        // Устанавливаем начальное количество отображаемых продуктов
-        const initialVisibleCount = calculateVisibleProductsCount();
-        console.log(initialVisibleCount);
-        setProductsToShow(filteredProducts.slice(0, initialVisibleCount));
-    }, [filteredProducts]);
-
+    }, [filteredProducts, productsContainer]);
+    
     useEffect(() => {
         function handleResize() {
-            // Если окно изменилось в размерах, пересчитываем видимую область и подгружаем нужное количество продуктов
-            const newVisibleCount = calculateVisibleProductsCount();
-            if (!isLoadingMore) {
-                setProductsToShow(products.slice(0, newVisibleCount));
+            if (productsContainer.current) {
+                const currentWidth = productsContainer.current.clientWidth;
+                const newVisibleCount = calculateVisibleProductsCount(currentWidth);
+                setProductsToShow(filteredProducts.slice(0, newVisibleCount));
             }
         }
-
+    
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
-    }, [products]);
+    }, []);
 
     useEffect(() => {
         function handleScroll() {
             const bottomReached =
                 document.documentElement.scrollTop +
                 window.innerHeight >=
-                document.documentElement.offsetHeight - 200;
+                document.documentElement.offsetHeight - 20;
             
             if (bottomReached && !isLoadingMore && productsToShow.length < products.length) {
                 setIsLoadingMore(true);
                 
                 // Подгрузка следующей порции товаров
-                const nextBatchSize = calculateVisibleProductsCount(); // Размер нового шага загрузки
+                const nextBatchSize = calculateVisibleProductsCount(productsContainerWidth!); // Размер нового шага загрузки
                 const startIndex = productsToShow.length;
                 const endIndex = Math.min(startIndex + nextBatchSize, products.length);
                 setTimeout(() => {
-                    setProductsToShow((prev) => [...prev, ...products.slice(startIndex, endIndex)]);
+                    setProductsToShow((prev) => [...prev, ...filteredProducts.slice(startIndex, endIndex)]);
                     setIsLoadingMore(false);
-                }, 500); // задержка для эффекта плавной загрузки
+                }, 1000); // задержка для эффекта плавной загрузки
             }
         }
-
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, [products, isLoadingMore, productsToShow]);
@@ -129,30 +133,42 @@ export const HomePage: FC = () => {
 
     return (
         <main className={styles.main}>
-            <div className={styles.filters}>
-                <div>
-                    <CheckboxGroupUI title='Пол' selectedItems={selectedSex} fieldNames={['Для женщин','Для мужчин']} onChange={handleSex}/>
+            <div className={styles.rowContainer}>
+                <div className={styles.containerFixed}>
+                    <div className={styles.filters}>
+                        <div>
+                            <CheckboxGroupUI title='Пол' selectedItems={selectedSex} fieldNames={['Для женщин','Для мужчин']} onChange={handleSex}/>
+                        </div>
+                        <div>
+                            <CheckboxDropdown selectedValues={selectedCategories} onChange={handlecategories} title='Категория' staticMode options={['Рубашки','Обувь','Верхняя одежда','Нижнее белье','Головные уборы','Брюки', 'Аксессуары']}/>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <CheckboxDropdown selectedValues={selectedCategories} onChange={handlecategories} title='Категория' staticMode options={['Рубашки','Обувь','Верхняя одежда','Нижнее белье','Головные уборы','Брюки', 'Аксессуары']}/>
+                <span className={styles.greyLine}></span>
+                <div className={styles.products} ref={productsContainer}>
+                        {productsToShow.map((product) => (
+                            <ProductCard
+                                className={styles.product}
+                                key={product.id}
+                                title={product.title}
+                                description={product.description}
+                                shortDescription={product.shortDescription}
+                                price={product.price}
+                                id={product.id}
+                                image={product.image}
+                                category={product.category}
+                                sex={product.sex}
+                            />
+                        ))}
                 </div>
             </div>
-            <div className={styles.products}>
-                    {productsToShow.map((product) => (
-                        <ProductCard
-                            className={styles.product}
-                            key={product.id}
-                            title={product.title}
-                            description={product.description}
-                            shortDescription={product.shortDescription}
-                            price={product.price}
-                            id={product.id}
-                            image={product.image}
-                            category={product.category}
-                            sex={product.sex}
-                        />
-                    ))}
-            </div>
+            {isLoadingMore && 
+                <div className={styles.spinnerContainer}>
+                    <SpinnerPulse className={styles.spinner}/>
+                </div>
+            }
         </main>
     );
 };
+
+export default HomePage;

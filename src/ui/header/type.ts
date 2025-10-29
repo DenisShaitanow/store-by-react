@@ -5,7 +5,7 @@ export type THeaderUIProps = {
     isModal: boolean;
     isAuth: boolean;
     isNotification: boolean;
-    user: TUser;
+    user?: TUser;
     theme: 'light' | 'dark';
     //удалить потом
     navItems?: Array<{ label: string; href: string }>;

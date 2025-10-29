@@ -12,6 +12,10 @@
     --alarm-color: #e0796e; /* цвет кружка нового уведомления */
     --error-color: #bf3920;
 
+    --accent-color-r: 171;
+    --accent-color-g: 210;
+    --accent-color-b: 122;
+
     /*  цвета категорий */
 
     --tag-business-bg-color: #eee7f7;
