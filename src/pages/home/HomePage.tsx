@@ -132,7 +132,7 @@ const HomePage: FC = () => {
     
 
     return (
-        <main className={styles.main}>
+        <div className={styles.main}>
             <div className={styles.rowContainer}>
                 <div className={styles.containerFixed}>
                     <div className={styles.filters}>
@@ -167,7 +167,7 @@ const HomePage: FC = () => {
                     <SpinnerPulse className={styles.spinner}/>
                 </div>
             }
-        </main>
+        </div>
     );
 };
 

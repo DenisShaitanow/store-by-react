@@ -1,0 +1,7 @@
+.layout {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-inline: 25px;
+    max-inline-size: 1960px;
+}
