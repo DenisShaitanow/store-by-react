@@ -44,7 +44,7 @@ export const HeaderUI = ({
         <div className={styles.header}>
             <Logo />
             <div className={styles.menu}>
-                <Link to="profile/favorites" className={styles.link}>
+                <Link to="about" className={styles.link}>
                     О проекте
                 </Link>
                 

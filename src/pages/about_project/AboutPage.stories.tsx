@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import  HomePage  from './HomePage';
+import  AboutPage  from './AboutPage';
 import { MemoryRouter } from 'react-router-dom';
 
-const meta: Meta<typeof HomePage> = {
-    title: 'Pages/HomePage',
-    component: HomePage,
+const meta: Meta<typeof AboutPage> = {
+    title: 'Pages/AboutPage',
+    component: AboutPage,
     decorators: [
         Story => (
             <MemoryRouter>
@@ -19,7 +19,7 @@ const meta: Meta<typeof HomePage> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof HomePage>;
+type Story = StoryObj<typeof AboutPage>;
 
 export const example: Story = {
     
