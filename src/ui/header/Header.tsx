@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import styles from './Header.module.css';
 
@@ -25,10 +25,17 @@ export const HeaderUI = ({
     handleCloseButtonClick
 }: THeaderUIProps) => {
     // по макету на шагах регистрации
+    const navigate = useNavigate();
+
+    function handleClickLogo() {
+        navigate('/');
+        console.log('clivk');
+    }
+
     if (isModal)
         return (
             <div className={styles.header}>
-                <Logo />
+                <div className={styles.logoContainer} onClick={handleClickLogo}><Logo /></div>
                 <ButtonUI
                     className={styles.closeButton}
                     label="Закрыть"
@@ -42,7 +49,7 @@ export const HeaderUI = ({
 
     return (
         <div className={styles.header}>
-            <Logo />
+            <div className={styles.logoContainer} onClick={handleClickLogo}><Logo /></div>
             <div className={styles.menu}>
                 <Link to="about" className={styles.link}>
                     О проекте

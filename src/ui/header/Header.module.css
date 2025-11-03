@@ -59,6 +59,16 @@
     min-width: 200px;
 }
 
+.logoContainer {
+    inline-size: fit-content;
+    block-size: fit-content;
+}
+
+.logoContainer:hover {
+    cursor: pointer;
+}
+
+
 @media (width <= 760px) {
     .searchBox {
         flex: 0 1 100%;

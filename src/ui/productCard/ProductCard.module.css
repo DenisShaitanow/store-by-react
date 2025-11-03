@@ -11,6 +11,10 @@
     color: var(--text-color);
 }
 
+.container:hover {
+    cursor: pointer;
+}
+
 .image {
     display: block;
     inline-size: 100%;

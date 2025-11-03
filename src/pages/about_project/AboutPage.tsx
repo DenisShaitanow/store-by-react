@@ -1,6 +1,6 @@
 import styles from './AboutPage.module.css';
 import type { FC } from 'react';
-import {  Navigate} from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 
 import { ButtonUI } from '../../ui/button';
 
@@ -8,8 +8,9 @@ import { ButtonUI } from '../../ui/button';
 
 const AboutPage: FC = () => {
 
+    const navigate = useNavigate();
     const handleClick = () => {
-        <Navigate to={'/'}/>
+        navigate(-1);
     }
 
     return (
