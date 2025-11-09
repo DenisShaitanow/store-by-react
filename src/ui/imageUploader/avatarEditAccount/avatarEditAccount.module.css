@@ -1,0 +1,65 @@
+.container {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: fit-content;
+    height: fit-content;
+}
+
+.inputAvatar {
+    position: relative;
+    display: none;
+    width: 244px;
+    height: 244px;
+    border-radius: 50%;
+}
+
+.addCircle {
+    position: absolute;
+    align-self: flex-end;
+    width: 56px;
+    height: 56px;
+    background-color: var(--button-hover-color);
+    border-radius: 50%;
+}
+
+.addCircle::before {
+    position: absolute;
+    content: '';
+    top: 50%;
+    left: 50%;
+    width: 24px;
+    height: 24px;
+    background-image: url('../../assets/editAvatarAccount.svg');
+    transform: translate(-50%, -50%);
+}
+
+.noAvatar {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 244px;
+    height: 244px;
+    background-image: url('../../assets/user-circle244x244.svg');
+}
+
+.imageAvatar {
+    position: relative;
+    width: 244px;
+    height: 244px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: transform ease-in-out 0.2s;
+}
+
+.imageAvatar:hover {
+    transform: scale(1.01);
+}
+
+.plus {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

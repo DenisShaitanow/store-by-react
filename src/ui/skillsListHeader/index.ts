@@ -1,1 +1,0 @@
-export { SkillsListHeader } from './SkillsListHeader';

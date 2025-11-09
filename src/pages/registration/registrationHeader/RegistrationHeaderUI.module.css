@@ -1,0 +1,18 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 90%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding-block: 21px 20px;
+    padding-inline: 40px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;  
+    background-color: var(--background-page-color);
+}
+
+.closeButton {
+    gap: 8px;
+    width: 147px;
+}

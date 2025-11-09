@@ -3,14 +3,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import styles from './Header.module.css';
 
 import CrossSvg from '../assets/cross.svg';
-/*import ChevronDownSvg from '../assets/chevron-down.svg';*/
 
 import type { THeaderUIProps } from './type';
 
 import { ButtonUI } from '../button';
 import { Logo } from '../logo';
 import { IconButton } from '../iconButton';
-/*import { SkillsListHeader } from '../skillsListHeader';*/
 import { UserDropdownMenu } from '../userDropdownMenu';
 
 
@@ -29,7 +27,6 @@ export const HeaderUI = ({
 
     function handleClickLogo() {
         navigate('/');
-        console.log('clivk');
     }
 
     if (isModal)

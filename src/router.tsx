@@ -3,7 +3,8 @@ import { HomePage } from './pages/home';
 import Layout from "./pages/layout/layout";
 import { AboutPage } from "./pages/about_project";
 import { CardPage } from './pages/cardPage';
-
+import RegistrationPage from './pages/registration/registration';
+import  AuthPage from './pages/authPage/AuthPage';
 
 export const router = createBrowserRouter([
     {
@@ -21,7 +22,15 @@ export const router = createBrowserRouter([
           {
             path: '/:idCard',
             element: <CardPage />
-          }
+          },
+          {
+            path: '/registration',
+            element: <RegistrationPage />
+          },
+          {
+            path: '/loginClient',
+            element: <AuthPage />
+          },
         ],
       },
 ]);

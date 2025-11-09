@@ -20,9 +20,8 @@
 }
 
 .containerFixed {
-    padding-top: 60px;
     padding-inline: 10px;
-    width: 170px;
+    min-width: 165px;
     
   
 }
