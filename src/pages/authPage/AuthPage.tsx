@@ -11,6 +11,7 @@ const AuthPage: FC = () => {
     
     
     const navigate = useNavigate();
+    const [authError, setAuthError] = useState<boolean>(false);
 
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
@@ -28,7 +29,17 @@ const AuthPage: FC = () => {
     }
 
     const onClickButton = () => {
-        navigate('/');
+        let regDataObject
+        const regDataString = localStorage.getItem('regData');
+        if (regDataString) { 
+            regDataObject = JSON.parse(regDataString);
+        }
+        if ( email === regDataObject.email && password ===  regDataObject.password) {
+            navigate('/');
+        } else {
+            setAuthError(true);
+        }
+        
     }
 
     return (
@@ -50,6 +61,7 @@ const AuthPage: FC = () => {
                         onChange={handleChangePassword}
                     />
             </div>
+            {authError && <span className={styles.authError}>Неправильный логин или пароль.</span>}
             <ButtonUI
                 label="Войти"
                 onClick={onClickButton}

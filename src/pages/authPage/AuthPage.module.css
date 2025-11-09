@@ -16,3 +16,14 @@
     padding-inline: 50px !important;
     margin-top: 15px;
 }
+
+.authError {
+    display: block;
+    width: fit-content;
+    height: fit-content;
+    color: red;
+    font-family: var(--second-family);
+    font-size: var(--font-size-h3);
+    font-weight: var(--font-weight-h3);
+    line-height: var(--line-height-h3);
+}
