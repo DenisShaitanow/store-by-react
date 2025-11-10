@@ -9,7 +9,7 @@ import { FormUserInformationStepTwo } from './step2/step2/FormUserInformationSte
 import { useNavigate } from 'react-router-dom';
 
 interface RegistrationData {
-    email: string;
+    email?: string;
     password: string;
     name: string;
     surname: string;
@@ -97,6 +97,7 @@ const RegistrationPage: FC = () => {
 
     const handleClickRegistrationButton = () => {
         localStorage.setItem('regData', JSON.stringify(regData));
+        navigate('/');
     }
     
     return (
@@ -109,7 +110,7 @@ const RegistrationPage: FC = () => {
                     <FormUserInformationStepTwo genderOptions={[{value: 'man', label: 'Мужской'}, {value: 'woman', label: 'Женский'}]} nameValue={name} nameChange={handleChangeName} surnameValue={surname} surnameChange={handleSurnameChange} changeAvatarUrl={handleCahengeAvatar} genderValue={gender} genderChange={handleGenderChange} locatonValue={location} locationChange={handleLocationChange} birthdayDateChange={handleBirthdayDateChange}/> 
                     <div className={styles.buttonsContainer}>
                         <ButtonUI onClick={handleClickBack} label='Назад' className={styles.buttonPadding}></ButtonUI>
-                        <ButtonUI onClick={handleClickRegistrationButton} label='Регистрация' className={styles.buttonPadding}></ButtonUI>
+                        <ButtonUI disabled={ !regData.email || !regData.password || !regData.birthdayDate || !regData.gender || !regData.location || !regData.name || !regData.surname} onClick={handleClickRegistrationButton} label='Зарегистрироваться' className={styles.buttonPadding}></ButtonUI>
                     </div> 
                 </div>)}
         </div>

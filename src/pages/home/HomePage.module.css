@@ -36,6 +36,7 @@
 
 .products {
     width: calc(100vw - 115px);
+    max-width: 1500px;
     display: flex;
     flex-wrap: wrap;
     gap: 20px;

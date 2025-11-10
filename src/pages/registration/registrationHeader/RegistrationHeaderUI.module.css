@@ -1,9 +1,10 @@
 .header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
     width: 90%;
     max-width: 1440px;
+    min-width: 742px;
     margin: 0 auto;
     padding-block: 21px 20px;
     padding-inline: 40px;
