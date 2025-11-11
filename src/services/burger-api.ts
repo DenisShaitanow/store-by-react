@@ -12,7 +12,7 @@ const checkResponse = <T>(res: Response): Promise<T> =>
 type TServerResponse<T> = {
   success: boolean;
 } & T;
-/*
+
 type TRefreshResponse = TServerResponse<{
   refreshToken: string;
   accessToken: string;
@@ -192,7 +192,9 @@ type TAuthResponse = TServerResponse<{
   user: RegistrationData;
 }>;
 
-export const registerUserApi = (data: RegistrationData) =>
+
+/*
+export const registerUserApi = (data: RegistrationData) => {
   fetch(`${URL}/auth/register`, {
     method: 'POST',
     headers: {
@@ -211,7 +213,60 @@ export const registerUserApi = (data: RegistrationData) =>
         return data;
       }
       return Promise.reject(data);
-    });
+})}
+*/
+
+
+export function mockedLogoutApi(): Promise<{ success: boolean }> {
+  return new Promise(resolve => {
+    resolve({ success: true });
+  });
+}
+
+/*
+export const logoutApi = () =>
+      fetch(`${URL}/auth/logout`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify({
+          token: localStorage.getItem('refreshToken')
+        })
+}).then((res) => checkResponse<TServerResponse<{}>>(res));
+*/
+
+export const mockedGetUserApi = async(): Promise<RegistrationData> => {
+  const storedData = localStorage.getItem('regData'); // Извлекаем данные единожды
+  if (!storedData)throw new Error('Пользователь не найден');
+
+  const parsedData = JSON.parse(storedData); // Парсим строку в объект
+  return parsedData; // Возвращаем распарсенный объект
+};
+
+
+
+export const mockedLoginUserApi = async (data: { email: string; password: string }): Promise<TAuthResponse> => {
+  const storedData = localStorage.getItem('regData'); // Извлекаем данные единожды
+  if (!storedData) throw new Error('Пользователь не найден'); // Если данных нет, генерируем ошибку
+
+  const parsedData = JSON.parse(storedData) as RegistrationData;
+
+  // Проверяем совпадение введённых данных с сохранёнными
+  if (parsedData.email !== data.email || parsedData.password !== data.password) {
+    throw new Error('Неправильные учетные данные'); // Генерируем ошибку при несовпадении
+  }
+  const mockSuccessResponse = {
+    success: true,
+    refreshToken: fakeRefreshToken,
+    accessToken: `Bearer ${fakeAccessToken}`,
+    user: parsedData,
+  };
+
+  return mockSuccessResponse; // Возвращаем объект пользователя при удачном входе
+};
+
+
 /*
 export type TLoginData = {
   email: string;
@@ -269,12 +324,7 @@ export const resetPasswordApi = (data: { password: string; token: string }) =>
 
 type TUserResponse = TServerResponse<{ user: TUser }>;
 
-export const getUserApi = () =>
-  fetchWithRefresh<TUserResponse>(`${URL}/auth/user`, {
-    headers: {
-      authorization: `Bearer ${getCookie('accessToken') || ''}`
-    } as HeadersInit
-  });
+
 
 export const updateUserApi = (user: Partial<TRegisterData>) =>
   fetchWithRefresh<TUserResponse>(`${URL}/auth/user`, {
@@ -284,15 +334,5 @@ export const updateUserApi = (user: Partial<TRegisterData>) =>
       authorization: `Bearer ${getCookie('accessToken') || ''}`
     } as HeadersInit,
     body: JSON.stringify(user)
-  });
-
-export const logoutApi = () =>
-  fetch(`${URL}/auth/logout`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8'
-    },
-    body: JSON.stringify({
-      token: localStorage.getItem('refreshToken')
-    })
-  }).then((res) => checkResponse<TServerResponse<{}>>(res));
+});
+*/

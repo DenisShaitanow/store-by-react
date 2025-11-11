@@ -1,7 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { deleteCookie } from '../../cookie';
 import {
-  mockedRegisterUserApi
+  mockedRegisterUserApi,
+  mockedLogoutApi,
+  mockedGetUserApi,
+  mockedLoginUserApi
+
 } from '../../burger-api';
 import { type RegistrationData } from '../../../types';
 
@@ -9,7 +13,7 @@ import { type RegistrationData } from '../../../types';
 export const registerUser = createAsyncThunk<
   
   { 
-    user: RegistrationData},
+    user: RegistrationData | null},
     RegistrationData
     
 
@@ -17,21 +21,22 @@ export const registerUser = createAsyncThunk<
   try {
     const response = await mockedRegisterUserApi(data);
     localStorage.setItem('refreshToken', response.refreshToken);
-    return response.user;
+    return { user: response.user} ;
   } catch (err) {
     return rejectWithValue('Ошибка при регистрации');
   }
 });
-/*
+
+
 // Логин пользователя
 export const loginUser = createAsyncThunk<
-  TUser,
+  RegistrationData,
   { email: string; password: string }
 >(
   'user/login',
   async (data: { email: string; password: string }, { rejectWithValue }) => {
     try {
-      const response = await loginUserApi(data);
+      const response = await mockedLoginUserApi(data);
       localStorage.setItem('refreshToken', response.refreshToken);
       return response.user;
     } catch (err) {
@@ -63,14 +68,15 @@ export const resetPassword = createAsyncThunk<
     return rejectWithValue('Ошибка при сбросе пароля');
   }
 });
+*/
 
 // Проверка авторизации пользователя
-export const checkUserAuth = createAsyncThunk<TUser, void>(
+export const checkUserAuth = createAsyncThunk<RegistrationData, void>(
   'user/checkAuth',
   async (_, { rejectWithValue }) => {
     try {
-      const data = await getUserApi();
-      return data.user;
+      const data = await mockedGetUserApi();
+      return data;
     } catch (err) {
       return rejectWithValue('Не авторизован');
     }
@@ -95,15 +101,15 @@ export const logoutUser = createAsyncThunk(
   'user/logout',
   async (_, { rejectWithValue }) => {
     try {
-      await logoutApi();
+      await mockedLogoutApi();
       console.log('exit');
       localStorage.removeItem('refreshToken');
       deleteCookie('accessToken');
-      /*
+      
       document.cookie =
         'accessToken=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;';
     } catch (err) {
       return rejectWithValue('Ошибка при выходе');
     }
   }
-);*/
+);

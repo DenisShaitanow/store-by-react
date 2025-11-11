@@ -14,7 +14,7 @@ export interface IProduct {
 }
 
 export interface RegistrationData {
-    email?: string;
+    email: string;
     password: string;
     name: string;
     surname: string;

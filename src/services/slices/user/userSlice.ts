@@ -1,6 +1,8 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { type RegistrationData } from '../../../types';
 
+import { registerUser, logoutUser, checkUserAuth, loginUser } from '../../thunks/user';
+
 interface IUserState {
     user: RegistrationData | null;
     isAuth: boolean;
@@ -9,9 +11,9 @@ interface IUserState {
     error: string | null;
     forgotPasswordSuccess: boolean;
     resetPasswordSuccess: boolean;
-  }
+}
   
-  export const initialState: IUserState = {
+export const initialState: IUserState = {
     user: null,
     isAuth: false,
     isAuthChecked: false,
@@ -19,9 +21,9 @@ interface IUserState {
     error: null,
     forgotPasswordSuccess: false,
     resetPasswordSuccess: false
-  };
+};
 
-  // слайс для пользователей
+// слайс для пользователей
 const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -61,7 +63,7 @@ const userSlice = createSlice({
 
       // register
       .addCase(registerUser.fulfilled, (state, action) => {
-        state.user = action.payload;
+        state.user = action.payload.user;
         state.isAuth = true;
         state.loading = false;
       })
