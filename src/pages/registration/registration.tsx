@@ -1,6 +1,6 @@
 import { type FC, type ChangeEvent, useState } from 'react';
 import styles from './registration.module.css';
-
+import { type RegistrationData } from '../../types';
 import { RegistrationHeaderUI } from './registrationHeader/RegistrationHeaderUI';
 import Stepper from './stepper/Stepper';
 import { ButtonUI } from '../../ui/button';
@@ -8,16 +8,6 @@ import { PasswordStep } from './step1/PasswordStep';
 import { FormUserInformationStepTwo } from './step2/step2/FormUserInformationStepTwo';
 import { useNavigate } from 'react-router-dom';
 
-interface RegistrationData {
-    email?: string;
-    password: string;
-    name: string;
-    surname: string;
-    avatar: File | null;
-    gender: string;
-    location: string;
-    birthdayDate: string;
-}
 
 const RegistrationPage: FC = () => {
 
