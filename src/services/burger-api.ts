@@ -2,10 +2,11 @@ import { setCookie, getCookie } from './cookie';
 
 
 import { type RegistrationData } from '../types';
-/*import { TIngredient, TOrder, TUser } from 'types';
 
+/*
 const URL = process.env.BURGER_API_URL;
 */
+
 const checkResponse = <T>(res: Response): Promise<T> =>
   res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
 
@@ -64,91 +65,6 @@ export const fetchWithRefresh = async <T>(
     }
   }
 };
-
-type TIngredientsResponse = TServerResponse<{
-  data: TIngredient[];
-}>;
-
-type TFeedsResponse = TServerResponse<{
-  orders: TOrder[];
-  total: number;
-  totalToday: number;
-}>;
-
-type TOrdersResponse = TServerResponse<{
-  data: TOrder[];
-}>;
-
-export const getIngredientsApi = () =>
-  fetch(`${URL}/ingredients`)
-    .then((res) => checkResponse<TIngredientsResponse>(res))
-    .then((data) => {
-      if (data?.success) return data.data;
-      return Promise.reject(data);
-    });
-
-export const getFeedsApi = () =>
-  fetch(`${URL}/orders/all`)
-    .then((res) => checkResponse<TFeedsResponse>(res))
-    .then((data) => {
-      if (data?.success) return data;
-      return Promise.reject(data);
-    });
-
-export const getOrdersApi = () => {
-  const accessToken = getCookie('accessToken');
-  return fetchWithRefresh<TFeedsResponse>(`${URL}/orders`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8',
-      authorization: `Bearer ${accessToken || ''}`
-    } as HeadersInit
-  }).then((data) => {
-    if (data?.success) {
-      return data.orders;
-    }
-    return Promise.reject(data);
-  });
-};
-
-type TNewOrderResponse = TServerResponse<{
-  order: TOrder;
-  name: string;
-}>;
-
-export const orderBurgerApi = (data: string[]) =>
-  fetchWithRefresh<TNewOrderResponse>(`${URL}/orders`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8',
-      authorization: `Bearer ${getCookie('accessToken') || ''}`
-    } as HeadersInit,
-    body: JSON.stringify({
-      ingredients: data
-    })
-  }).then((data) => {
-    if (data?.success) return data;
-    return Promise.reject(data);
-  });
-
-type TOrderResponse = TServerResponse<{
-  orders: TOrder[];
-}>;
-
-export const getOrderByNumberApi = (number: number) =>
-  fetch(`${URL}/orders/${number}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }).then((res) => checkResponse<TOrderResponse>(res));
-
-export type TRegisterData = {
-  email: string;
-  name: string;
-  password: string;
-};
-*/
 
 // Фиктивные токены
 const fakeAccessToken = 'fake_access_token';
@@ -267,6 +183,28 @@ export const mockedLoginUserApi = async (data: { email: string; password: string
 };
 
 
+type TUserResponse = TServerResponse<{ user: RegistrationData }>;
+
+export const mockUpdateUserApi = async (user: RegistrationData): Promise<TUserResponse> => {
+  return {
+    success: true,
+    user: user
+  }
+}
+
+
+/*
+export const updateUserApi = (user: RegistrationData) =>
+  fetchWithRefresh<TUserResponse>(`${URL}/auth/user`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+      authorization: `Bearer ${getCookie('accessToken') || ''}`
+    } as HeadersInit,
+    body: JSON.stringify(user)
+});*/
+
+
 /*
 export type TLoginData = {
   email: string;
@@ -294,35 +232,7 @@ export const loginUserApi = (data: TLoginData) =>
       return Promise.reject(data);
     });
 
-export const forgotPasswordApi = (data: { email: string }) =>
-  fetch(`${URL}/password-reset`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8'
-    },
-    body: JSON.stringify(data)
-  })
-    .then((res) => checkResponse<TServerResponse<{}>>(res))
-    .then((data) => {
-      if (data?.success) return data;
-      return Promise.reject(data);
-    });
 
-export const resetPasswordApi = (data: { password: string; token: string }) =>
-  fetch(`${URL}/password-reset/reset`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8'
-    },
-    body: JSON.stringify(data)
-  })
-    .then((res) => checkResponse<TServerResponse<{}>>(res))
-    .then((data) => {
-      if (data?.success) return data;
-      return Promise.reject(data);
-    });
-
-type TUserResponse = TServerResponse<{ user: TUser }>;
 
 
 

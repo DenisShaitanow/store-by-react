@@ -1,7 +1,13 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { type RegistrationData } from '../../../types';
 
-import { registerUser, logoutUser, checkUserAuth, loginUser } from '../../thunks/user';
+import { 
+  registerUser, 
+  logoutUser, 
+  checkUserAuth, 
+  loginUser, 
+  updateUser } 
+from '../../thunks/user';
 
 interface IUserState {
     user: RegistrationData | null;
@@ -9,8 +15,6 @@ interface IUserState {
     isAuthChecked: boolean;
     loading: boolean;
     error: string | null;
-    forgotPasswordSuccess: boolean;
-    resetPasswordSuccess: boolean;
 }
   
 export const initialState: IUserState = {
@@ -19,8 +23,6 @@ export const initialState: IUserState = {
     isAuthChecked: false,
     loading: false,
     error: null,
-    forgotPasswordSuccess: false,
-    resetPasswordSuccess: false
 };
 
 // слайс для пользователей
@@ -31,10 +33,6 @@ const userSlice = createSlice({
     resetError: (state) => {
       state.error = null;
     },
-    resetPasswordFlags: (state) => {
-      state.forgotPasswordSuccess = false;
-      state.resetPasswordSuccess = false;
-    }
   },
   extraReducers: (builder) => {
     builder
@@ -81,18 +79,6 @@ const userSlice = createSlice({
         state.loading = false;
       })
 
-      // forgot password
-      .addCase(forgotPassword.fulfilled, (state) => {
-        state.forgotPasswordSuccess = true;
-        state.loading = false;
-      })
-
-      // reset password
-      .addCase(resetPassword.fulfilled, (state) => {
-        state.resetPasswordSuccess = true;
-        state.loading = false;
-      })
-
       // общие обработчики
       .addMatcher(
         (action) => action.type.endsWith('/pending'),
@@ -111,5 +97,5 @@ const userSlice = createSlice({
   }
 });
 
-export const { resetError, resetPasswordFlags } = userSlice.actions;
+export const { resetError } = userSlice.actions;
 export const userReducer = userSlice.reducer;

@@ -4,7 +4,8 @@ import {
   mockedRegisterUserApi,
   mockedLogoutApi,
   mockedGetUserApi,
-  mockedLoginUserApi
+  mockedLoginUserApi,
+  mockUpdateUserApi
 
 } from '../../burger-api';
 import { type RegistrationData } from '../../../types';
@@ -85,11 +86,11 @@ export const checkUserAuth = createAsyncThunk<RegistrationData, void>(
 
 // Обновление данных пользователя
 export const updateUser = createAsyncThunk<
-  TUser,
-  Partial<{ name: string; email: string; password: string }>
+  RegistrationData,
+  RegistrationData
 >('user/update', async (data, { rejectWithValue }) => {
   try {
-    const response = await updateUserApi(data);
+    const response = await mockUpdateUserApi(data);
     return response.user;
   } catch (err) {
     return rejectWithValue('Ошибка при обновлении данных');
