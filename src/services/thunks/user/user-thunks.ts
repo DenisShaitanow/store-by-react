@@ -7,7 +7,7 @@ import {
   mockedLoginUserApi,
   mockUpdateUserApi
 
-} from '../../burger-api';
+} from '../../api';
 import { type RegistrationData } from '../../../types';
 
 // Регистрация пользователя
@@ -45,31 +45,6 @@ export const loginUser = createAsyncThunk<
     }
   }
 );
-
-// Запрос на восстановление пароля
-export const forgotPassword = createAsyncThunk<void, { email: string }>(
-  'user/forgotPassword',
-  async (data, { rejectWithValue }) => {
-    try {
-      await forgotPasswordApi(data);
-    } catch (err) {
-      return rejectWithValue('Ошибка при запросе восстановления пароля');
-    }
-  }
-);
-
-// Сброс пароля
-export const resetPassword = createAsyncThunk<
-  void,
-  { password: string; token: string }
->('user/resetPassword', async (data, { rejectWithValue }) => {
-  try {
-    await resetPasswordApi(data);
-  } catch (err) {
-    return rejectWithValue('Ошибка при сбросе пароля');
-  }
-});
-*/
 
 // Проверка авторизации пользователя
 export const checkUserAuth = createAsyncThunk<RegistrationData, void>(

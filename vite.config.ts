@@ -15,7 +15,7 @@ export default defineConfig({
     alias: [
       {
         find: '@store',
-        replacement: path.resolve(__dirname, 'src/servises/store')
+        replacement: path.resolve(__dirname, 'src/services/store')
       },
     ]
   },

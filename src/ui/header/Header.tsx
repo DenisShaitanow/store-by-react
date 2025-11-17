@@ -86,7 +86,8 @@ export const HeaderUI = ({
             {isAuth ? (
                 <div className={styles.profile}>
                     <UserDropdownMenu
-                        user={user}
+                        user={{nameUser: user.name || '', avatarUrl: URL.createObjectURL(user.avatarURl) || ''}}
+
                         onPersonalCabinetClick={() => {
                             // Навигация в личный кабинет
                         }}

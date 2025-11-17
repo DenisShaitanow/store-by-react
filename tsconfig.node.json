@@ -23,7 +23,7 @@
     "noUncheckedSideEffectImports": true,
     "baseUrl": ".",
     "paths": {
-      "@store": ["src/services/store"]
+      "@store/*": ["src/services/store/*"]
     }
 
   },

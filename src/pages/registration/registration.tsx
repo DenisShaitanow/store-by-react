@@ -7,9 +7,13 @@ import { ButtonUI } from '../../ui/button';
 import { PasswordStep } from './step1/PasswordStep';
 import { FormUserInformationStepTwo } from './step2/step2/FormUserInformationStepTwo';
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../services/hooks';
+import { registerUser } from '../../services/thunks/user/user-thunks'
 
 
 const RegistrationPage: FC = () => {
+
+    const dispatch = useAppDispatch();
 
     const navigate = useNavigate();
     const [email, setEmail] = useState<string>('');
@@ -87,6 +91,7 @@ const RegistrationPage: FC = () => {
 
     const handleClickRegistrationButton = () => {
         localStorage.setItem('regData', JSON.stringify(regData));
+        dispatch(registerUser(regData));
         navigate('/');
     }
     
