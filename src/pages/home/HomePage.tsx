@@ -1,6 +1,8 @@
 import styles from './HomePage.module.css';
 import { useState, useEffect, type ChangeEvent, useMemo, useRef, useLayoutEffect } from 'react';
-import { products as productsMock } from '../../constants/constants';
+import { useAppDispatch, useAppSelector } from '../../services/hooks';
+import { getProducts } from '../../services/thunks/userUIData/userUIData-thunks';
+import { selectProducts, selectLoadingProducts } from '../../services/selectors/userUIData-selectors/userUIData-selectors';
 import type { FC } from 'react';
 import { ProductCard } from '../../ui/productCard';
 import type { IProduct } from '../../ui/productCard/type';
@@ -30,6 +32,9 @@ const sexMapping: Record<string, string> = {
 
 const HomePage: FC = () => {
 
+    const dispatch = useAppDispatch();
+    const isLoading = useAppSelector(selectLoadingProducts);
+
     const productsContainer = useRef<HTMLDivElement>(null);
     const productsContainerWidth = productsContainer.current?.clientWidth;
     const [productsToShow, setProductsToShow] = useState<IProduct[]>([]);
@@ -38,8 +43,16 @@ const HomePage: FC = () => {
     const [selectedSexData, setSelectedSexData] = useState<string[]>([]);
     const [selectedCategories, setSelectedCategories ] = useState<(string | number)[]>([]);
     const [selectedCategoriesData, setSelectedCategoriesData ] = useState<string[]>([]);
+
+    useEffect(() => {
+        dispatch(getProducts());
+    }, [dispatch])
     
-    const products: IProduct[] = productsMock;
+    const products: IProduct[] = useAppSelector(selectProducts);
+
+    useEffect(() => {
+        console.log(products[0])
+    })
 
     const filteredProducts = useMemo(() => {
         return products.filter(product => {
@@ -146,7 +159,8 @@ const HomePage: FC = () => {
                 </div>
                 <span className={styles.greyLine}></span>
                 <div className={styles.products} ref={productsContainer}>
-                        {productsToShow.map((product) => (
+                        {isLoading && <SpinnerPulse className={styles.spinner}/>}
+                        {!isLoading && productsToShow.map((product) => (
                             <ProductCard
                                 className={styles.product}
                                 key={product.id}

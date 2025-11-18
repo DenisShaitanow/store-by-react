@@ -29,6 +29,10 @@ export const HeaderUI = ({
         navigate('/');
     }
 
+    const avatarUrl = user && user.avatar instanceof Blob
+                   ? URL.createObjectURL(user.avatar)
+                   : '';
+
     if (isModal)
         return (
             <div className={styles.header}>
@@ -86,7 +90,7 @@ export const HeaderUI = ({
             {isAuth ? (
                 <div className={styles.profile}>
                     <UserDropdownMenu
-                        user={{nameUser: user.name || '', avatarUrl: URL.createObjectURL(user.avatarURl) || ''}}
+                        user={{nameUser: user?.name || '', avatarUrl: avatarUrl}}
 
                         onPersonalCabinetClick={() => {
                             // Навигация в личный кабинет

@@ -63,7 +63,7 @@
     flex-direction: column;
     gap: 24px;
     width: 260px;
-    padding: 40px;
+    padding: 20px;
 }
 
 /* Элементы меню */
@@ -72,7 +72,7 @@
     display: flex;
     align-items: center;
     width: 100%;
-    padding: 8px 0 8px 2px;
+    padding: 8px 5px 8px 8px;
     color: var(--text-color);
     font-weight: var(--font-weight-h4);
     font-size: var(--font-size-h4);

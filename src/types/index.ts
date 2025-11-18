@@ -11,6 +11,7 @@ export interface IProduct {
     shortDescription: string;
     category: Category;
     sex: 'man' | 'woman';
+    isLiked: boolean
 }
 
 export interface RegistrationData {

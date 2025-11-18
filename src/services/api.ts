@@ -1,11 +1,24 @@
 import { setCookie, getCookie } from './cookie';
 
 
-import { type RegistrationData } from '../types';
+import { type IProduct, type RegistrationData } from '../types';
+import { products } from '../constants/constants';
 
 /*
 const URL = process.env.BURGER_API_URL;
 */
+
+export const mockedGetProductsApi = async (): Promise<IProduct[]> => {
+  return new Promise((resolve, reject) => {
+    if (products) {
+      setTimeout(() => {
+        resolve(products);
+      }, 1500);
+    } else {
+      reject(new Error('Нет массива с товарами')); 
+    }
+  });
+}
 
 const checkResponse = <T>(res: Response): Promise<T> =>
   res.ok ? res.json() : res.json().then((err) => Promise.reject(err));
