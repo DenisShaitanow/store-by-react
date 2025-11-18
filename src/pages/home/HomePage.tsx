@@ -73,6 +73,7 @@ const HomePage: FC = () => {
     }, [filteredProducts, productsContainer]);
     
     useEffect(() => {
+        // функция для изменения количества карточек в зависимости от ширины экрана
         function handleResize() {
             if (productsContainer.current) {
                 const currentWidth = productsContainer.current.clientWidth;
