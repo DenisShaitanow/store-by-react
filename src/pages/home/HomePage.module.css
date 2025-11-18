@@ -13,7 +13,8 @@
     display: flex;
     flex-direction: row;
     max-inline-size: 100%;
-    block-size: auto;
+    block-size: fit-content;
+    min-block-size: 1180px;
     gap: 40px;
     
 
@@ -27,7 +28,7 @@
 }
 
 .filters {
-    position: fixed;
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 50px;

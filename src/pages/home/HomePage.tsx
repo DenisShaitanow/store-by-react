@@ -1,5 +1,5 @@
 import styles from './HomePage.module.css';
-import { useState, useEffect, type ChangeEvent, useMemo, useRef, useLayoutEffect } from 'react';
+import { useState, useEffect, type ChangeEvent, useMemo, useRef, useLayoutEffect, useCallback } from 'react';
 import { useAppDispatch, useAppSelector } from '../../services/hooks';
 import { getProducts } from '../../services/thunks/userUIData/userUIData-thunks';
 import { selectProducts, selectLoadingProducts } from '../../services/selectors/userUIData-selectors/userUIData-selectors';
@@ -50,10 +50,6 @@ const HomePage: FC = () => {
     
     const products: IProduct[] = useAppSelector(selectProducts);
 
-    useEffect(() => {
-        console.log(products[0])
-    })
-
     const filteredProducts = useMemo(() => {
         return products.filter(product => {
           // Проверяем выбор категории
@@ -66,7 +62,7 @@ const HomePage: FC = () => {
           }
           return true;
         });
-      }, [selectedCategoriesData, selectedSexData]);
+    }, [selectedCategoriesData, selectedSexData, products]);
 
     useLayoutEffect(() => {
         if (productsContainer.current) {
@@ -77,17 +73,21 @@ const HomePage: FC = () => {
     }, [filteredProducts, productsContainer]);
     
     useEffect(() => {
+        // функция для изменения количества карточек в зависимости от ширины экрана
         function handleResize() {
             if (productsContainer.current) {
                 const currentWidth = productsContainer.current.clientWidth;
                 const newVisibleCount = calculateVisibleProductsCount(currentWidth);
-                setProductsToShow(filteredProducts.slice(0, newVisibleCount));
+                setProductsToShow(filteredProducts.slice(0, newVisibleCount)); // Пересчет и установка новых данных
             }
         }
     
+        // Установка слушателя resize
         window.addEventListener('resize', handleResize);
+    
+        // Удаление слушателя при уничтожении компонента
         return () => window.removeEventListener('resize', handleResize);
-    }, []);
+    }, [filteredProducts]); 
 
     useEffect(() => {
         function handleScroll() {
@@ -115,33 +115,24 @@ const HomePage: FC = () => {
 
 
     //  обработка инпута пола пользователя, получение данных соответствующих по типу карточке товара
-    const handleSex = (e: ChangeEvent<HTMLInputElement>) => {
+    const handleSex = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         const selectedItem: string = e.target.id;
         const selectedItemData: string = sexMapping[selectedItem];
         if (selectedSex.includes(selectedItem)) {
             setSelectedSex(prevSelectedItems =>
-                [...prevSelectedItems].filter(
-                    item => item !== selectedItem
-                )
+                prevSelectedItems.filter(item => item !== selectedItem)
             );
-            setSelectedSexData(prevSelectedSexData => [...prevSelectedSexData].filter(
-                item => item !== selectedItemData
-            ))
+            setSelectedSexData(prevSelectedSexData => prevSelectedSexData.filter(item => item !== selectedItemData))
         } else {
-            setSelectedSex(prevSelectedItems => [
-                ...prevSelectedItems,
-                selectedItem
-            ]);
-            setSelectedSexData(prevSelectedSexData => [...prevSelectedSexData, selectedItemData]
-            )
+            setSelectedSex(prevSelectedItems => [...prevSelectedItems, selectedItem]);
+            setSelectedSexData(prevSelectedSexData => [...prevSelectedSexData, selectedItemData])
         }
-    }
-
-    // обработка инпута категории товаров, получение данных соответствующих по типу карточке товара
-    const handlecategories = (selectedValues: (string | number)[]) => {
+    }, [setSelectedSex, setSelectedSexData, sexMapping, selectedSex]);
+    
+    const handleCategories = useCallback((selectedValues: (string | number)[]) => {
         setSelectedCategories(selectedValues);
         setSelectedCategoriesData(selectedValues.map(item => categoryMapping[item as number]));
-    }
+    }, [setSelectedCategories, setSelectedCategoriesData, categoryMapping]);
     
 
     return (
@@ -153,7 +144,7 @@ const HomePage: FC = () => {
                             <CheckboxGroupUI title='Пол' selectedItems={selectedSex} fieldNames={['Для женщин','Для мужчин']} onChange={handleSex}/>
                         </div>
                         <div>
-                            <CheckboxDropdown selectedValues={selectedCategories} onChange={handlecategories} title='Категория' staticMode options={['Рубашки','Обувь','Верхняя одежда','Нижнее белье','Головные уборы','Брюки', 'Аксессуары']}/>
+                            <CheckboxDropdown selectedValues={selectedCategories} onChange={handleCategories} title='Категория' staticMode options={['Рубашки','Обувь','Верхняя одежда','Нижнее белье','Головные уборы','Брюки', 'Аксессуары']}/>
                         </div>
                     </div>
                 </div>
