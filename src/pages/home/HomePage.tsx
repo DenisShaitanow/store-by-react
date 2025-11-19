@@ -169,7 +169,7 @@ const HomePage: FC = () => {
             </div>
             {isLoadingMore && 
                 <div className={styles.spinnerContainer}>
-                    <SpinnerPulse className={styles.spinner}/>
+                    <SpinnerPulse className={styles.spinnerLoadCards}/>
                 </div>
             }
         </div>

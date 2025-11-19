@@ -1,3 +1,4 @@
+import { setCookie, getCookie } from '../../cookie';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { deleteCookie } from '../../cookie';
 import {
@@ -21,6 +22,10 @@ export const registerUser = createAsyncThunk<
 >('user/register', async (data, { rejectWithValue }) => {
   try {
     const response = await mockedRegisterUserApi(data);
+    const accessToken = response.accessToken.startsWith('Bearer ')
+        ? response.accessToken.slice(7)
+        : response.accessToken;
+      setCookie('accessToken', accessToken);
     localStorage.setItem('refreshToken', response.refreshToken);
     return { user: response.user} ;
   } catch (err) {

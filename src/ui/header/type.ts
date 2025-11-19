@@ -10,6 +10,7 @@ export type THeaderUIProps = {
     theme: 'light' | 'dark';
     //удалить потом
     navItems?: Array<{ label: string; href: string }>;
+    handleClickLogout?: () => void;
     onRegisterClick?: () => void;
     onLoginClick?: () => void;
     onLogoutClick?: () => void;

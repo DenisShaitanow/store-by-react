@@ -37,6 +37,7 @@ export const PasswordInputUI: React.FC<PasswordInputUIProps> = ({
                 })}
             >
                 <input
+                    autoComplete='off'
                     className={clsx(styles.input, styles.text)}
                     type={showPassword ? 'text' : 'password'}
                     placeholder={

@@ -15,14 +15,14 @@
     max-inline-size: 100%;
     block-size: fit-content;
     min-block-size: 1180px;
-    gap: 40px;
+    gap: 25px;
     
 
 }
 
 .containerFixed {
     padding-inline: 10px;
-    min-width: 165px;
+    min-width: 180px;
     
   
 }
@@ -52,8 +52,14 @@
 }
 
 .spinner {
-    position: relative !important;
+    display: block;
+    position: absolute !important;
+    margin-left: 50px;
     
+}
+
+.spinnerLoadCards {
+    position: relative !important;
 }
 
 .greyLine {

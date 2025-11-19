@@ -5,7 +5,7 @@
     align-items: center;
     gap: 8px;
     width: fit-content;
-    height: 24px;
+    height: fit-content;
     cursor: pointer;
 }
 
@@ -19,8 +19,8 @@
     font-weight: var(--font-weight-body);
     font-size: var(--font-size-body);
     font-family: var(--font-family, sans-serif);
-    line-height: var(--line-height-body);
-    white-space: nowrap;
+    line-height: 110%;
+    white-space: wrap;
     text-align: left;
     background-color: var(--surface-color);
 }
