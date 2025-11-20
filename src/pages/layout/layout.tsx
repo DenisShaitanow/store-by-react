@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 
 import { selectUser } from '../../services/selectors/user-selectors/user-selectors';
 import { getCookie } from '../../services/cookie';
+import { checkUserAuth } from '../../services/thunks/user';
 
 function Layout() {
 
@@ -17,8 +18,7 @@ function Layout() {
   const dispatch = useAppDispatch();
 
   const isRegistrationPage = location.pathname === '/registration' || location.pathname === '/loginClient';
-  const accessToken = getCookie('accessToken');
-  const isAuth: boolean = useAppSelector(selectIsAuth) || !!accessToken || false;
+  const isAuth: boolean = useAppSelector(selectIsAuth) || false;
 
   const user = useAppSelector(selectUser);
 
@@ -31,11 +31,15 @@ function Layout() {
   }
 
   const handleClickLogout = () => {
-    console.log('exit');
     dispatch(logoutUser());
   }
 
-
+  useEffect(() => {
+    const accessToken = getCookie('accessToken') || '';   
+    if (accessToken) {
+      dispatch(checkUserAuth(accessToken)); // отправляем запрос на проверку токена
+    }
+  }, []); 
 
   return (
     <div className={styles.layout}>

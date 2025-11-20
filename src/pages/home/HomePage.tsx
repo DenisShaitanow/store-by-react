@@ -163,6 +163,7 @@ const HomePage: FC = () => {
                                 image={product.image}
                                 category={product.category}
                                 sex={product.sex}
+                                isLiked={product.isLiked}
                             />
                         ))}
                 </div>

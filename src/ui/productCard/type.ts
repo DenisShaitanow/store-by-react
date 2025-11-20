@@ -12,4 +12,5 @@ export interface IProduct {
     category: Category;
     sex: 'man' | 'woman';
     className?: string;
+    isLiked: boolean
 }

@@ -25,7 +25,7 @@ export const registerUser = createAsyncThunk<
     const accessToken = response.accessToken.startsWith('Bearer ')
         ? response.accessToken.slice(7)
         : response.accessToken;
-      setCookie('accessToken', accessToken);
+    setCookie('accessToken', accessToken);
     localStorage.setItem('refreshToken', response.refreshToken);
     return { user: response.user} ;
   } catch (err) {
@@ -44,6 +44,10 @@ export const loginUser = createAsyncThunk<
     try {
       const response = await mockedLoginUserApi(data);
       localStorage.setItem('refreshToken', response.refreshToken);
+      const accessToken = response.accessToken.startsWith('Bearer ')
+        ? response.accessToken.slice(7)
+        : response.accessToken;
+    setCookie('accessToken', accessToken);
       return response.user;
     } catch (err) {
       return rejectWithValue('Ошибка при входе');
@@ -52,11 +56,12 @@ export const loginUser = createAsyncThunk<
 );
 
 // Проверка авторизации пользователя
-export const checkUserAuth = createAsyncThunk<RegistrationData, void>(
+export const checkUserAuth = createAsyncThunk<RegistrationData, string>(
   'user/checkAuth',
   async (_, { rejectWithValue }) => {
     try {
-      const data = await mockedGetUserApi();
+      const accessToken = getCookie('accessToken')
+      const data = await mockedGetUserApi(accessToken || '');
       return data;
     } catch (err) {
       return rejectWithValue('Не авторизован');

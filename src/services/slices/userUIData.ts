@@ -1,6 +1,7 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { type IProduct } from '../../types/index';
 import { getProducts } from '../thunks/userUIData/userUIData-thunks';
+import { act } from 'react';
 
 interface IUserState {
     loadingProducts: boolean;
@@ -33,6 +34,21 @@ const userUIDataSlice = createSlice({
         resetBusket: (state) => {
             state.busket = [];
         },
+        addAndDeleteToFavoriteItems: (state, action) => {
+            const productId = action.payload;
+            const indexOfProduct = state.products.findIndex((product) => product.id === productId);
+        
+            if (indexOfProduct >= 0) {
+                state.products[indexOfProduct].isLiked = !state.products[indexOfProduct].isLiked;
+                
+                if (state.favoriteItems.includes(productId)) {
+                    state.favoriteItems = state.favoriteItems.filter(id => id !== productId);
+                } else {
+                    state.favoriteItems.push(productId);
+                }
+            }
+            localStorage.setItem('products', JSON.stringify(state.products));
+        },
         addToBusket: (state, action: PayloadAction<string>) => {
             state.busket = [...state.busket, action.payload];
         },
@@ -48,13 +64,13 @@ const userUIDataSlice = createSlice({
         .addCase(getProducts.pending, (state) => {
             state.loadingProducts = true;
         })
-            .addCase(getProducts.fulfilled, (state, action: PayloadAction<IProduct []>) => {
-                state.products = action.payload;
-                state.loadingProducts = false;
-            })
-            .addCase(getProducts.rejected, (state, action) => {
+        .addCase(getProducts.fulfilled, (state, action: PayloadAction<IProduct []>) => {
+            state.products = action.payload;
+            state.loadingProducts = false;
+        })
+        .addCase(getProducts.rejected, (state, action) => {
                 state.error = action.payload as string;
-            })
+        })
     }
 });
 
@@ -64,7 +80,8 @@ export const {
     resetBusket,
     addToBusket,
     removeFromBusket,
-    removeFromFavoriteItems
+    removeFromFavoriteItems,
+    addAndDeleteToFavoriteItems
 } = userUIDataSlice.actions;
 
 export const userUIDataReducer = userUIDataSlice.reducer;

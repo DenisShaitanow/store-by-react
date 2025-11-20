@@ -30,7 +30,7 @@ const AuthPage: FC = () => {
     }
 
     const onClickButton = () => {
-        let regDataObject
+        let regDataObject;
         const regDataString = localStorage.getItem('regData');
         if (regDataString) { 
             regDataObject = JSON.parse(regDataString);

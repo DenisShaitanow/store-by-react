@@ -4,11 +4,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import type { FC } from 'react';
 import styles from './ProductCard.module.css';
 import type { IProduct } from './type';
+import { useAppDispatch } from '../..//services/hooks';
+import { addAndDeleteToFavoriteItems } from '../../services/slices/userUIData';
 /*`../assets/${props.image}`*/ 
 
 
 export const ProductCard: FC<IProduct> = (props: IProduct) => {
-    const [like, setLike] = useState<boolean>(false);
+    const dispatch = useAppDispatch();
+    const [like, setLike] = useState<boolean>(props.isLiked);
     const heartlike = useRef<HTMLSpanElement>(null);
     const navigate = useNavigate();
 
@@ -21,8 +24,13 @@ export const ProductCard: FC<IProduct> = (props: IProduct) => {
     }
 
     function handleLike() {
+        dispatch(addAndDeleteToFavoriteItems(props.id));
         setLike(!like);
     }
+    /*
+    useEffect(() => {
+        console.log(props.isLiked)
+    })*/
 
     return (
         
