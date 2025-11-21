@@ -85,7 +85,7 @@ export const HeaderUI = ({
                             }}
                             aria-label="Уведомления"
                         />
-                        <Link to="profile/favorites">
+                        <Link to="/favoritsProducts">
                             <IconButton
                                 type="like"
                                 isLiked={false}

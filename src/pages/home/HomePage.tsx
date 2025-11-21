@@ -10,11 +10,6 @@ import { CheckboxGroupUI } from '../../ui/checkbox';
 import { CheckboxDropdown } from '../../ui/checkboxDropdown';
 import { SpinnerPulse } from '../../ui/spinnerPulse';
 
-const calculateVisibleProductsCount = (width: number) => {
-    const cardsPerRow = Math.floor(width / 240); 
-    return cardsPerRow * 3;
-};
-
 const categoryMapping: string[] = [
     't-shirts',
     'shoes',
@@ -31,11 +26,13 @@ const sexMapping: Record<string, string> = {
 }
 
 const HomePage: FC = () => {
+    
 
     const dispatch = useAppDispatch();
     const isLoading = useAppSelector(selectLoadingProducts);
 
     const productsContainer = useRef<HTMLDivElement>(null);
+    const productCard = useRef<HTMLDivElement>(null);
     const productsContainerWidth = productsContainer.current?.clientWidth;
     const [productsToShow, setProductsToShow] = useState<IProduct[]>([]);
     const [isLoadingMore, setIsLoadingMore] = useState(false);
@@ -43,6 +40,11 @@ const HomePage: FC = () => {
     const [selectedSexData, setSelectedSexData] = useState<string[]>([]);
     const [selectedCategories, setSelectedCategories ] = useState<(string | number)[]>([]);
     const [selectedCategoriesData, setSelectedCategoriesData ] = useState<string[]>([]);
+
+    const calculateVisibleProductsCount = (width: number) => {
+        const cardsPerRow = Math.floor(width / (productCard.current?.clientWidth || 240)); 
+        return cardsPerRow * 4;
+    };
 
     useEffect(() => {
         dispatch(getProducts());
@@ -69,6 +71,8 @@ const HomePage: FC = () => {
             const containerWidth = productsContainer.current.clientWidth;
             const visibleCardsCount = calculateVisibleProductsCount(containerWidth);
             setProductsToShow(filteredProducts.slice(0, visibleCardsCount));
+            console.log(containerWidth);
+            console.log(visibleCardsCount);
         }
     }, [filteredProducts, productsContainer]);
     
@@ -153,6 +157,7 @@ const HomePage: FC = () => {
                         {isLoading && <SpinnerPulse className={styles.spinner}/>}
                         {!isLoading && productsToShow.map((product) => (
                             <ProductCard
+                                ref={productCard}
                                 className={styles.product}
                                 key={product.id}
                                 title={product.title}

@@ -88,3 +88,31 @@
 .like-done {
     background-image: url('../assets/like-red.svg');
 }
+
+@media ( width <= 1440px ) {
+    .container {
+        inline-size: 180px;
+        block-size: 270px;
+        border-radius: 20px;
+    }
+
+    .title {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 120%;
+        padding-block: 0;
+    }
+
+    .description {
+        font-size: 12px; 
+        font-weight: 300;
+        line-height: 120%; 
+    }
+
+    .price {
+        font-size: var(--font-size-h4);
+        font-weight: var(--font-weight-h4);
+        line-height: 110%;
+        padding-block: 0;
+    }
+}

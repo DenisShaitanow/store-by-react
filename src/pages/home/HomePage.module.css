@@ -21,6 +21,7 @@
 }
 
 .containerFixed {
+    height: fit-content;
     padding-inline: 10px;
     min-width: 180px;
     
@@ -36,7 +37,8 @@
 }
 
 .products {
-    width: calc(100vw - 115px);
+    width: calc(100vw - 400px);
+    height: fit-content;
     max-width: 1500px;
     display: flex;
     flex-wrap: wrap;

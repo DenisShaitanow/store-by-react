@@ -1,4 +1,4 @@
-import { memo, useEffect, useState, useRef } from 'react';
+import { memo, useEffect, useState, useRef, forwardRef } from 'react';
 import ReactDOM from 'react-dom';
 import { Link, useNavigate } from 'react-router-dom';
 import type { FC } from 'react';
@@ -9,7 +9,7 @@ import { addAndDeleteToFavoriteItems } from '../../services/slices/userUIData';
 /*`../assets/${props.image}`*/ 
 
 
-export const ProductCard: FC<IProduct> = (props: IProduct) => {
+export const ProductCard = forwardRef<HTMLDivElement, IProduct>((props, refCont) => {
     const dispatch = useAppDispatch();
     const [like, setLike] = useState<boolean>(props.isLiked);
     const heartlike = useRef<HTMLSpanElement>(null);
@@ -26,15 +26,11 @@ export const ProductCard: FC<IProduct> = (props: IProduct) => {
     function handleLike() {
         dispatch(addAndDeleteToFavoriteItems(props.id));
         setLike(!like);
-    }
-    /*
-    useEffect(() => {
-        console.log(props.isLiked)
-    })*/
+    }  
 
     return (
         
-            <div onClick={handleClick} className={`${styles.container} ${props.className}`} id={props.id} data-cy={`productCard-${props.id}`}>
+            <div ref={refCont} onClick={handleClick} className={`${styles.container} ${props.className}`} id={props.id} data-cy={`productCard-${props.id}`}>
                 <img className={styles.image} src={props.image}></img>
                 <p className={styles.price}>{`${props.price}₽`}</p>
                 <p className={styles.title}>{props.title}</p>
@@ -51,4 +47,4 @@ export const ProductCard: FC<IProduct> = (props: IProduct) => {
             
    
     );
-};
+});

@@ -5,6 +5,7 @@ import { AboutPage } from "./pages/about_project";
 import { CardPage } from './pages/cardPage';
 import RegistrationPage from './pages/registration/registration';
 import  AuthPage from './pages/authPage/AuthPage';
+import FavoritsPage from './pages/favorits/FavoritsPage';
 
 export const router = createBrowserRouter([
     {
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
             path: '/loginClient',
             element: <AuthPage />
           },
+          {
+            path: '/favoritsProducts',
+            element: <FavoritsPage />
+          }
         ],
       },
 ]);
