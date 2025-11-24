@@ -3,7 +3,8 @@ export type IconButtonType =
     | 'notification'
     | 'share'
     | 'more'
-    | 'theme';
+    | 'theme'
+    | 'basket';
 
 export type ThemeMode = 'light' | 'dark';
 
@@ -39,9 +40,14 @@ export type ThemeProps = {
     themeMode: ThemeMode; // 'light' -> sun, 'dark' -> moon
 } & IconButtonBaseProps;
 
+export type BasketProps = {
+    type: 'basket'
+} & IconButtonBaseProps;
+
 export type IconButtonProps =
     | LikeProps
     | NotificationProps
     | ShareProps
     | MoreProps
-    | ThemeProps;
+    | ThemeProps
+    | BasketProps;

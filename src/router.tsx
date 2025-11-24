@@ -6,6 +6,7 @@ import { CardPage } from './pages/cardPage';
 import RegistrationPage from './pages/registration/registration';
 import  AuthPage from './pages/authPage/AuthPage';
 import FavoritsPage from './pages/favorits/FavoritsPage';
+import BasketPage from './pages/basket/BasketPage';
 
 export const router = createBrowserRouter([
     {
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
           {
             path: '/favoritsProducts',
             element: <FavoritsPage />
+          },
+          {
+            path: '/basket',
+            element: <BasketPage />
           }
         ],
       },

@@ -1,0 +1,101 @@
+.container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    inline-size: 70%;
+    max-inline-size: 600px;
+    block-size: 150px;
+    border-radius: 30px;
+    border: 1px solid;
+    border-color: var(--accent-color);
+    font-family: var(--second-family);
+    color: var(--text-color);
+    padding: 7px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    inline-size: 70%;
+}
+
+
+.image {
+    display: block;
+    inline-size: 25%;
+    block-size: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+    transition: 0.4s ease-in-out;
+    overflow: hidden;
+
+}
+
+.image:hover {
+    transform: scale(1.05);
+}
+
+.title {
+    display: block;
+    padding-inline: 10px;
+    padding-block: 3px;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 120%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box !important; /* Важно установить именно webkit-box */
+    -webkit-line-clamp: 2; /* Обязательно с дефисом и префиксом */
+    -webkit-box-orient: vertical; /* Ориентация вертикальной коробки */
+}
+
+.description {
+    padding-inline: 9px;
+    padding-block: 1px;
+    font-size: var(--font-size-h4); 
+    font-weight: var(--font-weight-caption); /* 400 */
+    line-height: var(--line-height-caption); /* 133% */
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box !important; /* Важно установить именно webkit-box */
+    -webkit-line-clamp: 4; /* Обязательно с дефисом и префиксом */
+    -webkit-box-orient: vertical; /* Ориентация вертикальной коробки */
+}
+
+.category {
+    position: absolute;
+    top: 97px;
+    right: 7px;
+    inline-size: fit-content;
+    block-size: fit-content;
+    display: block;
+    border-radius: 5px;
+    background-color: rgba(80, 136, 38, 0.5);
+    color: brown;
+    padding: 3px;
+    font-size: 10px;
+}
+
+.price {
+    padding-inline: 9px;
+    font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-h2);
+    line-height: var(--line-height-h2);
+    color: brown;
+    font-weight: 700;
+    padding-block: 5px;
+}
+
+.delete {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    fill: var(--accent-color);
+    cursor: pointer;
+}
+
+.delete :hover {
+    fill: var(--button-pressed-color);
+}
+

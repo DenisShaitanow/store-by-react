@@ -1,18 +1,17 @@
 .container {
     position: relative;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: flex-start;
     align-self: center;
     margin: auto;
-    inline-size: 80%;
+    inline-size: 60%;
     block-size: fit-content;
-    min-block-size: 800px;
     padding: 50px;
     border: solid var(--accent-color) 1px;
     border-radius: 50px;
-    box-shadow: 0 0 25px var(--accent-color);
-    gap: 60px;
+    box-shadow: 0 0 3px var(--accent-color);
+    gap: 15px;
     font-family: var(--second-family);
     color: var(--text-color);
 }

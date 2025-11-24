@@ -59,3 +59,13 @@
     background-color: var(--alarm-color);
     border-radius: 50%;
 }
+
+.basketIndicator {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    background-color: var(--alarm-color);
+    border-radius: 50%;
+}

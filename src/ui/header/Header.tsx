@@ -92,6 +92,12 @@ export const HeaderUI = ({
                                 aria-label="Избранное"
                             />
                         </Link>
+                        <Link to="/basket">
+                            <IconButton
+                                type="basket"
+                                aria-label='Корзина выбранных товаров'
+                             />
+                        </Link>
                     </>
                 )}
             </div>

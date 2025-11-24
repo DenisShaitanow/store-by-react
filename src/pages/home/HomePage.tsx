@@ -71,8 +71,6 @@ const HomePage: FC = () => {
             const containerWidth = productsContainer.current.clientWidth;
             const visibleCardsCount = calculateVisibleProductsCount(containerWidth);
             setProductsToShow(filteredProducts.slice(0, visibleCardsCount));
-            console.log(containerWidth);
-            console.log(visibleCardsCount);
         }
     }, [filteredProducts, productsContainer]);
     

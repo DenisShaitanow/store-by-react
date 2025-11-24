@@ -7,6 +7,11 @@ import ShareIcon from '../assets/share.svg?react';
 import MoreSquareIcon from '../assets/more-square.svg?react';
 import MoonIcon from '../assets/moon.svg?react';
 import SunIcon from '../assets/sun.svg?react';
+import Basket from '../assets/basket_header.svg?react';
+import { useAppSelector } from '../../services/hooks';
+import type { IProduct } from 'src/types';
+import { selectBasket } from '../../services/selectors/userUIData-selectors/userUIData-selectors';
+import { useEffect } from 'react';
 
 function pickIcon(type: IconButtonProps['type'], themeMode?: ThemeMode) {
     switch (type) {
@@ -20,6 +25,8 @@ function pickIcon(type: IconButtonProps['type'], themeMode?: ThemeMode) {
             return MoreSquareIcon;
         case 'theme':
             return themeMode === 'light' ? SunIcon : MoonIcon;
+        case 'basket':
+            return Basket;
         default:
             return ShareIcon;
     }
@@ -35,6 +42,9 @@ export const IconButton = (props: IconButtonProps) => {
         disabled = false
     } = props;
 
+    const productsInBasket: IProduct[] = useAppSelector(selectBasket);
+    useEffect(() => {console.log(productsInBasket)}, [productsInBasket])
+    const hasItemsInBasket: boolean = productsInBasket.length > 0;
     const computedAriaLabel =
         ariaLabel ??
         (type === 'like'
@@ -53,10 +63,12 @@ export const IconButton = (props: IconButtonProps) => {
                     ? props.themeMode === 'dark'
                         ? 'Сменить тему на светлую'
                         : 'Сменить тему на тёмную'
-                    : 'Кнопка');
+                        : type === 'basket'
+                        ? 'Открыть корзину' 
+                            : 'Кнопка');
 
     const isToggle =
-        type === 'like' || type === 'notification' || type === 'theme';
+        type === 'like' || type === 'notification' || type === 'theme' || type === 'basket';
 
     const ariaPressed =
         typeof pressed === 'boolean'
@@ -95,7 +107,7 @@ export const IconButton = (props: IconButtonProps) => {
             onClick={onClick}
             disabled={disabled}
         >
-            <IconComponent className={styles.icon} aria-hidden="true" />
+            <IconComponent className={styles.icon}  />
             {type === 'notification' &&
                 'hasNotification' in props &&
                 props.hasNotification && (
@@ -104,6 +116,12 @@ export const IconButton = (props: IconButtonProps) => {
                         aria-hidden="true"
                     />
                 )}
+            {type === 'basket' && hasItemsInBasket && (
+                <span
+                    className={styles.basketIndicator}
+                    aria-hidden="true"
+                />
+            )}
         </button>
     );
 };

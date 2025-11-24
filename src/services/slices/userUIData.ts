@@ -8,7 +8,7 @@ interface IUserState {
     products: IProduct[];
     favoriteItems: string[];
     notifications: {id: string, text: string}[];
-    busket: string[];
+    basket: IProduct[];
     error: string;
 }
   
@@ -17,7 +17,7 @@ export const initialState: IUserState = {
     products: [],
     favoriteItems: [],
     notifications: [],
-    busket: [],
+    basket: [],
     error: ''
 };
 
@@ -32,7 +32,7 @@ const userUIDataSlice = createSlice({
             state.notifications = [];
         },
         resetBusket: (state) => {
-            state.busket = [];
+            state.basket = [];
         },
         addAndDeleteToFavoriteItems: (state, action) => {
             const productId = action.payload;
@@ -49,14 +49,17 @@ const userUIDataSlice = createSlice({
             }
             localStorage.setItem('products', JSON.stringify(state.products));
         },
-        addToBusket: (state, action: PayloadAction<string>) => {
-            state.busket = [...state.busket, action.payload];
+        addToBusket: (state, action: PayloadAction<IProduct>) => {
+            state.basket = [...state.basket, action.payload];
+            localStorage.setItem('basket', JSON.stringify([...state.basket, action.payload]));
         },
-        removeFromBusket: (state, action: PayloadAction<string>) => {
-            state.busket = state.busket.filter(item => item !== action.payload)
+        removeFromBusket: (state, action: PayloadAction<IProduct>) => {
+            state.basket = state.basket.filter(item => item.id !== action.payload.id);
+            localStorage.setItem('basket', JSON.stringify(state.basket.filter(item => item.id !== action.payload.id)))
         },
         removeFromFavoriteItems: (state, action: PayloadAction<string>) => {
-            state.favoriteItems = state.favoriteItems.filter(item => item !== action.payload)
+            state.favoriteItems = state.favoriteItems.filter(item => item !== action.payload);
+            localStorage.setItem('products', JSON.stringify(state.favoriteItems.filter(item => item !== action.payload)));
         },
     },
     extraReducers: (builder) => {
