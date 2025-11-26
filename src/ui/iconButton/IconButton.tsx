@@ -43,7 +43,6 @@ export const IconButton = (props: IconButtonProps) => {
     } = props;
 
     const productsInBasket: IProduct[] = useAppSelector(selectBasket);
-    useEffect(() => {console.log(productsInBasket)}, [productsInBasket])
     const hasItemsInBasket: boolean = productsInBasket.length > 0;
     const computedAriaLabel =
         ariaLabel ??

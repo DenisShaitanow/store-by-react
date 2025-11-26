@@ -1,6 +1,6 @@
 import styles from './BasketPage.module.css';
 import { useEffect, useState, type FC } from 'react';
-import {   useParams } from 'react-router-dom';
+import {   useNavigate, useParams } from 'react-router-dom';
 import { ButtonUI } from '../../ui/button';
 import { useAppDispatch, useAppSelector } from '../../services/hooks';
 import { type IProduct } from '../../types';
@@ -8,25 +8,49 @@ import { selectBasket } from '../../services/selectors/userUIData-selectors/user
 import { Link } from 'react-router-dom';
 import { addToBusket, removeFromBusket } from '../../services/slices/userUIData';
 import ProductCardInBasket from '../../ui/productCardinBasket/ProductCardInBasket';
+import  SadSmile from '../../ui/assets/smiley-sad-fill.svg?react';
 
 
 
 
 const BasketPage: FC = () => {
 
+    const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const productsInBasket = useAppSelector(selectBasket);
     
-         
-         return (
-            <div className={styles.container}>
-                {productsInBasket.map(card => (
-                    <ProductCardInBasket key={card.id} {...card}/>
-                ))}
-                <ButtonUI label='Перейти к оформлению'></ButtonUI>
+    const handleOrder = () => {
+        navigate('/formOrder');
+    }
 
-            </div>
-        )
+    const handleBack = () => {
+        navigate('/');
+    }
+         
+    return (
+        <div className={styles.container}>
+            {productsInBasket.length > 0 ? (
+                <>
+                    <div className={styles.cardList}>
+                        {productsInBasket.map((card) => (
+                            <ProductCardInBasket key={card.id} {...card} />
+                        ))}
+                    </div>
+                    <ButtonUI 
+                        className={styles.buttonBasket} 
+                        label="Перейти к оформлению" 
+                        onClick={handleOrder}
+                    />
+                </>
+            ) : (
+                <div className={styles.noProducts}>
+                    <SadSmile />
+                    <span className={styles.basketEmpty}>Корзина пуста.</span>
+                    <ButtonUI label='Вернуться к покупкам' onClick={handleBack}></ButtonUI>
+                </div>
+            )}
+        </div>
+    );
     
     
    

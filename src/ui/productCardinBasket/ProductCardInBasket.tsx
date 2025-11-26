@@ -5,24 +5,27 @@ import type { FC } from 'react';
 import styles from './ProductCardInBasket.module.css';
 import type { IProduct } from './type';
 import { useAppDispatch } from '../../services/hooks';
-import { addAndDeleteToFavoriteItems } from '../../services/slices/userUIData';
+import { removeFromBusket } from '../../services/slices/userUIData';
 import Delete from '../assets/delete.svg?react';
 /*`../assets/${props.image}`*/ 
 
 
-const ProductCardInBasket: FC<IProduct> = ({id, image, price, shortDescription}) => {
+const ProductCardInBasket: FC<IProduct> = (card) => {
    
+const dispatch = useAppDispatch();
 
-
+const handleDelete = () => {
+    dispatch(removeFromBusket(card))
+}
 
     return (
         
-            <div className={`${styles.container}`} id={id} data-cy={`productCard-${id}`}>
-                <img className={styles.image} src={image}></img>
+            <div className={`${styles.container}`} id={card.id} data-cy={`productCard-${card.id}`}>
+                <img className={styles.image} src={card.image}></img>
                 <div className={styles.info}>
-                    <p className={styles.price}>{`${price}₽`}</p>
-                    <p className={styles.description}>{shortDescription}</p>
-                    <Delete className={styles.delete}/>
+                    <p className={styles.price}>{`${card.price}₽`}</p>
+                    <p className={styles.description}>{card.shortDescription}</p>
+                    <Delete className={styles.delete} onClick={handleDelete}/>
                 </div>
                 
                

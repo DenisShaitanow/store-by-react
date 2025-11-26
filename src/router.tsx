@@ -7,6 +7,7 @@ import RegistrationPage from './pages/registration/registration';
 import  AuthPage from './pages/authPage/AuthPage';
 import FavoritsPage from './pages/favorits/FavoritsPage';
 import BasketPage from './pages/basket/BasketPage';
+import FormOderPage from './pages/formOder/FormOrder';
 
 export const router = createBrowserRouter([
     {
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
           {
             path: '/basket',
             element: <BasketPage />
+          },
+          {
+            path: '/formOrder',
+            element: <FormOderPage />
           }
         ],
       },
