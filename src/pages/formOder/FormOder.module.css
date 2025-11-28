@@ -41,3 +41,24 @@
     border: solid 1px red;
 }
 
+.infoCard {
+    display: block;
+    font-size: var(--font-size-h3);
+    font-weight: var(--font-weight-h3);
+    line-height: var(--line-height-h3);
+}
+
+.cardInputs {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 25px;
+    row-gap: 10px;
+}
+
+.buttonBuy {
+    width: 60%;
+    align-self: center;
+    margin-top: 15px;
+}
+

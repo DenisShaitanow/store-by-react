@@ -134,7 +134,7 @@
     width: 100%;
     max-height: 110px;
     overflow-y: auto;
-    background-color: inherit;
+    background-color: var(--background-page-color);
 }
 
 .optionsContainer::-webkit-scrollbar {
