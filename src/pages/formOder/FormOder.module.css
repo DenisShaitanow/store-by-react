@@ -5,7 +5,7 @@
     min-block-size: 400px;
     margin-inline: auto;
     background-color: rgba(var(--accent-color-r), var(--accent-color-g), var(--accent-color-b), 0.2);
-    padding: 40px;
+    padding: 30px;
     gap: 10px;
     border-radius: 10px;
 }
