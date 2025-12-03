@@ -113,7 +113,7 @@ const FormOderPage: FC = () => {
             (!formData.formPaySelf &&
                 formData.numberCard.trim() !== "" &&
                 formData.PersonCard.trim() !== "" &&
-                formData.CVV.trim() !== "") && (!errors.cvvError || !errors.numberCardError || !errors.personCardError);
+                formData.CVV.trim() !== "") && (!errors.cvvError && !errors.numberCardError && !errors.personCardError);
     
         // Блокировка кнопки, если данные заполнены некорректно
         setButtonBuyDisabled(!(isValidAddressSelection && isPaymentDataComplete));
