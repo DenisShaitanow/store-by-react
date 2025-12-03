@@ -6,3 +6,4 @@ export const selectFavorirsProducts = (state: TRootState) => {
     return state.userUIData.products.filter(item => item.isLiked === true)
 };
 export const selectBasket = (state: TRootState) => state.userUIData.basket;
+export const selectOrders = (state: TRootState) => state.userUIData.orders;

@@ -1,7 +1,7 @@
 import { setCookie, getCookie } from './cookie';
 
 
-import { type IProduct, type RegistrationData } from '../types';
+import { type IFormOrderData, type IProduct, type RegistrationData } from '../types';
 import { products as defaultProducts } from '../constants/constants';
 
 /*
@@ -218,6 +218,19 @@ export const mockUpdateUserApi = async (user: RegistrationData): Promise<TUserRe
     success: true,
     user: user
   }
+}
+
+export const randomOrderId = () => {
+  return Math.floor(Math.random() * 1000000000);
+} 
+
+export const mockedDoOrder = async (formData: IFormOrderData): Promise<string> => {
+  
+  const orderId = randomOrderId();
+
+  return  (orderId.toString() )
+    
+  
 }
 
 

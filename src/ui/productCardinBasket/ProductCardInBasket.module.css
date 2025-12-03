@@ -1,5 +1,6 @@
 .container {
     position: relative;
+    align-self: center;
     display: flex;
     flex-direction: row;
     inline-size: 100%;

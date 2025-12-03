@@ -1,8 +1,12 @@
- import styles from './FormOder.module.css';
+import styles from './FormOder.module.css';
 import { useEffect, useLayoutEffect, useState, type ChangeEvent, type FC } from 'react';
+import { type IFormOrderData } from '../../types/index';
 import { InputUI } from '../../ui/input';
 import { InputDropDown } from '../../ui/inputDropDown/imputDropDownSimple';
 import { ButtonUI } from '../../ui/button';
+import { doOrder } from '../../services/thunks/userUIData/userUIData-thunks';
+import { useAppDispatch } from '../..//services/hooks';
+import { useNavigate } from 'react-router-dom';
 
 const formatCardNumber = (inputValue: string) => {
     // Удаляем любые существующие пробелы из строки
@@ -19,21 +23,18 @@ const formatCardNumber = (inputValue: string) => {
     return formattedValue;
 };
 
-interface IFormData {
-    selectСourier: boolean;
-    adress: string;
-    adressPoint: string;
-    formPaySelf: boolean;
-    numberCard: string;
-    PersonCard: string;
-    CVV: string;
-}
+const validateNumberCard = (value: string) => /^\d+$/.test(value.replace(/\s/g, ''));
+const validatePersonCard = (value: string) => /^[A-Za-z\s]+$/.test(value);
+const validateCVV = (value: string) => /^\d{3}$/.test(value);
 
 
 const FormOderPage: FC = () => { 
 
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+
     const storedFormDataString = JSON.parse(localStorage.getItem('orderForm') ?? '');
-    const initialFormData: IFormData = storedFormDataString ? storedFormDataString : {
+    const initialFormData: IFormOrderData = storedFormDataString ? storedFormDataString : {
         selectСourier: true,
         adress: '',
         adressPoint: '',
@@ -43,24 +44,46 @@ const FormOderPage: FC = () => {
         CVV: ''
     };
 
-    const [formData, setFormData] = useState<IFormData>(initialFormData);
+    const [formData, setFormData] = useState<IFormOrderData>(initialFormData);
+
+    const [errors, setErrors] = useState({
+        numberCardError: "",
+        personCardError: "",
+        cvvError: ""
+    });
 
 
     const [buttonBuyDisabled, setButtonBuyDisabled] = useState<boolean>(true);
 
     const handleChangeNumberCard = (e: ChangeEvent<HTMLInputElement>) => {
         const rawValue = e.target.value;
-        const cleanedAndFormattedValue = formatCardNumber(rawValue); // Форматируем значение
+        const cleanedAndFormattedValue = formatCardNumber(rawValue); 
+        const valid = validateNumberCard(cleanedAndFormattedValue);
+        setErrors((prev) => ({
+            ...prev,
+            numberCardError: valid ? "" : "Некорректный номер карты",
+        }));
         setFormData(prev => ({...prev, numberCard: cleanedAndFormattedValue}));
        
     }
 
     const handleChangePersonCard = (e: ChangeEvent<HTMLInputElement>) => {
+        const valid = validatePersonCard(e.target.value as string);
+        setErrors((prev) => ({
+            ...prev,
+            personCardError: valid ? "" : "Имя владельца должно содержать только латиницу",
+        }));
         setFormData(prev => ({...prev, PersonCard: e.target.value as string}));
     }
 
     const handleChangeCVV = (e: ChangeEvent<HTMLInputElement>) => {
-        setFormData(prev => ({...prev, CVV: e.target.value}));
+        const CvvChecked = e.target.value.substring(0, 3);
+        const valid = validateCVV(CvvChecked);
+        setErrors((prev) => ({
+            ...prev,
+            cvvError: valid ? "" : "Код CVV должен содержать три цифры",
+        }));
+        setFormData(prev => ({...prev, CVV: CvvChecked}));
     }
 
     const handleChangeAdress = (e: ChangeEvent<HTMLInputElement>) => {
@@ -70,6 +93,14 @@ const FormOderPage: FC = () => {
     const handleChangePoint = (e: ChangeEvent<HTMLInputElement>) => {
         setFormData(prev => ({...prev, adressPoint : e.target.value}));
     }
+
+    useEffect(() => {
+        if (!!errors.cvvError || !!errors.numberCardError || !!errors.personCardError) {
+            setButtonBuyDisabled(true)
+        } else {
+            setButtonBuyDisabled(false)
+        }
+    }, [errors])
 
     useEffect(() => {
         // Проверяем общую доступность формы
@@ -82,7 +113,7 @@ const FormOderPage: FC = () => {
             (!formData.formPaySelf &&
                 formData.numberCard.trim() !== "" &&
                 formData.PersonCard.trim() !== "" &&
-                formData.CVV.trim() !== "");
+                formData.CVV.trim() !== "") && (!errors.cvvError || !errors.numberCardError || !errors.personCardError);
     
         // Блокировка кнопки, если данные заполнены некорректно
         setButtonBuyDisabled(!(isValidAddressSelection && isPaymentDataComplete));
@@ -97,7 +128,8 @@ const FormOderPage: FC = () => {
     ]);
 
     const handleBuy = () => {
-        // dodelat
+        dispatch(doOrder(formData));
+        navigate('/orderComplited');
     }
 
     return (
@@ -135,10 +167,9 @@ const FormOderPage: FC = () => {
                 <>
                 <span className={styles.infoCard}>Введите данные карты</span>
                 <div className={styles.cardInputs}>
-                    <InputUI  name='numberCard' type='text' title='Номер карты' value={formData.numberCard} onChange={handleChangeNumberCard} placeholder='Введите номер карты'/>
-                    <InputUI halfSize name='cvvCard' type='text' title='CVV' value={formData.CVV} onChange={handleChangeCVV} placeholder='Введите код с обратной стороны'/>
-                    <InputUI name='personCard' type='text' title='Владелец карты' value={formData.PersonCard} onChange={handleChangePersonCard} placeholder='Введите имя владельца'/>
-                    
+                    <InputUI error={!!errors.numberCardError} errorText={errors.numberCardError}  name='numberCard' type='text' title='Номер карты' value={formData.numberCard} onChange={handleChangeNumberCard} placeholder='Введите номер карты'/>
+                    <InputUI error={!!errors.cvvError} errorText={errors.cvvError} halfSize name='cvvCard' type='text' title='CVV' value={formData.CVV} onChange={handleChangeCVV} placeholder='Введите код с обратной стороны'/>
+                    <InputUI error={!!errors.personCardError} errorText={errors.personCardError} name='personCard' type='text' title='Владелец карты' value={formData.PersonCard} onChange={handleChangePersonCard} placeholder='Введите имя владельца'/>
                 </div>
                 </>
             )}

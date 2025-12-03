@@ -24,3 +24,13 @@ export interface RegistrationData {
     location: string;
     birthdayDate: string;
 }
+
+export interface IFormOrderData {
+    selectСourier: boolean;
+    adress: string;
+    adressPoint: string;
+    formPaySelf: boolean;
+    numberCard: string;
+    PersonCard: string;
+    CVV: string;
+}

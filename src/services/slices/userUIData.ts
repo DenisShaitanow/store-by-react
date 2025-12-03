@@ -1,6 +1,6 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import { type IProduct } from '../../types/index';
-import { getProducts } from '../thunks/userUIData/userUIData-thunks';
+import { getProducts, doOrder } from '../thunks/userUIData/userUIData-thunks';
 import { act } from 'react';
 
 interface IUserState {
@@ -10,6 +10,9 @@ interface IUserState {
     notifications: {id: string, text: string}[];
     basket: IProduct[];
     error: string;
+    orders: string[];
+    errorOrder: string;
+    loadingOrder: boolean
 }
   
 export const initialState: IUserState = {
@@ -18,7 +21,10 @@ export const initialState: IUserState = {
     favoriteItems: [],
     notifications: [],
     basket: [],
-    error: ''
+    error: '',
+    orders: [],
+    errorOrder: '',
+    loadingOrder: false
 };
 
 const userUIDataSlice = createSlice({
@@ -73,6 +79,17 @@ const userUIDataSlice = createSlice({
         })
         .addCase(getProducts.rejected, (state, action) => {
                 state.error = action.payload as string;
+        })
+        .addCase(doOrder.pending, (state) => {
+            state.loadingOrder = true;
+        })
+        .addCase(doOrder.fulfilled, (state, action: PayloadAction<string>) => {
+            state.orders = [ ...state.orders, action.payload];
+            state.loadingProducts = false;
+            state.basket = [];
+        })
+        .addCase(doOrder.rejected, (state, action) => {
+                state.errorOrder = action.payload as string;
         })
     }
 });
