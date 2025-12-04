@@ -5,14 +5,13 @@
     justify-content: flex-start;
     align-self: center;
     margin: auto;
-    inline-size: 80%;
+    inline-size: 60%;
     block-size: fit-content;
-    min-block-size: 800px;
-    padding: 50px;
+    padding: 40px;
     border: solid var(--accent-color) 1px;
     border-radius: 50px;
     box-shadow: 0 0 25px var(--accent-color);
-    gap: 60px;
+    gap: 10px;
     font-family: var(--second-family);
     color: var(--text-color);
 }
@@ -45,14 +44,15 @@
     display: flex;
     flex-direction: column;
     inline-size: 40%;
-    gap: 25px;
+    block-size: fit-content;
+    gap: 15px;
     padding: 10px;
 } 
 
 .image {
     display: block;
     inline-size: 100%;
-    block-size: 400px;
+    block-size: 40%;
     object-fit: cover;
     border-radius: 20px;
 
@@ -108,10 +108,26 @@
 
 .button {
     font-size: 20px !important;
+    inline-size: 100% !important;
 }
 
 .back {
     position: absolute;
-    right: 25px;
+    right: 35px;
     padding-inline: 20px !important;
 }
+
+
+
+@media ( 1025px <= width <= 1440px) {
+
+    .container {
+        gap: 10px;
+    }
+    .price {
+        padding-inline: 5px;
+        padding-block: 1px;
+        font-size: 25px;
+        margin-bottom: 1      0px;
+    }
+ }

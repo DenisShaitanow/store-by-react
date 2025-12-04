@@ -127,6 +127,24 @@ const FormOderPage: FC = () => {
         formData
     ]);
 
+    useEffect(() => {
+        // Функция проверки всех значений формы
+        const checkAllValues = () => {
+            const numberCardValid = validateNumberCard(formData.numberCard);
+            const personCardValid = validatePersonCard(formData.PersonCard);
+            const cvvValid = validateCVV(formData.CVV);
+    
+            setErrors({
+                numberCardError: numberCardValid ? "" : "Некорректный номер карты",
+                personCardError: personCardValid ? "" : "Имя владельца должно содержать только латиницу",
+                cvvError: cvvValid ? "" : "Код CVV должен содержать три цифры",
+            });
+        };
+    
+        // Выполняем проверку при монтировании компонента
+        checkAllValues();
+    }, []);
+
     const handleBuy = () => {
         dispatch(doOrder(formData));
         navigate('/orderComplited');
