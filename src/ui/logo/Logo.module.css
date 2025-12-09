@@ -3,7 +3,7 @@
     flex-direction: row;
     align-items: center;
     gap: 12px;
-    width: 159px;
+    width: fit-content;
     height: 40px;
 }
 
@@ -34,3 +34,71 @@
     line-height: var(--line-height-logo);
     letter-spacing: -0.02em;
 }
+
+
+@media ( 769px <= width <= 900px) {
+    .wrapper {
+        width: 100px;
+        gap: 8px;
+    }
+
+    .text {
+        font-size: 18px;
+    }
+
+    .svg {
+        width: 22px;
+        height: 22px;
+    }
+}
+
+@media ( 481px <= width <= 768px) {
+
+    .wrapper {
+        gap: 5px;
+    }
+
+    .text {
+        font-size: 16px;
+    }
+
+    .svg {
+        width: 19px;
+        height: 19px;
+    }
+
+}
+
+@media ( 321px <= width <= 480px) { 
+
+    .wrapper {
+        gap: 3px;
+    }
+
+    .text {
+        font-size: 12px;
+    }
+
+    .svg {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+@media ( width <= 321px) { 
+
+    .wrapper {
+        gap: 3px;
+    }
+
+    .text {
+        font-size: 12px;
+    }
+
+    .svg {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+

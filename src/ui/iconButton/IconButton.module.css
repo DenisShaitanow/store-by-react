@@ -69,3 +69,55 @@
     background-color: var(--alarm-color);
     border-radius: 50%;
 }
+
+@media ( 625px <= width <= 900px) {
+
+    .button {
+        width: 16px;
+        height: 16px;
+    }
+
+    .icon {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+@media ( 481px <= width <= 624px) { 
+
+    .button {
+        width: 12px;
+        height: 12px;
+    }
+
+    .icon {
+        width: 12px;
+        height: 12px;
+    }
+}
+
+@media ( 321px <= width <= 480px) {
+    .button {
+        width: 9px;
+        height: 9px;
+    }
+
+    .icon {
+        width: 9px;
+        height: 9px;
+    }
+}
+
+
+@media ( width <= 320px) {
+    .button {
+        width: 9px;
+        height: 9px;
+    }
+
+    .icon {
+        width: 9px;
+        height: 9px;
+    }
+}
+

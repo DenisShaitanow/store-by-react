@@ -140,4 +140,10 @@
     .userName {
         display: none; /* Скрываем имя на телефоне */
     }
+
+    .avatarPlaceholder {
+        width: 22px;
+        height: 22px;
+        font-size: 9px;
+    }
 }
