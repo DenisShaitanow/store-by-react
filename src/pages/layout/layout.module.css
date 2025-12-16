@@ -8,3 +8,37 @@
     gap: 50px;
     margin: auto;
 }
+
+@media ( 769px <= width <= 1025px) { 
+
+    .layout {
+        gap: 40px;
+    }
+
+}
+
+@media ( 625px <= width <= 768px) { 
+    .layout {
+        gap: 30px;
+    }
+}
+
+@media ( 481px <= width <= 624px) { 
+    .layout {
+        gap: 22px;
+        padding-inline: 12px;
+    }
+}
+
+@media ( 386px <= width <= 480px) { 
+    .layout {
+        gap: 16px;
+        padding-inline: 10px;
+    }
+}
+
+@media ( width <= 385px) { 
+    .layout {
+        gap: 12px;
+    }
+}

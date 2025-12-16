@@ -57,7 +57,15 @@
     --font-weight-h4: 500;
     --line-height-h4: 150%;
 
+      /* h4 */
+
+      --font-size-h5: 14px;
+      --font-weight-h5: 500;
+      --line-height-h5: 130%;
+
     /* body */
+
+    
 
     --font-size-body: 16px;
     --font-weight-body: 400;

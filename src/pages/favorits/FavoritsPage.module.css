@@ -22,8 +22,8 @@
 
 .containerFixed {
     height: fit-content;
-    padding-inline: 10px;
     min-width: 180px;
+    padding-left: 5px;
     
   
 }

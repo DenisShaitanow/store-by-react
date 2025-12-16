@@ -42,8 +42,8 @@ const HomePage: FC = () => {
     const [selectedCategoriesData, setSelectedCategoriesData ] = useState<string[]>([]);
 
     const calculateVisibleProductsCount = (width: number) => {
-        const cardsPerRow = Math.floor(width / (productCard.current?.clientWidth || 240)); 
-        return cardsPerRow * 4;
+        const cardsPerRow = Math.floor((width - 0.1*width) / (productCard.current?.clientWidth || 160)); 
+        return cardsPerRow * 6;
     };
 
     useEffect(() => {
@@ -66,7 +66,7 @@ const HomePage: FC = () => {
         });
     }, [selectedCategoriesData, selectedSexData, products]);
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         if (productsContainer.current) {
             const containerWidth = productsContainer.current.clientWidth;
             const visibleCardsCount = calculateVisibleProductsCount(containerWidth);
