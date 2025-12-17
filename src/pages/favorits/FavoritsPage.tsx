@@ -1,8 +1,8 @@
-import styles from './HomePage.module.css';
+import styles from './FavoritsPage.module.css';
 import { useState, useEffect, type ChangeEvent, useMemo, useRef, useLayoutEffect, useCallback } from 'react';
 import { useAppDispatch, useAppSelector } from '../../services/hooks';
 import { getProducts } from '../../services/thunks/userUIData/userUIData-thunks';
-import { selectProducts, selectLoadingProducts } from '../../services/selectors/userUIData-selectors/userUIData-selectors';
+import { selectProducts, selectLoadingProducts, selectFavorirsProducts } from '../../services/selectors/userUIData-selectors/userUIData-selectors';
 import type { FC } from 'react';
 import { ProductCard } from '../../ui/productCard';
 import type { IProduct } from '../../ui/productCard/type';
@@ -25,7 +25,7 @@ const sexMapping: Record<string, string> = {
     'Для женщин': 'woman'
 }
 
-const HomePage: FC = () => {
+const FavoritsPage: FC = () => {
     
 
     const dispatch = useAppDispatch();
@@ -42,15 +42,16 @@ const HomePage: FC = () => {
     const [selectedCategoriesData, setSelectedCategoriesData ] = useState<string[]>([]);
 
     const calculateVisibleProductsCount = (width: number) => {
-        const cardsPerRow = Math.floor((width - 0.1*width) / (productCard.current?.clientWidth || 160)); 
-        return cardsPerRow * 6;
+        const cardsPerRow = Math.floor(width / (productCard.current?.clientWidth || 240)); 
+        return cardsPerRow * 4;
     };
 
     useEffect(() => {
         dispatch(getProducts());
     }, [dispatch])
     
-    const products: IProduct[] = useAppSelector(selectProducts);
+    const products: IProduct[] = useAppSelector(selectFavorirsProducts);
+    const noProducts: boolean = products.length > 0 ? true : false;
 
     const filteredProducts = useMemo(() => {
         return products.filter(product => {
@@ -66,7 +67,7 @@ const HomePage: FC = () => {
         });
     }, [selectedCategoriesData, selectedSexData, products]);
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (productsContainer.current) {
             const containerWidth = productsContainer.current.clientWidth;
             const visibleCardsCount = calculateVisibleProductsCount(containerWidth);
@@ -151,7 +152,7 @@ const HomePage: FC = () => {
                     </div>
                 </div>
                 <span className={styles.greyLine}></span>
-                <div className={styles.products} ref={productsContainer}>
+                {noProducts ? <div className={styles.products} ref={productsContainer}>
                         {isLoading && <SpinnerPulse className={styles.spinner}/>}
                         {!isLoading && productsToShow.map((product) => (
                             <ProductCard
@@ -169,7 +170,9 @@ const HomePage: FC = () => {
                                 isLiked={product.isLiked}
                             />
                         ))}
-                </div>
+                </div> : 
+                <span className={styles.noProducts}>Вы пока еще не выбрали понравившиеся товара. Сделайте это.</span>
+            }
             </div>
             {isLoadingMore && 
                 <div className={styles.spinnerContainer}>
@@ -180,4 +183,4 @@ const HomePage: FC = () => {
     );
 };
 
-export default HomePage;
+export default FavoritsPage;

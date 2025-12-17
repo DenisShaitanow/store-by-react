@@ -1,15 +1,16 @@
 import { type FC, type ChangeEvent, useState } from 'react';
 import styles from './AuthPage.module.css';
 import { useNavigate } from 'react-router-dom';
-
+import { loginUser } from '../../services/thunks/user';
 import { RegistrationHeaderUI } from '../registration/registrationHeader/RegistrationHeaderUI';
 import { InputUI } from '../../ui/input';
 import { ButtonUI } from '../../ui/button';
 import { PasswordInputUI } from '../../ui/password';
+import { useAppDispatch } from '../../services/hooks';
 
 const AuthPage: FC = () => {
     
-    
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const [authError, setAuthError] = useState<boolean>(false);
 
@@ -29,12 +30,13 @@ const AuthPage: FC = () => {
     }
 
     const onClickButton = () => {
-        let regDataObject
+        let regDataObject;
         const regDataString = localStorage.getItem('regData');
         if (regDataString) { 
             regDataObject = JSON.parse(regDataString);
         }
         if ( email === regDataObject.email && password ===  regDataObject.password) {
+            dispatch(loginUser({email: email, password: password}));
             navigate('/');
         } else {
             setAuthError(true);

@@ -59,3 +59,68 @@
     background-color: var(--alarm-color);
     border-radius: 50%;
 }
+
+.basketIndicator {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    background-color: var(--alarm-color);
+    border-radius: 50%;
+}
+
+@media ( 625px <= width <= 900px) {
+
+    .button {
+        width: 16px;
+        height: 16px;
+    }
+
+    .icon {
+        width: 16px;
+        height: 16px;
+    }
+
+    .basketIndicator {
+        width: 7px;
+        height: 7px;
+    }
+}
+
+@media ( 481px <= width <= 624px) { 
+
+    .button {
+        width: 12px;
+        height: 12px;
+    }
+
+    .icon {
+        width: 12px;
+        height: 12px;
+    }
+
+    .basketIndicator {
+        width: 5px;
+        height: 5px;
+    }
+}
+
+@media ( width <= 480px) {
+    .button {
+        width: 9px;
+        height: 9px;
+    }
+
+    .icon {
+        width: 9px;
+        height: 9px;
+    }
+
+    .basketIndicator {
+        width: 3px;
+        height: 3px;
+    }
+}
+
+

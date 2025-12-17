@@ -10,6 +10,7 @@ import { ButtonUI } from '../button';
 import { Logo } from '../logo';
 import { IconButton } from '../iconButton';
 import { UserDropdownMenu } from '../userDropdownMenu';
+import type { RegistrationData } from 'src/types';
 
 
 export const HeaderUI = ({
@@ -18,6 +19,7 @@ export const HeaderUI = ({
     isNotification,
     user,
     theme,
+    handleClickLogout,
     onRegisterClick,
     onLoginClick,
     handleCloseButtonClick
@@ -29,9 +31,15 @@ export const HeaderUI = ({
         navigate('/');
     }
 
-    const avatarUrl = user && user.avatar instanceof Blob
-                   ? URL.createObjectURL(user.avatar)
-                   : '';
+    const regData: RegistrationData = JSON.parse(localStorage.getItem('regData') || '');
+
+    const avatarUrl =
+                    user &&
+                    user.avatar instanceof Blob
+                        ? URL.createObjectURL(user.avatar)
+                        : regData.avatar instanceof File
+                        ? URL.createObjectURL(regData.avatar)
+                        : '';
 
     if (isModal)
         return (
@@ -77,12 +85,18 @@ export const HeaderUI = ({
                             }}
                             aria-label="Уведомления"
                         />
-                        <Link to="profile/favorites">
+                        <Link to="/favoritsProducts">
                             <IconButton
                                 type="like"
                                 isLiked={false}
                                 aria-label="Избранное"
                             />
+                        </Link>
+                        <Link to="/basket">
+                            <IconButton
+                                type="basket"
+                                aria-label='Корзина выбранных товаров'
+                             />
                         </Link>
                     </>
                 )}
@@ -90,13 +104,13 @@ export const HeaderUI = ({
             {isAuth ? (
                 <div className={styles.profile}>
                     <UserDropdownMenu
-                        user={{nameUser: user?.name || '', avatarUrl: avatarUrl}}
+                        user={{nameUser: user?.name || regData.name || '', avatarUrl: avatarUrl}}
 
                         onPersonalCabinetClick={() => {
                             // Навигация в личный кабинет
                         }}
                         onLogoutClick={() => {
-                            // Навигация
+                            handleClickLogout && handleClickLogout();
                         }}
                         placement="bottom-right"
                     />

@@ -335,13 +335,7 @@ export const CheckboxDropdown: React.FC<CheckboxDropdownProps> = ({
                                 {filteredOptions.map((option, index) => (
                                     <div
                                         key={option.value}
-                                        style={{
-                                            marginBottom:
-                                                index <
-                                                filteredOptions.length - 1
-                                                    ? '8px'
-                                                    : 0
-                                        }}
+                                        className={`${styles.option}`}
                                     >
                                         <CheckboxGroupUI
                                             fieldNames={[option.label]}

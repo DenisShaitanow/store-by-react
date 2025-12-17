@@ -1,8 +1,8 @@
 import { setCookie, getCookie } from './cookie';
 
 
-import { type IProduct, type RegistrationData } from '../types';
-import { products } from '../constants/constants';
+import { type IFormOrderData, type IProduct, type RegistrationData } from '../types';
+import { products as defaultProducts } from '../constants/constants';
 
 /*
 const URL = process.env.BURGER_API_URL;
@@ -10,12 +10,27 @@ const URL = process.env.BURGER_API_URL;
 
 export const mockedGetProductsApi = async (): Promise<IProduct[]> => {
   return new Promise((resolve, reject) => {
-    if (products) {
+    const storedData = localStorage.getItem('products');
+    let localProducts: IProduct[] | null = null;
+
+    if (storedData) {
+      try {
+        localProducts = JSON.parse(storedData);
+      } catch (error) {
+        console.error('Ошибка при разборе данных:', error);
+        reject(error);
+        return;
+      }
+    }
+
+    if (localProducts) {
       setTimeout(() => {
-        resolve(products);
-      }, 1500);
+        resolve(localProducts);
+      }, 1000);
     } else {
-      reject(new Error('Нет массива с товарами')); 
+      setTimeout(() => {
+        resolve(defaultProducts);
+      }, 1000);
     }
   });
 }
@@ -165,11 +180,11 @@ export const logoutApi = () =>
 }).then((res) => checkResponse<TServerResponse<{}>>(res));
 */
 
-export const mockedGetUserApi = async(): Promise<RegistrationData> => {
+export const mockedGetUserApi = async(accessToken: string): Promise<RegistrationData> => {
   const storedData = localStorage.getItem('regData'); // Извлекаем данные единожды
-  if (!storedData)throw new Error('Пользователь не найден');
+  if (!storedData && accessToken) throw new Error('Пользователь не найден');
 
-  const parsedData = JSON.parse(storedData); // Парсим строку в объект
+  const parsedData = JSON.parse(storedData!); // Парсим строку в объект
   return parsedData; // Возвращаем распарсенный объект
 };
 
@@ -203,6 +218,19 @@ export const mockUpdateUserApi = async (user: RegistrationData): Promise<TUserRe
     success: true,
     user: user
   }
+}
+
+export const randomOrderId = () => {
+  return Math.floor(Math.random() * 1000000000);
+} 
+
+export const mockedDoOrder = async (formData: IFormOrderData): Promise<string> => {
+  
+  const orderId = randomOrderId();
+
+  return  (orderId.toString() )
+    
+  
 }
 
 

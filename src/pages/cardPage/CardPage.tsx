@@ -1,16 +1,38 @@
 import styles from './CardPage.module.css';
-import { useEffect, type FC } from 'react';
+import { useEffect, useState, type FC } from 'react';
 import {   useParams } from 'react-router-dom';
-import { products } from '../../constants/constants';
 import { ButtonUI } from '../../ui/button';
+import { useAppDispatch, useAppSelector } from '../../services/hooks';
+import { type IProduct } from '../../types';
+import { selectProducts } from '../../services/selectors/userUIData-selectors/userUIData-selectors';
+import { Link } from 'react-router-dom';
+import { addToBusket, removeFromBusket } from '../../services/slices/userUIData';
 
 
 
 
 const CardPage: FC = () => {
 
+    const dispatch = useAppDispatch();
     const { idCard } = useParams();
-    const card = products.find(item => item.id === idCard) || {id: 55454545, price: 15000, title: 'Рубашка', description: 'Классическая мужская рубашка.', image: 'https://avatars.mds.yandex.net/i?id=eb6c5690d507b07c6a3551c0241ddc588f9eb2b5-5858707-images-thumbs&n=13', shortDescription: 'Стильный образ.', category: 't-shirts', sex: 'man'}; 
+    const products: IProduct[] = useAppSelector(selectProducts);
+    const [PutToBasketButton, setPut] = useState<boolean>(false);
+    let card: IProduct;
+
+    if (idCard) {
+         card = products.find(item => item.id === idCard)!;
+    } else {
+        throw new Error ('Товар не найден')
+    }
+    
+
+    const handleputTobasket = () => {
+        if (PutToBasketButton) {
+            dispatch(removeFromBusket(card));
+        } else {dispatch(addToBusket(card));}
+        
+        setPut(!PutToBasketButton);
+    }
 
     if ( idCard && card ) {
          
@@ -19,13 +41,15 @@ const CardPage: FC = () => {
                 <div className={styles.leftHalf}>
                     <img className={styles.image} src={card.image}></img>
                     <p className={styles.price}>{`${card.price}₽`}</p>
-                    <ButtonUI label='Положить в корзину' className={styles.button}/>
+                    <ButtonUI label={PutToBasketButton ? 'Убрать из корзины' : 'Положить в корзину'} className={styles.button} onClick={handleputTobasket}/>
                 </div>
                 
                 <div className={styles.information}>
                     <h2 className={styles.title}>{card.title}</h2>
                     <p className={styles.description}>{card.description}</p>
                 </div>
+                <Link to="/"><ButtonUI label='Назад' className={styles.back}/></Link>
+                
                 
             </div>
         )

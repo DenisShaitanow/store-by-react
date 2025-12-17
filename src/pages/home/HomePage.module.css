@@ -3,6 +3,7 @@
     flex-direction: column;
     flex-grow: 1;
     max-inline-size: 100vw;
+    min-inline-size: 375px;
     gap: 30px;
     background-color: var(--surface-color);
     padding-block: 10px;
@@ -12,17 +13,20 @@
 .rowContainer {
     display: flex;
     flex-direction: row;
+    inline-size: 100%;
     max-inline-size: 100%;
     block-size: fit-content;
-    min-block-size: 1180px;
-    gap: 40px;
+    gap: 25px;
     
 
 }
 
 .containerFixed {
-    padding-inline: 10px;
-    min-width: 165px;
+    height: fit-content;
+    padding-inline: 8px;
+    min-inline-size: 76px;
+    min-width: 70px;
+    width: 180px;
     
   
 }
@@ -36,7 +40,8 @@
 }
 
 .products {
-    width: calc(100vw - 115px);
+    width: 80%;
+    height: fit-content;
     max-width: 1500px;
     display: flex;
     flex-wrap: wrap;
@@ -52,12 +57,118 @@
 }
 
 .spinner {
-    position: relative !important;
+    display: block;
+    position: absolute !important;
+    margin-left: 50px;
     
+}
+
+.spinnerLoadCards {
+    position: relative !important;
 }
 
 .greyLine {
     width: 1px;
+    min-height: 100vh;
+
     background-color: var(--toggle-color);
     opacity: 0.6;
+}
+
+@media ( 890px <= width <= 1180px ) {
+    .rowContainer {
+        gap: 15px;
+    }
+
+    .containerFixed {
+        width: 145px;
+        padding: 0;
+    }
+
+    .products {
+        gap: 18px;
+    }
+
+    .filters {
+        gap: 30px;
+    }
+}
+
+@media ( 600px <= width <= 889px ) {
+    .rowContainer {
+        gap: 15px;
+    }
+
+    .containerFixed {
+        width: 130px;
+        padding: 0;
+    }
+
+    .products {
+        gap: 16px;
+    }
+
+    .filters {
+        gap: 18px;
+    }
+}
+
+@media ( 513px <= width <= 599px ) {
+    .rowContainer {
+        gap: 10px;
+    }
+
+    .containerFixed {
+        width: 100px;
+        padding: 0;
+    }
+
+    .products {
+        gap: 8px;
+    }
+
+    .filters {
+        gap: 15px;
+    }
+
+}
+
+@media ( 385px <= width <= 512px ) {
+    .rowContainer {
+        gap: 14px;
+    }
+
+    .containerFixed {
+        width: 85px;
+        padding: 0;
+    }
+
+    .products {
+        gap: 12px;
+    }
+
+    .filters {
+        gap: 12px;
+    }
+
+}
+
+@media ( width <= 384px ) {
+    .rowContainer {
+        gap: 9px;
+    }
+
+    .containerFixed {
+        width: 85px;
+        padding: 0;
+    }
+
+    .products {
+        gap: 10px;
+    }
+
+    .filters {
+        gap: 12px;
+    }
+
 }

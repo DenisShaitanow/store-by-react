@@ -35,7 +35,7 @@ export const CheckboxGroupUI: React.FC<CheckboxGroupUIProps> = ({
     withInDropdown
 }) => (
     <div className={styles.container}>
-        {title && <p className={clsx(styles.title, styles.text)}>{title}</p>}
+        {title && <p className={clsx(styles.title)}>{title}</p>}
         <div
             className={clsx(styles.list, {
                 [styles.list_with_dropdown]: withInDropdown

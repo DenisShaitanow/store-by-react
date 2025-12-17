@@ -1,19 +1,24 @@
 .container {
+    position: relative;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-self: center;
     margin: auto;
-    inline-size: 80%;
-    block-size: fit-content;
-    min-block-size: 800px;
-    padding: 50px;
+    inline-size: 60vw;
+    max-inline-size: 1000px;
+    min-inline-size: 193px;
+    block-size: 45vw;
+    min-block-size: 145px;
+    max-block-size: 600px;
+    padding: 3vw;
     border: solid var(--accent-color) 1px;
     border-radius: 50px;
     box-shadow: 0 0 25px var(--accent-color);
-    gap: 60px;
+    gap: 10px;
     font-family: var(--second-family);
     color: var(--text-color);
+    gap: 30px;
 }
 
 .column {
@@ -44,14 +49,14 @@
     display: flex;
     flex-direction: column;
     inline-size: 40%;
-    gap: 25px;
-    padding: 10px;
+    block-size: 100%;
+    gap: 15px;
 } 
 
 .image {
     display: block;
-    inline-size: 100%;
-    block-size: 400px;
+    flex-grow: 1;
+    block-size: 40%;
     object-fit: cover;
     border-radius: 20px;
 
@@ -60,18 +65,19 @@
 .information {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 35px;
     inline-size: 60%;
     block-size: 100%;
 }
 
 .title {
     display: block;
-    padding-inline: 10px;
-    padding-block: 3px;
+    padding-inline: 2px;
     font-size: 30px;
     font-weight: 650;
     line-height: 120%;
+    max-inline-size: 70%;
+    padding-right: 5px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box !important; /* Важно установить именно webkit-box */
@@ -81,10 +87,9 @@
 
 .description {
     display: block;
-    padding-inline: 10px;
-    padding-block: 3px;
+    padding-inline: 2px;
     font-size: 20px;
-    font-weight: 650;
+    font-weight: 300;
     line-height: 120%;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -101,10 +106,303 @@
     font-weight: 650;
     line-height: 120%;
     color: brown;
-    margin-bottom: 20px;
+    margin-bottom: 4%;
 }
 
 .button {
-    font-size: 20px !important;
+    font-size: 17px !important;
+    inline-size: 100% !important;
 }
+
+.back {
+    font-size: 17px !important;
+    position: absolute;
+    right: 35px;
+    padding-inline: 20px !important;
+    padding-block: 0px !important;
+}
+
+
+
+@media ( 1025px <= width <= 1440px) {
+
+    .container {
+        gap: 17px;
+        border-radius: 45px;
+    }
+
+    .leftHalf {
+        gap: 13px;
+    }
+
+    .price {
+        padding-inline: 5px;
+        padding-block: 1px;
+        font-size: 25px;
+        margin-bottom: 1      0px;
+    }
+
+    .title {
+        font-size: 25px;
+    }
+
+    .description {
+        font-size: 17px;
+    }
+
+    .button {
+        font-size: 15px !important;
+    }
+
+    .back {
+        font-size: 15px !important;
+        height: 35px;
+        border-radius: 12px;
+    }
+
+    .information {
+        gap: 27px;
+    }
+ }
+
+ @media ( 769px <= width <= 1025px) {
+
+    .container {
+        gap: 14px;
+        border-radius: 37px;
+        box-shadow: 0 0 29px var(--accent-color);
+    }
+
+    .leftHalf {
+        gap: 11px;
+    }
+
+    .price {
+        padding-inline: 5px;
+        padding-block: 1px;
+        font-size: 20px;
+        margin-bottom: 1      0px;
+    }
+
+    .title {
+        font-size: 20px;
+    }
+
+    .description {
+        font-size: 14px;
+    }
+
+    .button {
+        font-size: 13px !important;
+        height: 35px;
+        border-radius: 12px;
+    }
+
+    .back {
+        font-size: 13px !important;
+        padding-inline: 10px !important;
+        height: 30px;
+        border-radius: 9px;
+        right: 25px;
+    }
+
+    .information {
+        gap: 20px;
+    }
+ }
+
+ @media ( 625px <= width <= 768px) {
+
+    .container {
+        gap: 5px;
+        border-radius: 30px;
+        box-shadow: 0 0 20px var(--accent-color);
+    }
+
+    .leftHalf {
+        gap: 10px;
+        padding: 2px;
+    }
+
+    .price {
+        padding-inline: 5px;
+        padding-block: 1px;
+        font-size: 16px;
+        margin-bottom: 1      0px;
+    }
+
+    .title {
+        font-size: 16px;
+    }
+
+    .description {
+        font-size: 12px;
+    }
+
+    .button {
+        font-size: 12px !important;
+        height: 28px;
+        border-radius: 10px;
+    }
+
+    .back {
+        font-size: 12px !important;
+        padding-inline: 8px !important;
+        height: 24px;
+        border-radius: 7px;
+        right: 25px;
+    }
+
+    .information {
+        gap: 16px;
+    }
+ }
+
+ @media ( 481px <= width <= 624px) {
+
+    .container {
+        gap: 5px;
+        border-radius: 30px;
+        box-shadow: 0 0 20px var(--accent-color);
+    }
+
+    .leftHalf {
+        gap: 10px;
+        padding: 2px;
+    }
+
+    .price {
+        padding-inline: 5px;
+        padding-block: 1px;
+        font-size: 16px;
+        margin-bottom: 1      0px;
+    }
+
+    .title {
+        font-size: 13px;
+    }
+
+    .description {
+        font-size: 11px;
+    }
+
+    .button {
+        font-size: 10px !important;
+        height: 28px;
+        border-radius: 10px;
+    }
+
+    .back {
+        font-size: 10px !important;
+        padding-inline: 6px !important;
+        height: 22px;
+        border-radius: 7px;
+        right: 20px;
+    }
+
+    .information {
+        gap: 13px;
+    }
+ }
+ 
+
+ @media ( 321px <= width <= 480px) {
+
+    .container {
+        gap: 3px;
+        border-radius: 22px;
+        box-shadow: 0 0 12px var(--accent-color);
+    }
+
+    .leftHalf {
+        gap: 7px;
+        padding: 2px;
+    }
+
+    .price {
+        padding-inline: 3px;
+        padding-block: 1px;
+        font-size: 12px;
+        margin-bottom: 1      0px;
+    }
+
+    .title {
+        font-size: 12px;
+    }
+
+    .description {
+        font-size: 9px;
+    }
+
+    .button {
+        font-size: 6px !important;
+        height: 16px;
+        border-radius: 5px;
+        padding-block: 7px;
+        padding-inline: 3px;
+    }
+
+    .back {
+        font-size: 6px !important;
+        padding-inline: 3px !important;
+        height: 14px;
+        border-radius: 5px;
+        right: 10px;
+    }
+
+    .information {
+        gap: 5px;
+    }
+ }
+
+
+ @media ( width <= 320px) {
+
+    .container {
+        gap: 3px;
+        border-radius: 22px;
+        box-shadow: 0 0 12px var(--accent-color);
+    }
+
+    .leftHalf {
+        gap: 7px;
+        padding: 2px;
+    }
+
+    .price {
+        padding-inline: 3px;
+        padding-block: 1px;
+        font-size: 12px;
+        margin-bottom: 1      0px;
+    }
+
+    .title {
+        font-size: 12px;
+    }
+
+    .description {
+        font-size: 9px;
+    }
+
+    .button {
+        font-size: 6px !important;
+        height: 16px;
+        border-radius: 5px;
+        padding-block: 7px;
+        padding-inline: 3px;
+    }
+
+    .back {
+        font-size: 6px !important;
+        padding-inline: 3px !important;
+        height: 14px;
+        border-radius: 5px;
+        right: 10px;
+    }
+
+    .information {
+        gap: 5px;
+    }
+ }
+
 

@@ -1,0 +1,86 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    max-inline-size: 100vw;
+    gap: 30px;
+    background-color: var(--surface-color);
+    padding-block: 10px;
+}
+
+
+.rowContainer {
+    display: flex;
+    flex-direction: row;
+    max-inline-size: 100%;
+    block-size: fit-content;
+    min-block-size: 1180px;
+    gap: 25px;
+    
+
+}
+
+.containerFixed {
+    height: fit-content;
+    min-width: 180px;
+    padding-left: 5px;
+    
+  
+}
+
+.filters {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+
+}
+
+.products {
+    width: calc(100vw - 400px);
+    height: fit-content;
+    max-width: 1500px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.spinnerContainer {
+    width: fit-content;
+    height: fit-content;
+    display: block;
+    align-self: center;
+    margin-left: 100px;
+}
+
+.spinner {
+    display: block;
+    position: absolute !important;
+    margin-left: 50px;
+    
+}
+
+.spinnerLoadCards {
+    position: relative !important;
+}
+
+.greyLine {
+    width: 1px;
+    background-color: var(--toggle-color);
+    opacity: 0.6;
+}
+
+.noProducts {
+    text-align: center;
+    margin-inline: auto;
+    margin-top: 200px;
+    color: var(--button-pressed-color);
+    max-width: 400px;
+    font-size: 24px;
+}
+
+@media (width < 850px) {
+    .noProducts {
+        font-size: 18px;
+    }
+}

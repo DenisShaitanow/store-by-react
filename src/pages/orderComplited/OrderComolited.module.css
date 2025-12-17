@@ -1,0 +1,25 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    max-inline-size: 700px;
+    min-block-size: 200px;
+    margin-inline: auto;
+    background-color: rgba(var(--accent-color-r), var(--accent-color-g), var(--accent-color-b), 0.2);
+    padding: 30px;
+    gap: 10px;
+    border-radius: 10px;
+}
+
+.text {
+    font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-h2);
+    line-height: var(--line-height-h2);
+    text-align: center;
+}
+
+.buttonOk {
+    width: 40%;
+    align-self: center;
+    margin-top: 15px;
+}
+
