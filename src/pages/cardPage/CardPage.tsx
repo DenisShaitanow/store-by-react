@@ -48,7 +48,7 @@ const CardPage: FC = () => {
                     <h2 className={styles.title}>{card.title}</h2>
                     <p className={styles.description}>{card.description}</p>
                 </div>
-                <Link to="/"><ButtonUI label='Назад' className={styles.back}/></Link>
+                <Link to="/" className={styles.back}><ButtonUI label='Назад' className={styles.buttonBack}/></Link>
                 
                 
             </div>

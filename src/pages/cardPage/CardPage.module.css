@@ -5,12 +5,12 @@
     justify-content: flex-start;
     align-self: center;
     margin: auto;
-    inline-size: 60vw;
-    max-inline-size: 1000px;
+    inline-size: 80vw;
+    max-inline-size: 1100px;
     min-inline-size: 193px;
-    block-size: 45vw;
+    block-size: 65vw;
     min-block-size: 145px;
-    max-block-size: 600px;
+    max-block-size: 800px;
     padding: 3vw;
     border: solid var(--accent-color) 1px;
     border-radius: 50px;
@@ -21,12 +21,6 @@
     gap: 30px;
 }
 
-.column {
-    flex-direction: column !important;
-    align-items: center;
-    justify-content: center;
-    gap: 0 !important;
-}
 
 .notFoundParagraph {
     display: block;
@@ -111,7 +105,11 @@
 
 .button {
     font-size: 17px !important;
-    inline-size: 100% !important;
+    inline-size: 100%;
+}
+
+.buttonBack {
+    inline-size: 100px;
 }
 
 .back {
@@ -156,8 +154,9 @@
 
     .back {
         font-size: 15px !important;
-        height: 35px;
+        height: 55px;
         border-radius: 12px;
+        inline-size: fit-content;
     }
 
     .information {
@@ -165,244 +164,132 @@
     }
  }
 
- @media ( 769px <= width <= 1025px) {
+ @media ( 781px <= width <= 1024px) {
 
     .container {
+        flex-direction: column;
         gap: 14px;
         border-radius: 37px;
         box-shadow: 0 0 29px var(--accent-color);
     }
 
     .leftHalf {
-        gap: 11px;
+        flex-direction: row;
+        inline-size: 100%;
+        gap: 20px;
+    }
+
+    .image {
+        inline-size: 60%;
+        block-size: 100%;
     }
 
     .price {
         padding-inline: 5px;
         padding-block: 1px;
         font-size: 20px;
-        margin-bottom: 1      0px;
+        margin-top: 10px;
     }
 
     .title {
-        font-size: 20px;
+        font-size: 30px;
     }
 
     .description {
-        font-size: 14px;
+        font-size: 22px;
     }
 
     .button {
+        
+        margin-top: 7px;
+        inline-size: 25%;
         font-size: 13px !important;
         height: 35px;
         border-radius: 12px;
     }
 
+    
+    .buttonBack {
+        inline-size: 55px;
+     }
+
     .back {
         font-size: 13px !important;
         padding-inline: 10px !important;
-        height: 30px;
+        left: 5%;
+        top: 7%;
         border-radius: 9px;
-        right: 25px;
+        opacity: 0.7;
+        
     }
 
     .information {
-        gap: 20px;
+        inline-size: 100%;
+        gap: 14px;
     }
  }
 
- @media ( 625px <= width <= 768px) {
-
+ @media ( 400px <= width <= 780px) {
+   
     .container {
-        gap: 5px;
-        border-radius: 30px;
-        box-shadow: 0 0 20px var(--accent-color);
+        flex-direction: column;
+        gap: 14px;
+        border-radius: 37px;
+        box-shadow: 0 0 29px var(--accent-color);
     }
 
     .leftHalf {
-        gap: 10px;
-        padding: 2px;
-    }
-
-    .price {
-        padding-inline: 5px;
-        padding-block: 1px;
-        font-size: 16px;
-        margin-bottom: 1      0px;
-    }
-
-    .title {
-        font-size: 16px;
-    }
-
-    .description {
-        font-size: 12px;
-    }
-
-    .button {
-        font-size: 12px !important;
-        height: 28px;
-        border-radius: 10px;
-    }
-
-    .back {
-        font-size: 12px !important;
-        padding-inline: 8px !important;
-        height: 24px;
-        border-radius: 7px;
-        right: 25px;
-    }
-
-    .information {
-        gap: 16px;
-    }
- }
-
- @media ( 481px <= width <= 624px) {
-
-    .container {
-        gap: 5px;
-        border-radius: 30px;
-        box-shadow: 0 0 20px var(--accent-color);
-    }
-
-    .leftHalf {
-        gap: 10px;
-        padding: 2px;
-    }
-
-    .price {
-        padding-inline: 5px;
-        padding-block: 1px;
-        font-size: 16px;
-        margin-bottom: 1      0px;
-    }
-
-    .title {
-        font-size: 13px;
-    }
-
-    .description {
-        font-size: 11px;
-    }
-
-    .button {
-        font-size: 10px !important;
-        height: 28px;
-        border-radius: 10px;
-    }
-
-    .back {
-        font-size: 10px !important;
-        padding-inline: 6px !important;
-        height: 22px;
-        border-radius: 7px;
-        right: 20px;
-    }
-
-    .information {
+        flex-direction: row;
+        inline-size: 100%;
         gap: 13px;
     }
- }
- 
 
- @media ( 321px <= width <= 480px) {
-
-    .container {
-        gap: 3px;
-        border-radius: 22px;
-        box-shadow: 0 0 12px var(--accent-color);
-    }
-
-    .leftHalf {
-        gap: 7px;
-        padding: 2px;
+    .image {
+        inline-size: 60%;
+        block-size: 100%;
     }
 
     .price {
-        padding-inline: 3px;
+        padding-inline: 5px;
         padding-block: 1px;
-        font-size: 12px;
-        margin-bottom: 1      0px;
+        font-size: 16px;
+        margin-top: 9px;
     }
 
     .title {
-        font-size: 12px;
+        font-size: 30px;
     }
 
     .description {
-        font-size: 9px;
+        font-size: 22px;
     }
 
     .button {
-        font-size: 6px !important;
-        height: 16px;
-        border-radius: 5px;
-        padding-block: 7px;
-        padding-inline: 3px;
+        margin-top: 5px;
+        inline-size: 25%;
+        font-size: 13px !important;
+        height: 35px;
+        border-radius: 12px;
     }
 
+    
+    .buttonBack {
+        inline-size: 40px;
+     }
+
     .back {
-        font-size: 6px !important;
-        padding-inline: 3px !important;
-        height: 14px;
-        border-radius: 5px;
-        right: 10px;
+        font-size: 13px !important;
+        padding-inline: 10px !important;
+        left: 5%;
+        top: 7%;
+        border-radius: 9px;
+        opacity: 0.7;
+        
     }
 
     .information {
-        gap: 5px;
+        inline-size: 100%;
+        gap: 14px;
     }
+
  }
-
-
- @media ( width <= 320px) {
-
-    .container {
-        gap: 3px;
-        border-radius: 22px;
-        box-shadow: 0 0 12px var(--accent-color);
-    }
-
-    .leftHalf {
-        gap: 7px;
-        padding: 2px;
-    }
-
-    .price {
-        padding-inline: 3px;
-        padding-block: 1px;
-        font-size: 12px;
-        margin-bottom: 1      0px;
-    }
-
-    .title {
-        font-size: 12px;
-    }
-
-    .description {
-        font-size: 9px;
-    }
-
-    .button {
-        font-size: 6px !important;
-        height: 16px;
-        border-radius: 5px;
-        padding-block: 7px;
-        padding-inline: 3px;
-    }
-
-    .back {
-        font-size: 6px !important;
-        padding-inline: 3px !important;
-        height: 14px;
-        border-radius: 5px;
-        right: 10px;
-    }
-
-    .information {
-        gap: 5px;
-    }
- }
-
-

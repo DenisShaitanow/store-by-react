@@ -42,7 +42,8 @@ const HomePage: FC = () => {
     const [selectedCategoriesData, setSelectedCategoriesData ] = useState<string[]>([]);
 
     const calculateVisibleProductsCount = (width: number) => {
-        const cardsPerRow = Math.floor((width - 0.1*width) / (productCard.current?.clientWidth || 160)); 
+        const productCardWidth = productCard.current?.clientWidth;
+        const cardsPerRow = Math.floor((width - 0.1*width) / (productCardWidth || 160)); 
         return cardsPerRow * 6;
     };
 
@@ -51,6 +52,8 @@ const HomePage: FC = () => {
     }, [dispatch])
     
     const products: IProduct[] = useAppSelector(selectProducts);
+
+    
 
     const filteredProducts = useMemo(() => {
         return products.filter(product => {
@@ -65,6 +68,17 @@ const HomePage: FC = () => {
           return true;
         });
     }, [selectedCategoriesData, selectedSexData, products]);
+
+    // Используем useLayoutEffect для гарантированного получения размеров после первого рендера
+    /*useLayoutEffect(() => {
+        if (productCard.current && productsContainer.current) {
+            const cardWidth = productCard.current.clientWidth;
+            const containerWidth = productsContainer.current.clientWidth;
+            const visibleCardsCount = calculateVisibleProductsCount(cardWidth, containerWidth);
+            console.log(productCard.current.clientWidth)
+            setProductsToShow(filteredProducts.slice(0, visibleCardsCount));
+        }
+    }, [filteredProducts, productCard, productsContainer]);*/
 
     useEffect(() => {
         if (productsContainer.current) {
@@ -152,24 +166,45 @@ const HomePage: FC = () => {
                 </div>
                 <span className={styles.greyLine}></span>
                 <div className={styles.products} ref={productsContainer}>
-                        {isLoading && <SpinnerPulse className={styles.spinner}/>}
-                        {!isLoading && productsToShow.map((product) => (
-                            <ProductCard
-                                ref={productCard}
-                                className={styles.product}
-                                key={product.id}
-                                title={product.title}
-                                description={product.description}
-                                shortDescription={product.shortDescription}
-                                price={product.price}
-                                id={product.id}
-                                image={product.image}
-                                category={product.category}
-                                sex={product.sex}
-                                isLiked={product.isLiked}
-                            />
-                        ))}
-                </div>
+            {isLoading ? (
+                <SpinnerPulse className={styles.spinner} />
+            ) : (
+                <>
+                    {/* Первая карточка с установленным рефом */}
+                    <ProductCard
+                        ref={productCard}
+                        className={styles.product}
+                        key={productsToShow[0]?.id}
+                        title={productsToShow[0]?.title}
+                        description={productsToShow[0]?.description}
+                        shortDescription={productsToShow[0]?.shortDescription}
+                        price={productsToShow[0]?.price}
+                        id={productsToShow[0]?.id}
+                        image={productsToShow[0]?.image}
+                        category={productsToShow[0]?.category}
+                        sex={productsToShow[0]?.sex}
+                        isLiked={productsToShow[0]?.isLiked}
+                    />
+
+                    {/* Остальные карточки без рефов */}
+                    {productsToShow.slice(1).map((product) => (
+                        <ProductCard
+                            className={styles.product}
+                            key={product.id}
+                            title={product.title}
+                            description={product.description}
+                            shortDescription={product.shortDescription}
+                            price={product.price}
+                            id={product.id}
+                            image={product.image}
+                            category={product.category}
+                            sex={product.sex}
+                            isLiked={product.isLiked}
+                        />
+                    ))}
+                </>
+            )}
+        </div>
             </div>
             {isLoadingMore && 
                 <div className={styles.spinnerContainer}>
