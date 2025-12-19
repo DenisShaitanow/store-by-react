@@ -1,5 +1,6 @@
 .layout {
     display: flex;
+    inline-size: 100%;
     min-inline-size: 321px;
     flex-direction: column;
     justify-content: center;
