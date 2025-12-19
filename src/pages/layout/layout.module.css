@@ -4,6 +4,7 @@
     min-inline-size: 321px;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     padding-inline: 25px;
     max-inline-size: 1960px;
     gap: 50px;

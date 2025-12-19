@@ -44,9 +44,9 @@ function Layout() {
   return (
     <div className={styles.layout}>
       {!isRegistrationPage && <HeaderUI handleClickLogout={handleClickLogout} user={user!} onLoginClick={handleLogin} onRegisterClick={handleRegister} isModal={false} isAuth={isAuth} isNotification={false} theme={"light"} />}
-      <main>
+      
         <Outlet />
-      </main>
+      
     </div>
   );
 }

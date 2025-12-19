@@ -8,6 +8,7 @@
 
 .group {
     display: flex;
+    align-items: center;
     inline-size: 75%;
     align-self: center;
     flex-direction: column;
