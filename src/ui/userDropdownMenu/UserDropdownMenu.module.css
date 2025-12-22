@@ -133,12 +133,14 @@
 /* Адаптив */
 
 @media (width <= 768px) {
-    .menu {
-        min-width: 160px;
-    }
 
     .userName {
         display: none; /* Скрываем имя на телефоне */
+    }
+
+    .avatar {
+        width: 24px;
+        height: 24px;
     }
 
     .avatarPlaceholder {
@@ -147,3 +149,50 @@
         font-size: 9px;
     }
 }
+
+@media ( 601px <= width <= 900px ) {
+    .userName {
+        font-size: 13px;
+    }
+
+    .menu {
+        width: 130px;
+        gap: 5px;
+        padding: 7px;
+    }
+
+    .menuItem {
+        font-size: 12px;
+    }
+
+    .logoutIcon {
+        width: 16px;
+        height: 16px;
+    }
+    
+}
+
+
+@media (  width <= 600px ) {
+    .userName {
+        font-size: 13px;
+    }
+
+    .menu {
+        width: 110px;
+        gap: 3px;
+        padding: 4px;
+    }
+
+    .menuItem {
+        font-size: 10px;
+        padding: 5px 4px 5px 5px;
+    }
+
+    .logoutIcon {
+        width: 13px;
+        height: 13px;
+    }
+    
+}
+

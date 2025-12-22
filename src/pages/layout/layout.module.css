@@ -22,6 +22,7 @@
 @media ( 625px <= width <= 768px) { 
     .layout {
         gap: 30px;
+        padding-inline: 20px;
     }
 }
 
@@ -42,5 +43,6 @@
 @media ( width <= 385px) { 
     .layout {
         gap: 12px;
+        padding-inline: 10px;
     }
 }

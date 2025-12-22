@@ -16,7 +16,7 @@
     font-size: var(--font-size-h2);
     font-weight: var(--font-weight-h2);
     line-height: var(--line-height-h2);
-    z-index: 1;
+    
 }
 
 .twoButtons {
@@ -36,6 +36,9 @@
     padding-inline: 7px;
     padding-block: 4px;
     cursor: pointer;
+    font-size: var(--font-size-h4);
+    font-weight: var(--font-weight-h4);
+    line-height: var(--line-height-h4);
 }
 
 .select {
@@ -58,8 +61,41 @@
 }
 
 .buttonBuy {
+   
     width: 60%;
     align-self: center;
     margin-top: 15px;
+}
+
+@media ( 626px <= width <= 1200px) {
+    .buttonBuy {
+        height: 36px;
+        font-size: 18px;
+    }
+}
+
+@media ( width <= 625px) {
+    .buttonBuy {
+        height: 36px;
+        font-size: 16px;
+    }
+}
+
+@media ( width <= 500px ) {
+    .selectPay {
+        font-size: var(--font-size-h3);
+    }
+
+    .selectPayButton {
+        font-size: var(--font-size-h5);
+        font-weight: var(--font-weight-h5);
+        line-height: var(--line-height-h5);
+        block-size: fit-content;
+    }
+
+    .buttonBuy {
+        height: 33px;
+        font-size: 15px;
+    }
 }
 

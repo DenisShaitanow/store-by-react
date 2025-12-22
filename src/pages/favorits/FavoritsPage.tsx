@@ -139,7 +139,8 @@ const FavoritsPage: FC = () => {
     
 
     return (
-        <div className={styles.main}>
+        
+        <>
             <div className={styles.rowContainer}>
                 <div className={styles.containerFixed}>
                     <div className={styles.filters}>
@@ -179,7 +180,7 @@ const FavoritsPage: FC = () => {
                     <SpinnerPulse className={styles.spinnerLoadCards}/>
                 </div>
             }
-        </div>
+        </>
     );
 };
 

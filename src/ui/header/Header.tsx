@@ -41,6 +41,14 @@ export const HeaderUI = ({
                         ? URL.createObjectURL(regData.avatar)
                         : '';
 
+    const handleFavorits= () => {
+        navigate('/favoritsProducts');
+    }
+
+    const handleBasket= () => {
+        navigate('/basket');
+    }
+
     if (isModal)
         return (
             <div className={styles.header}>
@@ -85,19 +93,23 @@ export const HeaderUI = ({
                             }}
                             aria-label="Уведомления"
                         />
-                        <Link to="/favoritsProducts">
+                        
                             <IconButton
                                 type="like"
                                 isLiked={false}
                                 aria-label="Избранное"
+                                onClick={handleFavorits
+                                    // Логика открытия уведомлений будет реализована в родительском компоненте
+                                }
                             />
-                        </Link>
-                        <Link to="/basket">
+                        
+                        
                             <IconButton
                                 type="basket"
                                 aria-label='Корзина выбранных товаров'
+                                onClick={handleBasket}
                              />
-                        </Link>
+                        
                     </>
                 )}
             </div>

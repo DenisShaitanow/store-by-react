@@ -167,56 +167,71 @@
 
     .container {
         flex-direction: column;
+        padding: 5%;
         gap: 14px;
         border-radius: 37px;
         box-shadow: 0 0 29px var(--accent-color);
+        block-size: 80vh;
+        max-block-size: 1000px;
     }
 
     .leftHalf {
-        flex-direction: row;
+        position: relative;
         inline-size: 100%;
-        gap: 20px;
+        block-size: 76%;
+        gap: 13px;
+
     }
 
     .image {
-        inline-size: 60%;
-        block-size: 100%;
+        inline-size: 100%;
+        block-size: 80%;
     }
 
     .price {
         padding-inline: 5px;
         padding-block: 1px;
-        font-size: 20px;
-        margin-top: 10px;
+        margin-left: 3%;
+        font-size: 30px;
+        margin-top: 9px;
     }
 
     .title {
-        font-size: 30px;
+        inline-size: 100%;
+        max-inline-size: 100%;
+        block-size: fit-content;
+        max-block-size: 30%;
+        font-size: 26px;
+        padding: 0;
     }
 
     .description {
-        font-size: 22px;
+        inline-size: 100%;
+        block-size: 70%;
+        font-size: 19px;
     }
 
     .button {
-        
-        margin-top: 7px;
+        position: absolute;
+        top: 84%;
+        right: 5%;
         inline-size: 25%;
-        font-size: 13px !important;
-        height: 35px;
+        font-size: 20px !important;
+        padding: 16px 9px;
+        height: 42px;
         border-radius: 12px;
     }
 
     
     .buttonBack {
-        inline-size: 55px;
+        inline-size: 60px;
      }
 
     .back {
-        font-size: 13px !important;
+        font-size: 19px !important;
         padding-inline: 10px !important;
-        left: 5%;
-        top: 7%;
+        right: 7%;
+        top: 10%;
         border-radius: 9px;
         opacity: 0.7;
         
@@ -224,8 +239,10 @@
 
     .information {
         inline-size: 100%;
-        gap: 14px;
+        padding-inline: 3%;
+        gap: 7%;
     }
+
  }
 
  @media ( 681px <= width <= 820px) {
@@ -278,7 +295,7 @@
 
     .button {
         position: absolute;
-        top: 84%;
+        top: 87%;
         right: 5%;
         inline-size: 25%;
         font-size: 20px !important;
@@ -527,7 +544,7 @@
 
     .button {
         position: absolute;
-        top: 86%;
+        top: 85%;
         right: 5%;
         inline-size: 25%;
         font-size: 14px !important;

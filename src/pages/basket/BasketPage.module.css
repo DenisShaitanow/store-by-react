@@ -5,11 +5,12 @@
     justify-content: space-between;
     align-self: center;
     margin: auto;
-    inline-size: 40%;
+    inline-size: 55%;
+    min-inline-size: 283px;
     block-size: fit-content;
     padding: 20px;
     background-color: rgba(var(--accent-color-r), var(--accent-color-g), var(--accent-color-b), 0.2);
-    border-radius: 50px;
+    border-radius: 40px;
     box-shadow: 0 0 3px var(--accent-color);
     gap: 15px;
     font-family: var(--second-family);
@@ -99,4 +100,44 @@
     font-size: 30px;
     font-weight: 650;
     line-height: 120%;
+}
+
+@media ( 800px <= width <= 1200px ) {
+
+    .container {
+        inline-size: 65%;
+        border-radius: 36px;
+    }
+}
+
+@media ( 600px <= width <= 799px ) {
+
+    .container {
+        inline-size: 75%;
+        border-radius: 32px;
+    }
+}
+
+@media ( 400px <= width <= 599px ) {
+
+    .container {
+        inline-size: 75%;
+        border-radius: 27px;
+    }
+
+    .noProducts {
+        min-block-size: 250px;
+    }
+}
+
+@media ( width <= 399px ) {
+
+    .container {
+        inline-size: 85%;
+        border-radius: 27px;
+    }
+
+    .noProducts {
+        min-block-size: 190px;
+    }
 }

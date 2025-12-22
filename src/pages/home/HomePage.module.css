@@ -1,20 +1,8 @@
-.main {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    inline-size: 100%;
-    max-inline-size: 100vw;
-    min-inline-size: 375px;
-    gap: 30px;
-    background-color: var(--surface-color);
-    padding-block: 10px;
-}
-
 
 .rowContainer {
     display: flex;
     flex-direction: row;
-    inline-size: 100%;
+    inline-size: 95%;
     max-inline-size: 100%;
     block-size: fit-content;
     gap: 25px;

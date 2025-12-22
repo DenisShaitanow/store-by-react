@@ -69,17 +69,6 @@ const HomePage: FC = () => {
         });
     }, [selectedCategoriesData, selectedSexData, products]);
 
-    // Используем useLayoutEffect для гарантированного получения размеров после первого рендера
-    /*useLayoutEffect(() => {
-        if (productCard.current && productsContainer.current) {
-            const cardWidth = productCard.current.clientWidth;
-            const containerWidth = productsContainer.current.clientWidth;
-            const visibleCardsCount = calculateVisibleProductsCount(cardWidth, containerWidth);
-            console.log(productCard.current.clientWidth)
-            setProductsToShow(filteredProducts.slice(0, visibleCardsCount));
-        }
-    }, [filteredProducts, productCard, productsContainer]);*/
-
     useEffect(() => {
         if (productsContainer.current) {
             const containerWidth = productsContainer.current.clientWidth;
@@ -152,7 +141,7 @@ const HomePage: FC = () => {
     
 
     return (
-        <div className={styles.main}>
+        <>
             <div className={styles.rowContainer}>
                 <div className={styles.containerFixed}>
                     <div className={styles.filters}>
@@ -211,7 +200,7 @@ const HomePage: FC = () => {
                     <SpinnerPulse className={styles.spinnerLoadCards}/>
                 </div>
             }
-        </div>
+        </>
     );
 };
 
