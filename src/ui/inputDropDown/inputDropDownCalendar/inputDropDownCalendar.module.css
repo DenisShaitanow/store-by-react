@@ -6,9 +6,8 @@
     flex-direction: column;
     gap: 4px;
     width: 100%;
-    min-width: fit-content;
     color: var(--text-color);
-    font-weight: var(--font-weight-h4);
+    font-weight: 400;
     font-size: var(--font-size-h4);
     font-family: var(--font-family);
     line-height: var(--line-height-h4);
@@ -27,7 +26,7 @@
     width: 100%;
     max-width: 208px;
     min-height: 48px;
-    padding: 12px 20px;
+    padding: 11px 20px;
     background-color: var(--color-bg);
     border: 1px solid var(--caption-color);
     border-radius: var(--card-border-radius);
@@ -167,3 +166,28 @@
 .label {
     width: 100%;
 }
+
+@media ( 400px <= width <= 500px ) {
+    .input { 
+        font-size: 12px;
+    }
+
+    .label { 
+        font-size: 12px;
+    }
+}
+
+@media ( width <= 399px ) {
+    .input { 
+        font-size: 10px;
+    }
+
+    .label { 
+        font-size: 10px;
+    }
+
+    .select {
+        min-height: 41px;
+    }
+}
+

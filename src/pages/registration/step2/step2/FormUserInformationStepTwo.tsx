@@ -87,6 +87,7 @@ export const FormUserInformationStepTwo: FC<
                     title="Дата рождения"
                     id="dateBirthday"
                     placeholder="дд.мм.гггг"
+                    className={styles.calendar}
                 />
                 <InputDropDown
                     options={genderOptions}

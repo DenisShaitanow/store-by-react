@@ -3,16 +3,17 @@
     flex-direction: column;
     align-items: center;
     gap: 16px;
-    width: 75%;
+    width: 100%;
     max-width: 436px;
     height: fit-content;
-    min-height: 465px;
+    height: 465px;
 }
 
 .twoShortInputs {
     display: flex;
     gap: 20px;
-    width: 436px;
+    width: 100%;
+    max-width: 436px;
     height: 76px;
 }
 
@@ -33,4 +34,20 @@
     content: '';
 }
 
+.calendar {
+    
+}
+
+@media ( 401px <=  width <= 500px ) {
+    .container {
+        height: 425px;
+    }
+}
+
+
+@media ( width <= 400px ) {
+    .container {
+        height: 400px;
+    }
+}
 

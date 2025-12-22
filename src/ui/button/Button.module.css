@@ -85,6 +85,7 @@
         font-size: var(--font-size-h5);
         height: 38px;
         border-radius: 12px;
+        padding: 9px 5px;
     }
 
     .button.secondary {
@@ -99,7 +100,7 @@
         font-size: 12px;
         height: 32px;
         border-radius: 10px;
-        padding: 5px 3px;
+        padding: 8px 4px;
     }
 
     .button.secondary {
@@ -112,14 +113,14 @@
 
 @media (  width <= 624px) {
     .button {
-        font-size: 8px;
+        font-size: 10px;
         height: 24px;
         border-radius: 7px;
-        padding: 3px 1px;
+        padding: 7px 3px;
     }
 
     .button.secondary {
-        font-size: 8px;
+        font-size: 10px;
         height: 24px;
         border-radius: 7px;
         padding: 3px 1px;
