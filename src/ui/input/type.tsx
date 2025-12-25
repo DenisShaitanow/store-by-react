@@ -12,4 +12,5 @@ export type InputUIProps = {
     halfSize?: boolean; // для использования в составе компонентов для ввода даты и пола
     largeSize?: boolean; // для использования, но без кнопки редактирования
     withEditButton?: boolean; // для использования на странице профиля
+    dataCy?: string
 };

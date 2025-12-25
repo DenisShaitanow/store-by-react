@@ -9,4 +9,5 @@ export type InputDropDownProps = {
     value?: string;
     placeholder: string;
     error?: string;
+    dataCy?: string;
 };

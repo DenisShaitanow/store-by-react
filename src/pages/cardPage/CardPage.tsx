@@ -7,6 +7,7 @@ import { type IProduct } from '../../types';
 import { selectProducts } from '../../services/selectors/userUIData-selectors/userUIData-selectors';
 import { Link } from 'react-router-dom';
 import { addToBusket, removeFromBusket } from '../../services/slices/userUIData';
+import { selectIsAuth } from '../../services/selectors/user-selectors/user-selectors';
 
 
 
@@ -24,6 +25,8 @@ const CardPage: FC = () => {
     } else {
         throw new Error ('Товар не найден')
     }
+
+    const isAuth = useAppSelector(selectIsAuth);
     
 
     const handleputTobasket = () => {
@@ -41,7 +44,8 @@ const CardPage: FC = () => {
                 <div className={styles.leftHalf}>
                     <img className={styles.image} src={card.image}></img>
                     <p className={styles.price}>{`${card.price}₽`}</p>
-                    <ButtonUI label={PutToBasketButton ? 'Убрать из корзины' : 'Положить в корзину'} className={styles.button} onClick={handleputTobasket}/>
+                    <ButtonUI disabled={!isAuth} label ={!isAuth ? 'Авторизуйтесь пожалуйста' : PutToBasketButton ? 'Убрать из корзины' : 'Положить в корзину'} className={styles.button} onClick={handleputTobasket}/>
+                    {!isAuth && <span className={styles.regPleaseTransparant}>Для покупки товара, вам необходимо авторизоваться.</span>}
                 </div>
                 
                 <div className={styles.information}>

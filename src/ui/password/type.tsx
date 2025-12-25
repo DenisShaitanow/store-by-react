@@ -11,5 +11,6 @@ export type PasswordInputUIProps = {
     value: string;
     error?: boolean;
     errorText?: string;
+    dataCy?: string;
     largeSize?: boolean; // для использования на странице профиля при нажатии на кнопу "Изменить пароль"
 };

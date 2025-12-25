@@ -11,7 +11,7 @@
     font-size: var(--font-size-h4);
     font-family: var(--font-family);
     line-height: var(--line-height-h4);
-    background-color: var(--surface-color);
+    background-color: var(--background-page-color);
 }
 
 /* Selector */
@@ -20,7 +20,7 @@
     position: relative;
     z-index: 2;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
     width: 100%;
@@ -35,6 +35,13 @@
 }
 
 /* Icon for closed state */
+.calendar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+}
 
 .select::after {
     position: absolute;
@@ -42,7 +49,6 @@
     right: 1rem;
     width: 24px;
     height: 24px;
-    background-image: url('../../assets/calendar.svg');
     background-repeat: no-repeat;
     background-position: center;
     transform: translateY(-50%);
@@ -106,6 +112,7 @@
     font-family: var(--font-family);
     line-height: var(--line-height-h4);
     border: transparent;
+    background-color: inherit;
 }
 
 /* Container for options */
@@ -117,7 +124,7 @@
     display: flex;
     width: fit-content;
     overflow-y: auto;
-    background-color: var(--surface-color);
+    background-color: inherit;
 }
 
 .optionsContainer::-webkit-scrollbar {

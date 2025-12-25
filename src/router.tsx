@@ -9,6 +9,7 @@ import FavoritsPage from './pages/favorits/FavoritsPage';
 import BasketPage from './pages/basket/BasketPage';
 import FormOderPage from './pages/formOder/FormOrder';
 import OrderComplited from './pages/orderComplited/OrderComolited';
+import PersonalCabinet from "./pages/personalCabinet/PersonalCabinet";
 
 export const router = createBrowserRouter([
     {
@@ -50,6 +51,10 @@ export const router = createBrowserRouter([
           {
             path: '/orderComplited',
             element: <OrderComplited />
+          },
+          {
+            path: '/personalCabinet',
+            element: <PersonalCabinet />
           }
         ],
       },

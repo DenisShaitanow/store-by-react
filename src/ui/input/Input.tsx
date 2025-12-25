@@ -14,7 +14,8 @@ export const InputUI: FC<InputUIProps> = ({
     errorText,
     halfSize,
     largeSize,
-    withEditButton
+    withEditButton,
+    dataCy
 }) => {
     // Состояние для переключения режима readonly
     const [readonlyMode, setReadonlyMode] = useState(true);
@@ -43,6 +44,7 @@ export const InputUI: FC<InputUIProps> = ({
                 })}
             >
                 <input
+                    data-cy={dataCy}
                     className={clsx(styles.input, styles.text)}
                     type={type}
                     placeholder={placeholder}

@@ -6,7 +6,6 @@
     width: 100%;
     max-width: 436px;
     height: fit-content;
-    height: 465px;
 }
 
 .twoShortInputs {
@@ -38,16 +37,5 @@
     
 }
 
-@media ( 401px <=  width <= 500px ) {
-    .container {
-        height: 425px;
-    }
-}
 
-
-@media ( width <= 400px ) {
-    .container {
-        height: 400px;
-    }
-}
 

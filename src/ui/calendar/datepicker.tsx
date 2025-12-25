@@ -14,18 +14,13 @@ const ru = ((ruLocale as any)?.default ?? ruLocale) as Locale;
 registerLocale('ru', ru);
 setDefaultLocale('ru');
 
-/**
- * Публичные пропсы нашего компонента.
- * Обратите внимание: выбранная дата НЕ подсвечивается внутри календаря —
- * мы отдаём значение наружу (в отдельный инпут), а в календарь передаём selected={null}.
- */
+
 type Props = {
     inline?: boolean;
     id?: string;
     className?: string;
     selected?: Date | null;
     onChange?: (date: Date | null) => void;
-    onSelect?: (date: Date | null) => void;
     onClickOutside?: (event: Event) => void;
 };
 
@@ -53,7 +48,6 @@ export const SimpleDatePicker = ({
     className,
     selected = null,
     onChange,
-    onSelect,
     onClickOutside
 }: Props) => {
     const [value, setValue] = useState<Date | null>(selected);
@@ -71,15 +65,19 @@ export const SimpleDatePicker = ({
         initialSelectedRef.current = selected ?? null;
     }, [selected]);
 
+    useEffect(() => {
+        console.log(value)
+    },[value])
+
     // Обновляем только локальное состояние .
     const handleChange = (d: Date | null) => {
         setValue(d);
     };
 
     // Пробрасываем наружу факт клика по дню (без подтверждения).
-    const handleSelect = (d: Date | null) => {
-        onSelect?.(d);
-    };
+    /*const handleSelect = (d: Date | null) => {
+        setValue(d);
+    };*/
 
     // Кнопка "Отменить": откат к последней подтверждённой дате и уведомление наружу.
     const handleCancel = () => {
@@ -149,9 +147,9 @@ export const SimpleDatePicker = ({
         <div ref={rootRef} className={`calendar ${className ?? ''}`} id={id}>
             <DatePicker
                 inline={inline}
-                selected={null}
+                selected={value || null}
                 onChange={handleChange}
-                onSelect={handleSelect}
+                /*onSelect={handleSelect}*/
                 onClickOutside={(ev: Event) => {
                     setOpenMonth(false);
                     setOpenYear(false);

@@ -5,8 +5,9 @@ import { InputUI } from '../../ui/input';
 import { InputDropDown } from '../../ui/inputDropDown/imputDropDownSimple';
 import { ButtonUI } from '../../ui/button';
 import { doOrder } from '../../services/thunks/userUIData/userUIData-thunks';
-import { useAppDispatch } from '../..//services/hooks';
+import { useAppDispatch, useAppSelector } from '../..//services/hooks';
 import { useNavigate } from 'react-router-dom';
+import { selectBasket } from '../../services/selectors/userUIData-selectors/userUIData-selectors';
 
 const formatCardNumber = (inputValue: string) => {
     // Удаляем любые существующие пробелы из строки
@@ -33,7 +34,11 @@ const FormOderPage: FC = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
+    const basket = useAppSelector(selectBasket);
+    const basketListId = basket.map(product => product.id);
+
     const storedFormDataString = JSON.parse(localStorage.getItem('orderForm') ?? '');
+
     const initialFormData: IFormOrderData = storedFormDataString ? storedFormDataString : {
         selectСourier: true,
         adress: '',
@@ -41,10 +46,15 @@ const FormOderPage: FC = () => {
         formPaySelf: true,
         numberCard: '',
         PersonCard: '',
-        CVV: ''
+        CVV: '',
+        productList: []
     };
 
     const [formData, setFormData] = useState<IFormOrderData>(initialFormData);
+
+    useEffect(() => {
+        setFormData(prev => ({...prev, productList: basketListId}));
+    }, [])
 
     const [errors, setErrors] = useState({
         numberCardError: "",
@@ -64,6 +74,7 @@ const FormOderPage: FC = () => {
             numberCardError: valid ? "" : "Некорректный номер карты",
         }));
         setFormData(prev => ({...prev, numberCard: cleanedAndFormattedValue}));
+        console.log(initialFormData);
        
     }
 
@@ -94,19 +105,19 @@ const FormOderPage: FC = () => {
         setFormData(prev => ({...prev, adressPoint : e.target.value}));
     }
 
-    useEffect(() => {
+    /*useEffect(() => {
         if (!!errors.cvvError || !!errors.numberCardError || !!errors.personCardError) {
             setButtonBuyDisabled(true)
         } else {
             setButtonBuyDisabled(false)
         }
-    }, [errors])
+    }, [errors])*/
 
     useEffect(() => {
         // Проверяем общую доступность формы
         const isValidAddressSelection =
             (formData.selectСourier && formData.adress.trim()) ||       
-            (!formData.selectСourier && formData.adressPoint.trim()); 
+            (!formData.selectСourier && formData.adressPoint.trim()) && formData.productList; 
     
         const isPaymentDataComplete =
         formData.formPaySelf ||

@@ -1,4 +1,5 @@
 export type FormUserInformationStepTwoProps = {
+    hiddenAvatarInput: boolean;
     changeAvatarUrl: (val: File) => void;
     nameValue: string;
     nameChange: (val: string) => void;

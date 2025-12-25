@@ -10,7 +10,7 @@
     min-inline-size: 193px;
     block-size: 65vw;
     min-block-size: 145px;
-    max-block-size: 800px;
+    max-block-size: 700px;
     padding: 3vw;
     border: solid var(--accent-color) 1px;
     border-radius: 50px;
@@ -49,9 +49,19 @@
 
 .image {
     display: block;
-    block-size: 40%;
+    block-size: 60%;
     object-fit: cover;
     border-radius: 20px;
+
+}
+
+.regPleaseTransparant {
+    inline-size: 100%;
+    block-size: fit-content;
+    font-size: 20px;
+    font-weight: 650;
+    line-height: 120%;
+    color: var(--text-color);
 
 }
 
@@ -178,7 +188,7 @@
     .leftHalf {
         position: relative;
         inline-size: 100%;
-        block-size: 76%;
+        block-size: 70%;
         gap: 13px;
 
     }
@@ -194,6 +204,7 @@
         margin-left: 3%;
         font-size: 30px;
         margin-top: 9px;
+        margin-bottom: 0;
     }
 
     .title {
@@ -220,6 +231,14 @@
         padding: 16px 9px;
         height: 42px;
         border-radius: 12px;
+    }
+
+    .regPleaseTransparant {
+        position: absolute;
+        top: 93%;
+        right: 3%;
+        inline-size: 35%;
+        font-size: 14px;
     }
 
     

@@ -49,6 +49,7 @@
     opacity: 0;
     transition: var(--dropdown-transition);
     pointer-events: none;
+    background-color: var(--background-page-color);
 }
 
 .dropdown.open {

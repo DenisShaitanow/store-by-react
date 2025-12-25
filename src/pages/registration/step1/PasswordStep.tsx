@@ -52,11 +52,13 @@ export const PasswordStep: React.FC<PasswordStepProps> = ({
                         onChange={onChangeEmail}
                         error={error}
                         errorText={errorText}
+                        dataCy={'registrationInputEmail'}
                     />
                     <PasswordInputUI
                         page="register"
                         value={password}
                         onChange={onChangePassword}
+                        dataCy={'registrationInputPassword'}
                     />
                 </div>
             </div>
@@ -66,6 +68,7 @@ export const PasswordStep: React.FC<PasswordStepProps> = ({
                 className={styles.button}
                 type="button"
                 disabled={!email || password.length < 8 || error}
+                dataCy={'buttonStep1'}
             />
         </div>
     </div>

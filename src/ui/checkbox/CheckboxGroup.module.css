@@ -22,7 +22,6 @@
     line-height: 110%;
     white-space: wrap;
     text-align: left;
-    background-color: var(--surface-color);
 }
 
 .input {
@@ -59,6 +58,7 @@
     font-size: var(--font-size-h3);
     font-family: var(--second-family);
     line-height: var(--line-height-h3);
+    color: var(--text-color);
 }
 
 .list {

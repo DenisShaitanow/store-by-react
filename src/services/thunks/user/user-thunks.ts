@@ -6,7 +6,8 @@ import {
   mockedLogoutApi,
   mockedGetUserApi,
   mockedLoginUserApi,
-  mockUpdateUserApi
+  mockUpdateUserApi,
+  changeDataInPersonalCabinetApi
 
 } from '../../api';
 import { type RegistrationData } from '../../../types';
@@ -22,6 +23,28 @@ export const registerUser = createAsyncThunk<
 >('user/register', async (data, { rejectWithValue }) => {
   try {
     const response = await mockedRegisterUserApi(data);
+    const accessToken = response.accessToken.startsWith('Bearer ')
+        ? response.accessToken.slice(7)
+        : response.accessToken;
+    setCookie('accessToken', accessToken);
+    localStorage.setItem('refreshToken', response.refreshToken);
+    return { user: response.user} ;
+  } catch (err) {
+    return rejectWithValue('Ошибка при регистрации');
+  }
+});
+
+// изменение данных пользователя в личном кабинете
+export const changeDataInPersonalCabinet = createAsyncThunk<
+  
+  { 
+    user: RegistrationData | null},
+    RegistrationData
+    
+
+>('user/changeDataInPersonalCabinet', async (data, { rejectWithValue }) => {
+  try {
+    const response = await changeDataInPersonalCabinetApi(data);
     const accessToken = response.accessToken.startsWith('Bearer ')
         ? response.accessToken.slice(7)
         : response.accessToken;

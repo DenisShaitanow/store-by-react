@@ -15,6 +15,7 @@ export type IconButtonBaseProps = {
     pressed?: boolean;
     className?: string;
     disabled?: boolean;
+    dataCy?: string;
 };
 
 export type LikeProps = {

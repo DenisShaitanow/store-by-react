@@ -6,7 +6,8 @@ import {
   logoutUser, 
   checkUserAuth, 
   loginUser, 
-  updateUser } 
+  updateUser,
+  changeDataInPersonalCabinet } 
 from '../../thunks/user';
 
 interface IUserState {
@@ -61,6 +62,13 @@ const userSlice = createSlice({
 
       // register
       .addCase(registerUser.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+        state.isAuth = true;
+        state.loading = false;
+      })
+
+      //changeDataInPersonalCabinet
+      .addCase(changeDataInPersonalCabinet.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.isAuth = true;
         state.loading = false;

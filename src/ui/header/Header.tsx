@@ -11,6 +11,8 @@ import { Logo } from '../logo';
 import { IconButton } from '../iconButton';
 import { UserDropdownMenu } from '../userDropdownMenu';
 import type { RegistrationData } from 'src/types';
+import { useEffect, useContext } from 'react';
+import { ThemeContext } from '../../context/themeContext/ThemeContext';
 
 
 export const HeaderUI = ({
@@ -27,20 +29,53 @@ export const HeaderUI = ({
     // по макету на шагах регистрации
     const navigate = useNavigate();
 
+    const { toggleTheme } = useContext(ThemeContext);
+
     function handleClickLogo() {
         navigate('/');
     }
 
-    const regData: RegistrationData = JSON.parse(localStorage.getItem('regData') || '');
+    let regData: RegistrationData;
 
-    const avatarUrl =
-                    user &&
-                    user.avatar instanceof Blob
-                        ? URL.createObjectURL(user.avatar)
-                        : regData.avatar instanceof File
-                        ? URL.createObjectURL(regData.avatar)
-                        : '';
+    const storedRegData = localStorage.getItem('regData');
+    if (!storedRegData) {
+        // Если ключ не найден, устанавливаем запасное значение
+        regData = {
+            email: '',
+            password: '',
+            name: '',
+            surname: '',
+            avatar: '',
+            gender: '',
+            location: '',
+            birthdayDate: '',
+        }; // или любое другое значение по умолчанию
+    } else {
+        try {
+            // Пробуем разобрать JSON
+            regData = JSON.parse(storedRegData);
+        } catch (err) {
+            console.error("Ошибка парсинга регистрационных данных:", err);
+            regData = {
+                email: '',
+                password: '',
+                name: '',
+                surname: '',
+                avatar: '',
+                gender: '',
+                location: '',
+                birthdayDate: '',
+            }; // устанавливаем резервное значение
+        }
+    }
 
+    const avatarUrl = user && user.avatar
+    ? user.avatar
+    : regData && regData.avatar
+        ? regData.avatar
+        : '' 
+
+   
     const handleFavorits= () => {
         navigate('/favoritsProducts');
     }
@@ -79,27 +114,21 @@ export const HeaderUI = ({
                     type="theme"
                     themeMode={theme === 'dark' ? 'dark' : 'light'}
                     onClick={() => {
-                        // Логика переключения темы, теоретическая
+                        toggleTheme();
                     }}
                     aria-label="Переключить тему"
+                    dataCy={'sun'}
                 />
                 {isAuth && (
                     <>
-                        <IconButton
-                            type="notification"
-                            hasNotification={isNotification}
-                            onClick={() => {
-                                // Логика открытия уведомлений будет реализована в родительском компоненте
-                            }}
-                            aria-label="Уведомления"
-                        />
+                        
                         
                             <IconButton
                                 type="like"
                                 isLiked={false}
                                 aria-label="Избранное"
                                 onClick={handleFavorits
-                                    // Логика открытия уведомлений будет реализована в родительском компоненте
+                                
                                 }
                             />
                         
@@ -119,8 +148,9 @@ export const HeaderUI = ({
                         user={{nameUser: user?.name || regData.name || '', avatarUrl: avatarUrl}}
 
                         onPersonalCabinetClick={() => {
-                            // Навигация в личный кабинет
+                            navigate('/personalCabinet');// Навигация в личный кабинет
                         }}
+
                         onLogoutClick={() => {
                             handleClickLogout && handleClickLogout();
                         }}
@@ -135,12 +165,14 @@ export const HeaderUI = ({
                             label="Войти"
                             onClick={onLoginClick}
                             secondary
+                            dataCy='Войти'
                         />
                         <ButtonUI
                             className={styles.registerButton}
                             label="Зарегистрироваться"
                             onClick={onRegisterClick}
                             secondary={false}
+                            dataCy={'registrationButton'}
                         />
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 :root {
-    --text-color: #253017; /* цвет основного текста */
+  --text-color: #253017; /* цвет основного текста */
     --caption-color: #69735d; /* цвет placeholder`a в input */
     --toggle-color: #b2b9a9; /* цвет переключателя (выкл) */
     --disabled-text-color: #9ca197; /* цвет неактивного текста */
@@ -7,10 +7,23 @@
     --button-pressed-color: #508826; /* цвет ссылки и нажатой кнопки (в UI kit Text link, Button pressed) */
     --accent-color: #abd27a;
     --button-hover-color: #deebc5;
-    --surface-color: #ffffff; /* цвет фона карточек и инпута */
+    --enterButton-color: #f9faf7; /* цвет фона кнопки войти */
     --background-page-color: #f9faf7; /* цвет фона страницы */
     --alarm-color: #e0796e; /* цвет кружка нового уведомления */
     --error-color: #bf3920;
+
+    
+      --calendar-font: 'Roboto', 'Jost', 'Open Sans';
+      --calendar-bg: #ffffff;
+      --calendar-border: #69735d;
+      --calendar-accent: #abd27a;
+      --calendar-text: #253017;
+      --calendar-muted: #9aa199;
+      --button-pressed-color: #508826;
+      --day-hover: #e4e8df;
+      --calendar-radius: 12px;
+      --calendar-day-size: 32px;
+  
 
     --accent-color-r: 171;
     --accent-color-g: 210;
@@ -111,4 +124,21 @@
     --category-skill-section-padding: 60px;
     --category-skill-item-gap: var(--card-profile-info-gap);
 
+}
+
+.dark-theme { 
+  --text-color: #ecf3e4; /* цвет основного текста */
+  --calendar-text: #ecf3e4;
+  --caption-color: #69735d; /* цвет placeholder`a в input */
+  --toggle-color: #b2b9a9; /* цвет переключателя (выкл) */
+  --disabled-text-color: #9ca197; /* цвет неактивного текста */
+  --disabled-bg-color: #e4e8df; /* цвет неактивной кнопки */
+  --button-pressed-color: #508826; /* цвет ссылки и нажатой кнопки (в UI kit Text link, Button pressed) */
+  --accent-color: #8ba46c;
+  --button-hover-color: #6e775c;
+  --surface-color: #ffffff; /* цвет фона карточек и инпута */
+  --background-page-color: #142a48; /* цвет фона страницы */
+  --alarm-color: #e0796e; /* цвет кружка нового уведомления */
+  --error-color: #bf3920;
+  --enterButton-color: #3d4b21;
 }

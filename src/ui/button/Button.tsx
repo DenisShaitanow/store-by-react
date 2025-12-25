@@ -10,9 +10,11 @@ export const ButtonUI = ({
     tertiary = false,
     disabled = false,
     // нужно чтобы отображался svg в кнопке закрыть хидера
-    children
+    children,
+    dataCy
 }: ButtonProps) => (
     <button
+        data-cy={dataCy}
         type={type}
         disabled={disabled}
         className={`

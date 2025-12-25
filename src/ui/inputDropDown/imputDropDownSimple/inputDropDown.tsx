@@ -21,7 +21,8 @@ export const InputDropDown: FC<InputDropDownProps> = ({
     title,
     value, // Получаем начальное значение из props
     placeholder,
-    error
+    error,
+    dataCy
 }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
@@ -92,6 +93,7 @@ export const InputDropDown: FC<InputDropDownProps> = ({
     const renderOptions = () =>
         filteredOptions.map((option, index) => (
             <div
+                data-cy={`genderOption${index}`}
                 key={option.value}
                 onClick={() => handleOptionClick(option.value)}
                 className={styles.option}
@@ -113,6 +115,7 @@ export const InputDropDown: FC<InputDropDownProps> = ({
                 </label>
                 <div className={`${isOpen ? styles.borderDone : ''}`}>
                     <div
+                        data-cy={'inputDroppdownSelect'}
                         onClick={() => {
                             setIsOpen(!isOpen);
                         }}

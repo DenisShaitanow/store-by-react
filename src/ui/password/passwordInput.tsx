@@ -10,6 +10,7 @@ export const PasswordInputUI: React.FC<PasswordInputUIProps> = ({
     value,
     error,
     errorText,
+    dataCy,
     largeSize
 }) => {
     const isRegisterPage = page === 'register';
@@ -37,6 +38,7 @@ export const PasswordInputUI: React.FC<PasswordInputUIProps> = ({
                 })}
             >
                 <input
+                    data-cy={dataCy}
                     autoComplete='off'
                     className={clsx(styles.input, styles.text)}
                     type={showPassword ? 'text' : 'password'}

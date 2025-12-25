@@ -11,6 +11,7 @@ import { InputDropDownCalendar } from '../../../../ui/inputDropDown/inputDropDow
 export const FormUserInformationStepTwo: FC<
     FormUserInformationStepTwoProps
 > = ({
+    hiddenAvatarInput,
     changeAvatarUrl,
     nameValue,
     nameChange,
@@ -42,6 +43,7 @@ export const FormUserInformationStepTwo: FC<
         if (files && files.length > 0) {
             const selectedFile = files[0]; // Берём первый файл
             changeAvatarUrl(selectedFile);
+            console.log(URL.createObjectURL(selectedFile))
         }
     };
 
@@ -63,8 +65,8 @@ export const FormUserInformationStepTwo: FC<
     };
 
     return (
-        <form className={styles.container}>
-            <AvatarRegistration onImageChange={handleFileChange} />
+        <form className={styles.container} data-cy={'containerFormStep2'}>
+            { !hiddenAvatarInput && <AvatarRegistration onImageChange={handleFileChange} />}
             <InputUI
                 title="Имя"
                 type="text"
@@ -72,6 +74,7 @@ export const FormUserInformationStepTwo: FC<
                 name="name"
                 onChange={handleChangeName}
                 value={nameValue}
+                dataCy={'registrationInputName'}
             />
             <InputUI
                 title="Фамилия"
@@ -80,6 +83,7 @@ export const FormUserInformationStepTwo: FC<
                 name="surname"
                 onChange={handleChangeSurname}
                 value={surnameValue}
+                dataCy={'registrationInputSurname'}
             />
             <div className={styles.twoShortInputs}>
                 <InputDropDownCalendar
@@ -98,6 +102,7 @@ export const FormUserInformationStepTwo: FC<
                     value={genderValue}
                     onChangeOption={handleGenderChange}
                     classNameImageOpen={styles.aroundImage}
+                    dataCy={'registrationInputGender'}
                 />
             </div>
             <InputUI
@@ -107,6 +112,7 @@ export const FormUserInformationStepTwo: FC<
                 name="location"
                 onChange={handleLocationChange}
                 value={locatonValue}
+                dataCy={'registrationInputCity'}
             />
             
         </form>

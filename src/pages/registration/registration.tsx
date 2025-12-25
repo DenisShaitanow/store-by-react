@@ -29,7 +29,7 @@ const RegistrationPage: FC = () => {
         password: '',
         name: '',
         surname: '',
-        avatar: null,
+        avatar: '',
         gender: '',
         location: '',
         birthdayDate: ''
@@ -65,9 +65,9 @@ const RegistrationPage: FC = () => {
         setRegData((prev) => ({...prev, surname: val}));
     }
 
-    const handleCahengeAvatar = (val: File) => {
+    const handleChangeAvatar = (val: File) => {
         setAvatar(val);
-        setRegData((prev) => ({...prev, avatar: val}));
+        setRegData((prev) => ({...prev, avatar: URL.createObjectURL(val)}));
     }
     
     const handleGenderChange = (val: string) => {
@@ -102,10 +102,10 @@ const RegistrationPage: FC = () => {
             { currentStep === 1 && <PasswordStep onClickButton={handleClickButton} email={email} password={password} onChangeEmail={handleChangeEmail} onChangePassword={handleChangePassword}/> }
             { currentStep === 2 && (
                 <div className={styles.step2}> 
-                    <FormUserInformationStepTwo genderOptions={[{value: 'man', label: 'Мужской'}, {value: 'woman', label: 'Женский'}]} nameValue={name} nameChange={handleChangeName} surnameValue={surname} surnameChange={handleSurnameChange} changeAvatarUrl={handleCahengeAvatar} genderValue={gender} genderChange={handleGenderChange} locatonValue={location} locationChange={handleLocationChange} birthdayDateChange={handleBirthdayDateChange}/> 
+                    <FormUserInformationStepTwo hiddenAvatarInput={false} genderOptions={[{value: 'man', label: 'Мужской'}, {value: 'woman', label: 'Женский'}]} nameValue={name} nameChange={handleChangeName} surnameValue={surname} surnameChange={handleSurnameChange} changeAvatarUrl={handleChangeAvatar} genderValue={gender} genderChange={handleGenderChange} locatonValue={location} locationChange={handleLocationChange} birthdayDateChange={handleBirthdayDateChange}/> 
                     <div className={styles.buttonsContainer}>
                         <ButtonUI onClick={handleClickBack} label='Назад' className={styles.buttonPadding}></ButtonUI>
-                        <ButtonUI disabled={ !regData.email || !regData.password || !regData.birthdayDate || !regData.gender || !regData.location || !regData.name || !regData.surname} onClick={handleClickRegistrationButton} label='Зарегистрироваться' className={styles.buttonPadding}></ButtonUI>
+                        <ButtonUI dataCy='registrationButton' disabled={ !regData.email || !regData.password || !regData.birthdayDate || !regData.gender || !regData.location || !regData.name || !regData.surname} onClick={handleClickRegistrationButton} label='Зарегистрироваться' className={styles.buttonPadding}></ButtonUI>
                     </div> 
                 </div>)}
         </div>

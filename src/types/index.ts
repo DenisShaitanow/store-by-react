@@ -19,7 +19,7 @@ export interface RegistrationData {
     password: string;
     name: string;
     surname: string;
-    avatar: File | null;
+    avatar: string;
     gender: string;
     location: string;
     birthdayDate: string;
@@ -33,4 +33,5 @@ export interface IFormOrderData {
     numberCard: string;
     PersonCard: string;
     CVV: string;
+    productList: string[];
 }

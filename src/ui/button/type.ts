@@ -11,4 +11,5 @@ export type ButtonProps = {
     // нужно чтобы отображался svg в кнопке закрыть хидера
     children?: ReactNode;
     icon?: ReactNode;
+    dataCy?: string
 };

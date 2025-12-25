@@ -39,7 +39,8 @@ export const IconButton = (props: IconButtonProps) => {
         ariaLabel,
         pressed,
         className,
-        disabled = false
+        disabled = false,
+        dataCy
     } = props;
 
     const productsInBasket: IProduct[] = useAppSelector(selectBasket);
@@ -99,6 +100,7 @@ export const IconButton = (props: IconButtonProps) => {
 
     return (
         <button
+            data-cy={dataCy}
             type="button"
             className={buttonClasses}
             aria-label={computedAriaLabel}

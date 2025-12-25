@@ -12,6 +12,7 @@
     align-items: center;
     inline-size: 80%;
     max-inline-size: 436px;
+    gap: 35px;
 }
 
 .buttonsContainer {

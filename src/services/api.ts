@@ -130,6 +130,37 @@ export function mockedRegisterUserApi(data: RegistrationData): Promise<{
   });
 }
 
+export function changeDataInPersonalCabinetApi(data: RegistrationData): Promise<{
+  success: boolean,
+  refreshToken: string,
+  accessToken: string,
+  user: RegistrationData
+}> {
+
+  const fakeRegistrationData = {
+    email: data.email,
+    password: data.password,
+    name: data.name,
+    surname: data.surname,
+    avatar: data.avatar,
+    gender: data.gender,
+    location: data.location,
+    birthdayDate: data.birthdayDate
+  }
+  // Ответ регистрации
+  const mockSuccessResponse = {
+    success: true,
+    refreshToken: fakeRefreshToken,
+    accessToken: `Bearer ${fakeAccessToken}`,
+    user: fakeRegistrationData,
+  };
+
+  return new Promise((resolve) => {
+    // Здесь можем добавить проверку данных или любые условия
+    resolve(mockSuccessResponse); // Возвращаем заготовленную структуру
+  });
+}
+
 type TAuthResponse = TServerResponse<{
   refreshToken: string;
   accessToken: string;
