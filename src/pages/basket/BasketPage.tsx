@@ -37,6 +37,7 @@ const BasketPage: FC = () => {
                         ))}
                     </div>
                     <ButtonUI 
+                        dataCy='proceedToCheckoutOrder'
                         className={styles.buttonBasket} 
                         label="Перейти к оформлению" 
                         onClick={handleOrder}

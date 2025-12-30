@@ -10,6 +10,7 @@ import BasketPage from './pages/basket/BasketPage';
 import FormOderPage from './pages/formOder/FormOrder';
 import OrderComplited from './pages/orderComplited/OrderComolited';
 import PersonalCabinet from "./pages/personalCabinet/PersonalCabinet";
+import NotificationsPage from './pages/notifications/NotificationsPage';
 
 export const router = createBrowserRouter([
     {
@@ -55,6 +56,10 @@ export const router = createBrowserRouter([
           {
             path: '/personalCabinet',
             element: <PersonalCabinet />
+          },
+          {
+            path: '/notifications',
+            element: <NotificationsPage />
           }
         ],
       },

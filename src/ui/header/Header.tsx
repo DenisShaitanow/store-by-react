@@ -84,6 +84,10 @@ export const HeaderUI = ({
         navigate('/basket');
     }
 
+    const handleOpenNotifications = () => {
+        navigate('/notifications');
+    }
+
     if (isModal)
         return (
             <div className={styles.header}>
@@ -101,7 +105,7 @@ export const HeaderUI = ({
 
     return (
         <div className={styles.header}>
-            <div className={styles.logoContainer} onClick={handleClickLogo}><Logo /></div>
+            <div data-cy={'headerLogo'} className={styles.logoContainer} onClick={handleClickLogo}><Logo /></div>
             <div className={styles.menu}>
                 <Link to="about" className={styles.link}>
                     О проекте
@@ -134,9 +138,17 @@ export const HeaderUI = ({
                         
                         
                             <IconButton
+                                dataCy='basketHeaderButton'
                                 type="basket"
                                 aria-label='Корзина выбранных товаров'
                                 onClick={handleBasket}
+                             />
+
+                             <IconButton
+                                type='notification'
+                                dataCy='headerButtonNotification'
+                                ariaLabel='Открыть список уведомлений'
+                                onClick={handleOpenNotifications}
                              />
                         
                     </>

@@ -22,7 +22,7 @@ const OrderComplited: FC = () => {
     return (
         <div className={styles.container}>
             <span className={styles.text}>Ваш заказ успешно создан и поступил в обработку, его номер {orderId}.</span>
-            <ButtonUI className={styles.buttonOk} onClick={handleOk} label='Отлично'></ButtonUI>
+            <ButtonUI dataCy='returnToMainPageAfterOrder' className={styles.buttonOk} onClick={handleOk} label='Отлично'></ButtonUI>
         </div>
     )
 }

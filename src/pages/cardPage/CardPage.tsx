@@ -44,7 +44,7 @@ const CardPage: FC = () => {
                 <div className={styles.leftHalf}>
                     <img className={styles.image} src={card.image}></img>
                     <p className={styles.price}>{`${card.price}₽`}</p>
-                    <ButtonUI disabled={!isAuth} label ={!isAuth ? 'Авторизуйтесь пожалуйста' : PutToBasketButton ? 'Убрать из корзины' : 'Положить в корзину'} className={styles.button} onClick={handleputTobasket}/>
+                    <ButtonUI dataCy='putToBasketButton' disabled={!isAuth} label ={!isAuth ? 'Авторизуйтесь пожалуйста' : PutToBasketButton ? 'Убрать из корзины' : 'Положить в корзину'} className={styles.button} onClick={handleputTobasket}/>
                     {!isAuth && <span className={styles.regPleaseTransparant}>Для покупки товара, вам необходимо авторизоваться.</span>}
                 </div>
                 

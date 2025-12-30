@@ -37,9 +37,14 @@ const FormOderPage: FC = () => {
     const basket = useAppSelector(selectBasket);
     const basketListId = basket.map(product => product.id);
 
-    const storedFormDataString = JSON.parse(localStorage.getItem('orderForm') ?? '');
+    let storedFormDataStringParsed: IFormOrderData | null = null;
 
-    const initialFormData: IFormOrderData = storedFormDataString ? storedFormDataString : {
+    const storedFormDataString = localStorage.getItem('orderForm');
+    if (storedFormDataString) {
+        storedFormDataStringParsed = JSON.parse(storedFormDataString)
+    }
+
+    const initialFormData: IFormOrderData = storedFormDataStringParsed ? storedFormDataStringParsed : {
         selectСourier: true,
         adress: '',
         adressPoint: '',
@@ -177,7 +182,7 @@ const FormOderPage: FC = () => {
                 </div>
             </div>
             { formData.selectСourier && (
-                <InputUI name='adress' type='text' title='Адрес' value={formData.adress} onChange={handleChangeAdress} placeholder='Введите адрес'/>
+                <InputUI dataCy='inputAdressDelivery' name='adress' type='text' title='Адрес' value={formData.adress} onChange={handleChangeAdress} placeholder='Введите адрес'/>
             )}
             { !formData.selectСourier && (
                 <InputDropDown className={styles.pointTake} id='1' title='Пункт выдачи' withInput={false} value={formData.adressPoint} onChangeOption={handleChangePoint} placeholder='Выберите удобный пункт выдачи' options={[{value: 'ул.Мичурина, д.23', label: 'ул.Мичурина, д.23'}, {value: 'пр-т Королева, д.26', label: 'пр-т Королева, д.26'}, {value: 'пл. Ленина, д.17', label: 'пл. Ленина, д.17'}, {value: 'ул. Кирова, д.17', label: 'ул. Кирова, д.17'}, {value: 'ул. Сахарова, д.1', label: 'ул. Сахарова, д.1'}]}/>
@@ -203,7 +208,7 @@ const FormOderPage: FC = () => {
                 </>
             )}
              
-             <ButtonUI className={styles.buttonBuy} label='Совершить покупку' disabled={buttonBuyDisabled} onClick={handleBuy}/>
+             <ButtonUI dataCy='makePurchase' className={styles.buttonBuy} label='Совершить покупку' disabled={buttonBuyDisabled} onClick={handleBuy}/>
             
         
         </div>

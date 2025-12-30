@@ -25,7 +25,7 @@ const handleDelete = () => {
                 <div className={styles.info}>
                     <p className={styles.price}>{`${card.price}₽`}</p>
                     <p className={styles.description}>{card.shortDescription}</p>
-                    <Delete className={styles.delete} onClick={handleDelete}/>
+                    <Delete data-cy={'buttonDeleteProductFromBasket'} className={styles.delete} onClick={handleDelete}/>
                 </div>
                 
                
