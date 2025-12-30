@@ -1,3 +1,3 @@
 export type AddImagesForSkillsProps = {
-    onImagesChange: (newImages: File[]) => void;
+  onImagesChange: (newImages: File[]) => void;
 };

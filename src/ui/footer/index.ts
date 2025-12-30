@@ -1,2 +1,2 @@
-export { Footer } from '../footer/Footer';
+export { Footer } from "../footer/Footer";
 // brat, ne zabivay export, ty chego...

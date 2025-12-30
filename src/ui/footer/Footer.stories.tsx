@@ -1,17 +1,17 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Footer } from './Footer';
-import { MemoryRouter } from 'react-router-dom';
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { Footer } from "./Footer";
+import { MemoryRouter } from "react-router-dom";
 
 const meta: Meta<typeof Footer> = {
-    title: 'shared/Footer',
-    component: Footer,
-    decorators: [
-        Story => (
-            <MemoryRouter>
-                <Story />
-            </MemoryRouter>
-        )
-    ]
+  title: "shared/Footer",
+  component: Footer,
+  decorators: [
+    (Story) => (
+      <MemoryRouter>
+        <Story />
+      </MemoryRouter>
+    ),
+  ],
 };
 
 export default meta;

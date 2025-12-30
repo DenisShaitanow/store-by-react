@@ -1,4 +1,4 @@
-import { type TRootState } from '@store/store';
+import { type TRootState } from "@store/store";
 
 export const selectUser = (state: TRootState) => state.user.user;
 export const selectIsAuthChecked = (state: TRootState) =>

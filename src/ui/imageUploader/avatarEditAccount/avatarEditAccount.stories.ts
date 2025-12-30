@@ -1,16 +1,16 @@
 // components/AvatarRegistration/AvatarRegistration.stories.tsx
 
-import type { Meta, StoryObj } from '@storybook/react-vite'; // Убедись, что версия Storybook соответствует проекту
-import { AvatarEditAccount } from './avatarEditAccount'; // Импортируем компонент
+import type { Meta, StoryObj } from "@storybook/react-vite"; // Убедись, что версия Storybook соответствует проекту
+import { AvatarEditAccount } from "./avatarEditAccount"; // Импортируем компонент
 
 // Объявление метаданных для истории
 const meta: Meta = {
-    title: 'imageUploader/AvatarEditAccount', // Категория и название компонента
-    component: AvatarEditAccount,
-    tags: ['autodocs'], // Включаем автоматическое документирование
-    parameters: {
-        layout: 'centered' // Центрируем компонент на странице
-    }
+  title: "imageUploader/AvatarEditAccount", // Категория и название компонента
+  component: AvatarEditAccount,
+  tags: ["autodocs"], // Включаем автоматическое документирование
+  parameters: {
+    layout: "centered", // Центрируем компонент на странице
+  },
 };
 
 export default meta;

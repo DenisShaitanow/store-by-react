@@ -1,3 +1,3 @@
 export type AvatarRegistrationProps = {
-    onImageChange(event: React.ChangeEvent<HTMLInputElement>): void;
+  onImageChange(event: React.ChangeEvent<HTMLInputElement>): void;
 };

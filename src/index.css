@@ -1,13 +1,13 @@
 *,
 *::after,
 *::before {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-    margin: 0;
-    min-width: 375px;
-    background-color: var(--background-page-color);
+  margin: 0;
+  min-width: 375px;
+  background-color: var(--background-page-color);
 }
 
 h1,
@@ -20,21 +20,20 @@ p,
 ul,
 ol,
 li {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 input:focus,
 input:focus-visible {
-    outline: none;
+  outline: none;
 }
 
 ul,
 ol {
-    list-style: none;
+  list-style: none;
 }
-

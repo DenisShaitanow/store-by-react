@@ -1,12 +1,12 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Logo } from './Logo';
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import { Logo } from "./Logo";
 
 const meta: Meta<typeof Logo> = {
-    title: 'UI/Logo',
-    component: Logo,
-    parameters: {
-        layout: 'centered'
-    }
+  title: "UI/Logo",
+  component: Logo,
+  parameters: {
+    layout: "centered",
+  },
 };
 
 export default meta;

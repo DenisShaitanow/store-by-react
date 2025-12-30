@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect } from "react";
 
 // Создаем контекст с начальным значением и типом
 type ThemeContextType = {
@@ -7,30 +7,28 @@ type ThemeContextType = {
 };
 
 export const ThemeContext = createContext<ThemeContextType>({
-  theme: 'light',
-  toggleTheme: () => {}
+  theme: "light",
+  toggleTheme: () => {},
 });
 
 interface ThemeProviderProps {
-  children: React.ReactNode; 
+  children: React.ReactNode;
 }
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
   const [theme, setTheme] = useState<"light" | "dark">("light");
 
   const toggleTheme = () => {
-    setTheme((prevTheme) =>
-      prevTheme === "light" ? "dark" : "light"
-    );
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
 
   useEffect(() => {
     const htmlTag = document.documentElement;
     if (htmlTag) {
-      if (theme === 'dark') {
-        htmlTag.classList.add('dark-theme');
+      if (theme === "dark") {
+        htmlTag.classList.add("dark-theme");
       } else {
-        htmlTag.classList.remove('dark-theme');
+        htmlTag.classList.remove("dark-theme");
       }
     }
   }, [theme]);

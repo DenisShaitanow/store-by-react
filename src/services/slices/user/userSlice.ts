@@ -1,34 +1,34 @@
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import { type RegistrationData } from '../../../types';
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import { type RegistrationData } from "../../../types";
 
-import { 
-  registerUser, 
-  logoutUser, 
-  checkUserAuth, 
-  loginUser, 
+import {
+  registerUser,
+  logoutUser,
+  checkUserAuth,
+  loginUser,
   updateUser,
-  changeDataInPersonalCabinet } 
-from '../../thunks/user';
+  changeDataInPersonalCabinet,
+} from "../../thunks/user";
 
 interface IUserState {
-    user: RegistrationData | null;
-    isAuth: boolean;
-    isAuthChecked: boolean;
-    loading: boolean;
-    error: string | null;
+  user: RegistrationData | null;
+  isAuth: boolean;
+  isAuthChecked: boolean;
+  loading: boolean;
+  error: string | null;
 }
-  
+
 export const initialState: IUserState = {
-    user: null,
-    isAuth: false,
-    isAuthChecked: false,
-    loading: false,
-    error: null,
+  user: null,
+  isAuth: false,
+  isAuthChecked: false,
+  loading: false,
+  error: null,
 };
 
 // слайс для пользователей
 const userSlice = createSlice({
-  name: 'user',
+  name: "user",
   initialState,
   reducers: {
     resetError: (state) => {
@@ -89,20 +89,20 @@ const userSlice = createSlice({
 
       // общие обработчики
       .addMatcher(
-        (action) => action.type.endsWith('/pending'),
+        (action) => action.type.endsWith("/pending"),
         (state) => {
           state.loading = true;
           state.error = null;
-        }
+        },
       )
       .addMatcher(
-        (action) => action.type.endsWith('/rejected'),
+        (action) => action.type.endsWith("/rejected"),
         (state, action: PayloadAction<string>) => {
           state.loading = false;
           state.error = action.payload as string;
-        }
+        },
       );
-  }
+  },
 });
 
 export const { resetError } = userSlice.actions;

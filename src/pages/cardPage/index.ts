@@ -1,2 +1,1 @@
-export { default as CardPage } from './CardPage';
-
+export { default as CardPage } from "./CardPage";
