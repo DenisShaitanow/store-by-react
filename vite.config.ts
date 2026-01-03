@@ -62,5 +62,9 @@ export default defineConfig({
         setupFiles: ['.storybook/vitest.setup.ts']
       }
     }]
-  }
+  },
+  base: '/store-by-react/', // Ваш базовый путь для проекта на GitHub Pages
+  build: {
+    outDir: 'dist', // Директория, куда будет складываться сборка
+  },
 });

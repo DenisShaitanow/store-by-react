@@ -62,5 +62,6 @@ export const router = createBrowserRouter([
         element: <NotificationsPage />,
       },
     ],
-  },
-]);
+  }
+],
+{ basename: '/store-by-react' });

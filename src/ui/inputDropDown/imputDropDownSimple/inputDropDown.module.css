@@ -19,7 +19,7 @@
   position: relative;
   z-index: 2;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   min-height: 48px;
@@ -31,20 +31,7 @@
   transition: border-color 0.2s ease;
 }
 
-/* Icon for closed state */
 
-.select::after {
-  position: absolute;
-  top: 50%;
-  right: 1rem;
-  width: 16px;
-  height: 8px;
-  background-image: url("../../assets/angleOpenInput.svg");
-  background-repeat: no-repeat;
-  background-position: center;
-  transform: translateY(-50%);
-  content: "";
-}
 
 /* Styles when there is an error */
 
@@ -55,20 +42,11 @@
 
 /* Open state */
 
-.selectOpen {
-  z-index: 3;
-  border-top: 1px solid #e4e8df;
-  border-right: 1px solid #e4e8df;
-  border-bottom: 1px solid #e4e8df;
-  border-left: 1px solid #e4e8df;
-}
 
 .borderDone {
-  position: absolute;
   top: 28px;
   z-index: 800;
   width: 100%;
-  border: 1px solid var(--caption-color);
   border-radius: var(--card-border-radius);
 }
 
@@ -82,17 +60,11 @@
 
 /* Icon for open state */
 
-.selectOpen::after {
-  position: absolute;
-  top: 50%;
-  right: 1rem;
-  width: 24px;
-  height: 24px;
-  background-image: url("../../assets/krestCloseInput.svg");
-  background-repeat: no-repeat;
-  background-position: center;
-  transform: translateY(-50%);
-  content: "";
+.svg {
+  width: 16px;
+  height: 16px;
+  stroke: var(--text-color);
+  fill: var(--text-color);
 }
 
 /* Placeholder selection */
@@ -129,10 +101,12 @@
 .optionsContainer {
   position: absolute;
   left: 0;
+  margin-top: 1px;
   z-index: 1;
   width: 100%;
   max-height: 110px;
   overflow-y: auto;
+  border: solid 1px var(--caption-color);
   background-color: var(--background-page-color);
 }
 
@@ -153,7 +127,6 @@
 }
 
 .optionsContainerOpen {
-  position: relative;
   border-radius: var(--card-border-radius);
 }
 
@@ -161,8 +134,9 @@
 
 .option {
   position: relative;
+  display: flex;
+  align-items: center;
   z-index: 10;
-  display: block;
   width: 100%;
   height: 32px;
   padding: 4px 20px;
@@ -191,11 +165,19 @@
   width: 100%;
 }
 
+
 @media (400px <= width <= 500px) {
   .container {
     font-size: 12px;
   }
+
+  .svg {
+    width: 14px;
+    height: 14px;
+  }
 }
+
+
 
 @media (width <= 399px) {
   .container {
@@ -203,6 +185,12 @@
   }
 
   .select {
-    min-height: 41px;
+    min-height: 43px;
   }
-}
+
+  .svg {
+    width: 13px;
+    height: 13px;
+  }
+
+}       

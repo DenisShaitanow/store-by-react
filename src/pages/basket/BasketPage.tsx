@@ -1,15 +1,9 @@
 import styles from "./BasketPage.module.css";
-import { useEffect, useState, type FC } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import {  type FC } from "react";
+import { useNavigate } from "react-router-dom";
 import { ButtonUI } from "../../ui/button";
 import { useAppDispatch, useAppSelector } from "../../services/hooks";
-import { type IProduct } from "../../types";
 import { selectBasket } from "../../services/selectors/userUIData-selectors/userUIData-selectors";
-import { Link } from "react-router-dom";
-import {
-  addToBusket,
-  removeFromBusket,
-} from "../../services/slices/userUIData";
 import ProductCardInBasket from "../../ui/productCardinBasket/ProductCardInBasket";
 import SadSmile from "../../ui/assets/smiley-sad-fill.svg?react";
 

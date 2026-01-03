@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc --noEmitOnError && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.10.1",
+    "@svgr/webpack": "^8.1.0",
     "@types/react-router-dom": "^5.3.3",
     "classnames": "^2.5.1",
     "date-fns": "^4.1.0",

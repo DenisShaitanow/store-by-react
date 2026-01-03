@@ -100,10 +100,18 @@
   .text {
     font-size: 12px;
   }
+
+  .input {
+    block-size: 20px;
+  }
 }
 
 @media (width <= 399px) {
   .text {
     font-size: 10px;
+  }
+
+  .input {
+    block-size: 20px;
   }
 }

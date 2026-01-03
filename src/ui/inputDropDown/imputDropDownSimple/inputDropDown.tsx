@@ -3,6 +3,9 @@ import { useState, useRef, useCallback, useEffect } from "react";
 import styles from "./inputDropDown.module.css";
 import type { InputDropDownProps } from "./type";
 
+import AngleOpen from '../../assets/angleOpenInput.svg?react';
+import KrestClose from '../../assets/krestCloseInput.svg?react';
+
 const findLabelByValue = (
   options: { value: string; label: string }[],
   value: string,
@@ -142,6 +145,11 @@ export const InputDropDown: FC<InputDropDownProps> = ({
               />
             )}
             {!withInput && <>{selectedLabel || placeholder} </>}
+            {isOpen && (<KrestClose className={styles.svg} />)}
+            {!isOpen && (<AngleOpen className={styles.svg} onClick={(event: React.MouseEvent) => {
+              event.stopPropagation(); // Остановка всплытия события
+              setIsOpen(true); // Изменяем состояние
+            }}/>)}
           </div>
 
           {isOpen && (

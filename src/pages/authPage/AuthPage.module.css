@@ -39,4 +39,8 @@
   .container {
     gap: 15px;
   }
+
+  .authError {
+    font-size: var(--font-size-h5);
+  }
 }

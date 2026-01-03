@@ -20,6 +20,7 @@ export const RevealElementUI: React.FC<RevealElementUIProps> = ({
         <svg
           className={styles.button_container}
           xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
           width="24"
           height="24"
           fill="none"
@@ -37,6 +38,7 @@ export const RevealElementUI: React.FC<RevealElementUIProps> = ({
       {!visible && (
         <svg
           className={styles.button_container}
+          viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
           width="24"
           height="24"
