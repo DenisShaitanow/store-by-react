@@ -18,6 +18,7 @@ export const FormUserInformationStepTwo: FC<
   surnameValue,
   surnameChange,
   birthdayDateChange,
+  birthdayDateValue,
   genderOptions,
   genderValue,
   genderChange,
@@ -94,6 +95,7 @@ export const FormUserInformationStepTwo: FC<
           id="dateBirthday"
           placeholder="дд.мм.гггг"
           className={styles.calendar}
+          value={birthdayDateValue}
         />
         <InputDropDown
           options={genderOptions}

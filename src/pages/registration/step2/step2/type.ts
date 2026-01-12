@@ -14,4 +14,5 @@ export type FormUserInformationStepTwoProps = {
   genderChange: (val: string) => void;
   locatonValue: string;
   locationChange: (val: string) => void;
+  birthdayDateValue?: Date;
 };

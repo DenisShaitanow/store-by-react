@@ -1,5 +1,5 @@
 import styles from "./PersonalCabinet.module.css";
-import { type FC, useState, type ChangeEvent } from "react";
+import { type FC, useState, type ChangeEvent, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../services/hooks";
 import { selectUser } from "../../services/selectors/user-selectors/user-selectors";
 import { FormUserInformationStepTwo } from "../registration/step2/step2/FormUserInformationStepTwo";
@@ -14,17 +14,26 @@ const PersonalCabinet: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const user = useAppSelector(selectUser);
+  const localStorageUser = localStorage.getItem('regData');
+
+  const parsedLocalStorageUser: RegistrationData | undefined = localStorageUser
+  ? JSON.parse(localStorageUser)
+  : undefined;
+
+  useEffect(() => {
+    console.log(user)
+  }, [user]);
 
   const [personalCabinetData, setPersonalCabinetData] =
     useState<RegistrationData>({
       email: user?.email ?? "",
-      password: user?.password ?? "",
-      name: user?.name ?? "",
-      surname: user?.surname ?? "",
-      avatar: user?.avatar ?? "",
-      gender: user?.gender ?? "",
-      location: user?.location ?? "",
-      birthdayDate: user?.birthdayDate ?? "",
+      password: user?.password || parsedLocalStorageUser?.password || "",
+      name: user?.name || parsedLocalStorageUser?.name || '',
+      surname: user?.surname || parsedLocalStorageUser?.surname || "",
+      avatar: user?.avatar || parsedLocalStorageUser?.avatar || "",
+      gender: user?.gender  || parsedLocalStorageUser?.gender || "",
+      location: user?.location  || parsedLocalStorageUser?.location || "",
+      birthdayDate: user?.birthdayDate || parsedLocalStorageUser?.birthdayDate || "",
     });
 
   const handleChangeName = (val: string) => {
@@ -93,6 +102,7 @@ const PersonalCabinet: FC = () => {
         locatonValue={personalCabinetData.location}
         locationChange={handleLocationChange}
         birthdayDateChange={handleBirthdayDateChange}
+        birthdayDateValue={new Date(personalCabinetData.birthdayDate)}
       />
       <PasswordInputUI
         page="register"
